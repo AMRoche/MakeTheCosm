@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<header>
+		<script type="text/javascript" src="script/jquery164.min.js"></script>
+		<script type="text/javascript" src="script/formGenerator.js"></script>
+		<script type="text/javascript" src="script/streaming.js"></script>
+
+		<script>
+			console.log("things loaded");
+		</script>
+	</header>
+	<body>
+		<div id="wrapper">
+			<div id="devConsole" style = "background:teal;">
+				<!--interval = setInterval(testThing,750);-->
+				<button onclick="(function(){interval = window.setInterval(testThing(),750)})();">
+					Start Test Transmission
+				</button>
+				<button onclick="(function(){window.clearInterval(interval);console.log('Ceasing Testing.');})();">
+					Stop Test Transmission
+				</button>
+				<button onclick="(function(){newFeed();})">
+					Add a New Feed
+				</button>
+				<form id="form2" onsubmit = "return apiKeySet()">
+					API KEY :
+					<input type="text" id="apiDevAccess" value="LEXFCUfXTzzUiPhvL0tSAAkJFkWSAKxLQkVLSExCMHlZTT0g">
+					<input type="submit"\>
+				</form>
+			</div>
+			<div id="setup">
+			</div>
+
+			<div id="form">
+				<form id="selector" onsubmit = "return initialSet()">
+					API KEY :
+					<input type="text" id="apiAccess">
+					Number of Inputs :
+					<input type="number" id="numOfFeeds" value=1 min=1 max=10>
+					<input type="submit">
+				</form>
+			</div>
+		</div>
+	</body>
+	<footer>
+	</footer>
+</html>
