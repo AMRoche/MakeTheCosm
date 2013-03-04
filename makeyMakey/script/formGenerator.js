@@ -83,6 +83,7 @@ $(function() {
 function apiKeySet() {
 	apiKEY = document.getElementById("apiDevAccess").value;
 	console.log("API key set to : " + apiKEY);
+	console.log(apiValidation(apiKEY));
 	return false;
 }
 
@@ -106,22 +107,22 @@ function initialSet() {
 	var stringyThing = "";
 	stringyThing += '<div id="extraButtons">';
 	if (choices < 10) {
-		stringyThing += '<input type="button" id="addOpt" onclick="addOption(' + choices + ')"value="[ + ]"\>';
+		stringyThing += '<input type="button" class="btn" id="addOpt" onclick="addOption(' + choices + ')"value="[ + ]"\>';
 	}
 	if (choices > 1) {
-		stringyThing += '<input type = "button" id="removeOpt" onclick="removeOption(' + choices + ')"value="[ - ]"\>';
+		stringyThing += '<input type = "button" class="btn" id="removeOpt" onclick="removeOption(' + choices + ')"value="[ - ]"\>';
 	}
 	stringyThing += '</div>';
 	stringyThing += '<form id = "streamer" onsubmit = "return resultParser()">';
 	stringyThing += 'Feed I.D. (leave blank to generate new feed) : <input type="text" id="feedId"></input>';
 	stringyThing += 'Feed Title : <input type="text" id="feedTitle"></input>';
 	for (var i = 0; i < optionLength; i++) {
-		stringyThing += '<div id="input' + i + '" class="inputs">Name : <input type ="text" class="inputId"> Key to bind to : ' + optString(i) + ' Invert Input : <input type="checkbox" class="invert"  value="invert"></input></div>';
+		stringyThing += '<div id="input' + i + '" class="inputs"><div class="sendIndicator" style="float:left; width:30px; height:30px;border-radius:20px;margin-right:50px; background-color:black; display:none;"></div>Name : <input type ="text" class="inputId"> Key to bind to : ' + optString(i) + ' Invert Input : <input type="checkbox" data-toggle="buttons-checkbox" class="invert"  value="invert"></input></div>';
 	}//inputId, inputKey invert,
-	stringyThing += '<button type ="submit" id="subInit">Start Streaming!</button><input type="button" id="streamStop" onclick = "(function(){stopStreaming();})();" value="Stop Streaming"\>';
+	stringyThing += '<button type ="submit" class="btn"id="subInit">Start Streaming!</button><input type="button" class="btn" id="streamStop" onclick = "(function(){stopStreaming();})();" value="Stop Streaming"\>';
 	stringyThing += '</form>';
-	document.getElementById("form").style.display = "none";
-	document.getElementById("setup").innerHTML = stringyThing;
+	//document.getElementById("form").style.display = "none";
+	document.getElementById("form").innerHTML = stringyThing;
 	return false;
 	}
 }
@@ -148,7 +149,7 @@ function removeOption(currentCount) {
 		element.parentNode.removeChild(element);
 	}
 	if (choices > 1) {
-		document.getElementById("extraButtons").innerHTML = '<input type="button" id="addOpt" onclick="addOption(' + choices + ')" value="[ + ]"\>' + '<input type="button" id="removeOpt" onclick="removeOption(' + choices + ')" value="[ - ]"\>';
+		document.getElementById("extraButtons").innerHTML = '<input type="button" class="btn" id="addOpt" onclick="addOption(' + choices + ')" value="[ + ]"\>' + '<input type="button" class="btn" id="removeOpt" onclick="removeOption(' + choices + ')" value="[ - ]"\>';
 	}
 
 	var element = document.getElementById("input" + choices);
@@ -170,7 +171,7 @@ function addOption(currentCount) {
 		var element = document.getElementById("addOpt");
 		element.parentNode.removeChild(element);
 	} else {
-		document.getElementById("extraButtons").innerHTML = '<input type="button" id="addOpt" onclick="addOption(' + choices + ')"value= "[ + ]"\>' + '<input type="button" id="removeOpt" onclick="removeOption(' + choices + ')"value="[ - ]">';
+		document.getElementById("extraButtons").innerHTML = '<input type="button" class="btn" id="addOpt" onclick="addOption(' + choices + ')"value= "[ + ]"\>' + '<input type="button" class="btn" id="removeOpt" onclick="removeOption(' + choices + ')"value="[ - ]">';
 	}
 	//console.log(choices);
 	var remove = document.getElementById("streamStop");
@@ -178,7 +179,7 @@ function addOption(currentCount) {
 	remove.parentNode.removeChild(remove);
 	element.parentNode.removeChild(element);
 	//inputId, inputKey invert,
-	$('#streamer').append('<div id="input' + currentCount + '" class="inputs">Name : <input type ="text" class="inputId"> Key to bind to : ' + optString(currentCount) + ' Invert Input : <input type="checkbox" class="invert"   value="invert"></input></div>' + '<button type="submit" id="subInit">Start Streaming!</button><input type="button" id="streamStop" onclick = "(function(){stopStreaming();})();"value="Stop Streaming."\>');
+	$('#streamer').append('<div id="input' + currentCount + '" class="inputs"><div class="sendIndicator" style="float:left; width:30px; height:30px;border-radius:20px;margin-right:50px; background-color:black; display:none;"></div>Name : <input type ="text" class="inputId"> Key to bind to : ' + optString(currentCount) + ' Invert Input : <input type="checkbox" class="invert"   value="invert"></input></div>' + '<button type="submit" class="btn" id="subInit">Start Streaming!</button><input type="button" class="btn" id="streamStop" onclick = "(function(){stopStreaming();})();"value="Stop Streaming."\>');
 
 	choices++;
 	if (currentCount < 9) {
@@ -190,7 +191,33 @@ function addOption(currentCount) {
 		removeOption(choices)
 	};
 }
-
+function apiValidation(supposedKey){
+	var validKey = false;
+	console.log("testing");
+	$.ajax({
+			type : "GET",
+			url : "http://api.cosm.com/v2/" + "feeds",
+			beforeSend : function(request) {
+				request.setRequestHeader("X-ApiKey", supposedKey);
+			},
+			async : false,
+			data : "{}",
+			always : function() {
+				console.log("done");
+			},
+			error : function(response) {
+				console.log(response);
+			},
+			success : function(response) {validKey = true;},
+			error : function(response){
+				
+					validKey = false;
+				
+				}
+});
+if(!validKey){return false;}
+else{return true;}
+}
 function boolOrNot(thingy) {
 	if (thingy == true) {
 		return 1;
@@ -213,6 +240,7 @@ function resultParser() {
 	console.log(feedsValues + "." + inputid.length);
 
 	for (var i = 0; i < inputid.length; i++) {
+		
 		inputid[i].value = inputid[i].value.split(' ').join('_')
 		if(!inputid[i].value.match(/^[0-9a-z]+$/)) {
 			console.log("doing!");
@@ -337,6 +365,10 @@ function addFeed() {
 }
 
 function stopStreaming() {
+	document.getElementById("indicator").style.backgroundColor = "red";
+	for(var i = 0; i < document.getElementsByClassName("sendIndicator").length; i++){
+		document.getElementsByClassName("sendIndicator")[i].style.display = "none";
+	}
 	toStream = false;
 	console.log(toStream);
 	if (pushInterval) {
@@ -346,12 +378,20 @@ function stopStreaming() {
 }
 
 function pushToServer() {
+	document.getElementById("indicator").style.backgroundColor = "green";
 	//inputId, inputKey, invert,feedId, feedTitle
 	//formSubmitted
 	SendUrl = "http://api.cosm.com/v2/" + "feeds/" + formSubmitted[3] + "?_method=PUT";
 	console.log(SendUrl+"-----------------");
 	var info = new Array();
 	for (var i = 0; i < formSubmitted[0].length; i++) {
+		document.getElementsByClassName("sendIndicator")[i].style.display = "";
+		if(feedsValues[i] != (formSubmitted[2][i])?1:0){
+			document.getElementsByClassName("sendIndicator")[i].style.backgroundColor = "rgb(51,105,255)";
+		}
+		if(feedsValues[i] == (formSubmitted[2][i])?1:0){
+			document.getElementsByClassName("sendIndicator")[i].style.backgroundColor = "black";
+		}
 		var ID = formSubmitted[0][i];
 		info.push({
 			"current_value" : JSON.stringify(feedsValues[i]),
