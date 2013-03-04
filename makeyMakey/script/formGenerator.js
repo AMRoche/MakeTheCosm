@@ -87,14 +87,14 @@ function apiKeySet() {
 }
 
 function initialSet() {
-	if(apiKEY == null ){
+	
+	if(document.getElementById("apiAccess").value == "" ){
 			apiKEY = prompt("Please enter a valid API key.","");
-			console.log(apiKEY);
 			if(apiKEY == ""){return false;}
-			
 			else if(apiKEY!=""&&apiKEY!=null){
-				document.getElementById("apiAccess").value = apiKEY;
-			initialSet();}
+			document.getElementById("apiAccess").value = apiKEY;
+			initialSet();
+			return false;}
 	}
 	if (document.getElementById("apiAccess").value != "") {
 		console.log(document.getElementById("apiAccess").value);
@@ -213,11 +213,13 @@ function resultParser() {
 	console.log(feedsValues + "." + inputid.length);
 
 	for (var i = 0; i < inputid.length; i++) {
-	if(!inputid[i].value.match(/^[0-9a-z]+$/)) {
-		console.log("doing!");
-      inputid[i].value = "Feed "+i+" input id not alphanumeric.";
-    }
-		formSubmitted[0].push(inputid[i].value.split(' ').join('_'));
+		inputid[i].value = inputid[i].value.split(' ').join('_')
+		if(!inputid[i].value.match(/^[0-9a-z]+$/)) {
+			console.log("doing!");
+	      inputid[i].value = "Feed_"+i+"_input_id_not_alphanumeric";
+	    }
+	    
+		formSubmitted[0].push(inputid[i].value);
 		formSubmitted[1].push(inputkey[i].value);
 		formSubmitted[2].push(invert[i].checked);
 		feedsValues.push(boolOrNot(invert[i].checked));
