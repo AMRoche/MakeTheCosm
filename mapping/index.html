@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Slideshow Test</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="styles.css" type="text/css">
+
+	</head>
+	<body>
+		<ul class="slideshow">
+			<li class="slide active" id="slide-1">
+				<div class="content">
+					<h1>Feed Selection</h1>
+					<!--cosm API -->
+					<div class="wrapper">
+						<div id="map"></div>
+						<div id="feedList"></div>
+					</div>
+				</div>
+			</li>
+
+			<li class="slide static-background" id="slide-2">
+				<div class="content">
+					<h1>Sound Mapping</h1>
+					<div class="wrapper">
+						<div id="selectedFeeds">
+							
+						</div>
+					</div>
+				</div>
+				<div>
+
+				</div>
+			</li>
+
+			<li class="slide" id="slide-3">
+				<div class="content">
+					<h1>Sounds Selection Area [User Area]</h1>
+					<div class="wrapper">
+						<div id="userZone">
+							
+						</div>
+					</div>
+					<!--<p>
+						The goddesses? Alex, the goddesses .... Let me just say this about the goddesses: 
+						I don't believe the term is good enough ... is good enough ... but when you're bound 
+						by these terrestrial descriptions, you must use the best choice available, right?
+					</p>-->
+				</div>
+				</li>
+
+		</ul>
+
+		<header>
+			
+		</header>
+
+		<footer>
+
+		</footer>
+
+		<button type="button" id="prev-button" class="hidden">
+			&laquo;
+		</button>
+		<button type="button" id="next-button">
+			&raquo;
+		</button>
+
+	</body>
+	<script type="text/javascript" src="script/zepto.min.js"></script>
+	<script type="text/javascript" src="script/hammer.js"></script>
+	<script type="text/javascript" src = "script/transfers.js"></script>
+	<script type="text/javascript" src="script/formverify.js"></script>
+	<script type="text/javascript" src="script/history.js"></script>
+</html>
