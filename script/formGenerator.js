@@ -3,15 +3,20 @@ var keys = [87, 65, 83, 68, 70, 71, 38, 40, 37, 39];
 var chars = ['W', 'A', 'S', 'D', 'F', 'G', 'UP', 'DOWN', 'LEFT', 'RIGHT'];
 var choices;
 // ^ int holding how many options there are on screen.
-var formSubmitted = [new Array(), new Array(), new Array(),"",""];
+var formSubmitted = [new Array(), new Array(), new Array(), "", ""];
 // ^ inputId, inputKey, invert,feedId, feedTitle
 var SendUrl;
-var feedsToPush = {}; // <- Object for stuff to send to server.
-var feedsValues = new Array(); //values in feed.
-var toStream = false; //controls whether to even log information.
-var pushInterval = null; //thing holding the setInterval for pushing information.
-var apiKEY;
-
+var feedsToPush = {};
+// <- Object for stuff to send to server.
+var feedsValues = new Array();
+//values in feed.
+var toStream = false;
+//controls whether to even log information.
+var pushInterval = null;
+//thing holding the setInterval for pushing information.
+var delimiter = "¬!¬";
+//delimiter for array holding stream ID's
+var apiKEY = null;
 
 function charGet(number) {
 	for (var i = 0; i < keys.length; i++) {
@@ -22,14 +27,14 @@ function charGet(number) {
 	return "unfound";
 }
 
-function scanSubmit(texticle){
-	for(var i = 0; i < formSubmitted[1].length; i++){
-		if(texticle == formSubmitted[1][i]){
-			if(formSubmitted[2][i] == true){
+function scanSubmit(texticle) {
+	for (var i = 0; i < formSubmitted[1].length; i++) {
+		if (texticle == formSubmitted[1][i]) {
+			if (formSubmitted[2][i] == true) {
 				//write a one to feedsValues
 				feedsValues[i] = 1;
 			}
-			if(formSubmitted[2][i] == false){
+			if (formSubmitted[2][i] == false) {
 				//write a zero to feedsValues
 				feedsValues[i] = 0;
 			}
@@ -39,14 +44,14 @@ function scanSubmit(texticle){
 	return false;
 }
 
-function scanSubmitDown(texticle){
-	for(var i = 0; i < formSubmitted[1].length; i++){
-		if(texticle == formSubmitted[1][i]){
-			if(formSubmitted[2][i] == true){
+function scanSubmitDown(texticle) {
+	for (var i = 0; i < formSubmitted[1].length; i++) {
+		if (texticle == formSubmitted[1][i]) {
+			if (formSubmitted[2][i] == true) {
 				//write a zero to feedsValues
 				feedsValues[i] = 0;
 			}
-			if(formSubmitted[2][i] == false){
+			if (formSubmitted[2][i] == false) {
 				//write a one to feedsValues
 				feedsValues[i] = 1;
 			}
@@ -58,21 +63,21 @@ function scanSubmitDown(texticle){
 
 $(function() {
 	$(document).keydown(function(e) {
-		if(toStream == true){
-		
-		scanSubmitDown(charGet(e.keyCode));
+		if (toStream == true) {
+
+			scanSubmitDown(charGet(e.keyCode));
 			console.log("KEYDOWN");
 			console.log(feedsValues);
 		}
 	});
 	$(document).keyup(function(e) {
-		if(toStream == true){
-		
-		scanSubmit(charGet(e.keyCode));
+		if (toStream == true) {
+
+			scanSubmit(charGet(e.keyCode));
 			console.log(feedsValues);
 		}
 	});
-	
+
 });
 
 function apiKeySet() {
@@ -82,11 +87,20 @@ function apiKeySet() {
 }
 
 function initialSet() {
+	if(apiKEY == null ){
+			apiKEY = prompt("Please enter a valid API key.","");
+			console.log(apiKEY);
+			if(apiKEY == ""){return false;}
+			
+			else if(apiKEY!=""&&apiKEY!=null){
+				document.getElementById("apiAccess").value = apiKEY;
+			initialSet();}
+	}
 	if (document.getElementById("apiAccess").value != "") {
 		console.log(document.getElementById("apiAccess").value);
 		apiKEY = document.getElementById("apiAccess").value;
 		console.log("api key changed to : " + apiKEY);
-	}
+	
 	var optionLength = document.getElementById("numOfFeeds").value;
 	choices = optionLength;
 	var stringyThing = "";
@@ -100,7 +114,7 @@ function initialSet() {
 	stringyThing += '</div>';
 	stringyThing += '<form id = "streamer" onsubmit = "return resultParser()">';
 	stringyThing += 'Feed I.D. (leave blank to generate new feed) : <input type="text" id="feedId"></input>';
-		stringyThing += 'Feed Title : <input type="text" id="feedTitle"></input>';
+	stringyThing += 'Feed Title : <input type="text" id="feedTitle"></input>';
 	for (var i = 0; i < optionLength; i++) {
 		stringyThing += '<div id="input' + i + '" class="inputs">Name : <input type ="text" class="inputId"> Key to bind to : ' + optString(i) + ' Invert Input : <input type="checkbox" class="invert"  value="invert"></input></div>';
 	}//inputId, inputKey invert,
@@ -109,6 +123,7 @@ function initialSet() {
 	document.getElementById("form").style.display = "none";
 	document.getElementById("setup").innerHTML = stringyThing;
 	return false;
+	}
 }
 
 function optString(input) {
@@ -164,7 +179,7 @@ function addOption(currentCount) {
 	element.parentNode.removeChild(element);
 	//inputId, inputKey invert,
 	$('#streamer').append('<div id="input' + currentCount + '" class="inputs">Name : <input type ="text" class="inputId"> Key to bind to : ' + optString(currentCount) + ' Invert Input : <input type="checkbox" class="invert"   value="invert"></input></div>' + '<button type="submit" id="subInit">Start Streaming!</button><input type="button" id="streamStop" onclick = "(function(){stopStreaming();})();"value="Stop Streaming."\>');
-	
+
 	choices++;
 	if (currentCount < 9) {
 		document.getElementById("addOpt").onclick = function() {
@@ -175,11 +190,11 @@ function addOption(currentCount) {
 		removeOption(choices)
 	};
 }
-function boolOrNot(thingy){
-	if(thingy == true){
+
+function boolOrNot(thingy) {
+	if (thingy == true) {
 		return 1;
-	}
-	else{
+	} else {
 		return 0;
 	}
 }
@@ -195,76 +210,187 @@ function resultParser() {
 	inputid = document.getElementsByClassName("inputId");
 	inputkey = document.getElementsByClassName("inputKey");
 	invert = document.getElementsByClassName("invert");
-	console.log(feedsValues+"."+inputid.length);
-	
+	console.log(feedsValues + "." + inputid.length);
+
 	for (var i = 0; i < inputid.length; i++) {
-		formSubmitted[0].push(inputid[i].value);
+	if(!inputid[i].value.match(/^[0-9a-z]+$/)) {
+		console.log("doing!");
+      inputid[i].value = "Feed "+i+" input id not alphanumeric.";
+    }
+		formSubmitted[0].push(inputid[i].value.split(' ').join('_'));
 		formSubmitted[1].push(inputkey[i].value);
 		formSubmitted[2].push(invert[i].checked);
-		console.log(boolOrNot(invert[i].checked));
 		feedsValues.push(boolOrNot(invert[i].checked));
 	}
-	
-	console.log(feedsValues);
-	
-	if(document.getElementById("feedId").value != ""){
+
+	/*pull id from stream suggested and input.
+	 * roll through stream id's and if case insensitive equal to input
+	 * make input the stream id found such that shit isn't fucked up.
+	 * use delimiter in found id's so we know it's not deleted.
+	 delete all stream id's which do not contain delimiter.
+	 */
+ 	if (document.getElementById("feedId").value == "") {
+ 		toStream = false;
+		addFeed();
+	}
+	else if (document.getElementById("feedId").value != "") {
+		console.log("ti")
 		formSubmitted[3] = document.getElementById("feedId").value;
 		formSubmitted[4] = document.getElementById("feedTitle").value;
-		pushToServer();
-	}
-	if(document.getElementById("feedTitle").value == ""){
-		//create new feed
+
+		//all testing stuff goes here. Let's add stuff to the dev console for now.
+
+		var fNum = document.getElementById("feedNum").value;
+		var containArray = new Array();
+		$.ajax({
+			url : "http://api.cosm.com/v2/" + "feeds/" + fNum,
+			beforeSend : function(request) {
+				request.setRequestHeader("X-ApiKey", apiKEY);
+			},
+			data : "",
+			always : function() {
+				console.log("done");
+			},
+			error : function(response) {
+				console.log(response);
+			},
+			success : function(response) {
+				//	document.getElementById("spanner").innerHTML = response;
+				if (response.datastreams != undefined) {
+					for (var i = 0; i < response.datastreams.length; i++) {
+						containArray.push(response.datastreams[i].id);
+					}
+
+					for (var i = 0; i < containArray.length; i++) {
+						for (var j = 0; j < formSubmitted[0].length; j++) {
+							if (formSubmitted[0][j].toLowerCase() == containArray[i].toLowerCase()) {
+								formSubmitted[0][i] = containArray[i];
+								containArray[i] += delimiter;
+							}
+						}
+					}
+					for (var i = 0; i < containArray.length; i++) {
+						if (containArray[i].indexOf(delimiter) == -1) {
+							console.log("deleting " + containArray[i]);
+							deleteElements(fNum, containArray[i]);
+						}
+					}
+				}
+				//	console.log(containArray);
+				//	console.log(checker);
+				pushInterval = setInterval(pushToServer, 660);
+			}
+		});
+
+		//end of testing here.
+
 	}
 	console.log(formSubmitted);
-	pushInterval = window.setInterval(pushToServer,660);
 	return false;
 }
 
-function stopStreaming(){
-	toStream = false;
-	console.log(toStream);
-	 if(pushInterval) {
-        clearInterval(pushInterval);
-    }
-    console.log("cleared");	
+function addFeed() {
+	var urlLink = null;
+		$.ajax({
+			type : "GET",
+			url : "backend/creater.php",
+			data : {
+				APIkey : apiKEY
+			},
+			async : false,
+			always : function() {
+				console.log("done");
+			},
+			dataType : "jsonp",
+			success : function(data, textStatus, xhr) {
+				console.log(textStatus);
+			},
+			error : function(response) {
+				console.log(response);
+			},
+			complete : function(response) {
+				console.log(response);
+				if (JSON.parse(response.responseText).Location == undefined) {
+					addFeed();
+				} else {
+					urlLink = JSON.parse(response.responseText).Location;
+					urlLink = urlLink.split("/")[5];
+					console.log(urlLink);
+					formSubmitted[3] = urlLink;
+					formSubmitted[4] = document.getElementById("feedTitle").value;
+					toStream = true;
+				
+					if (formSubmitted[4].length == 0) {
+						formSubmitted[4] = "A test title for you.";
+					}
+				}
+
+			},
+			failure : function(response, status, xhr) {
+				console.log(response);
+				console.log(xhr.getAllResponseHeaders());
+			}
+		});
+	pushInterval = setInterval(pushToServer, 660);
 }
 
-function pushToServer(){
+function stopStreaming() {
+	toStream = false;
+	console.log(toStream);
+	if (pushInterval) {
+		clearInterval(pushInterval);
+	}
+	console.log("cleared");
+}
+
+function pushToServer() {
 	//inputId, inputKey, invert,feedId, feedTitle
 	//formSubmitted
-	SendUrl= "http://api.cosm.com/v2/" +"feeds/"+ formSubmitted[3]+"?_method=PUT";
+	SendUrl = "http://api.cosm.com/v2/" + "feeds/" + formSubmitted[3] + "?_method=PUT";
+	console.log(SendUrl+"-----------------");
 	var info = new Array();
-	for(var i = 0; i < formSubmitted[0].length; i++){
+	for (var i = 0; i < formSubmitted[0].length; i++) {
 		var ID = formSubmitted[0][i];
-		info.push({"id":ID,"current_value":JSON.stringify(feedsValues[i]),"max_value":"1.0","min_value":"0.0"});
+		info.push({
+			"current_value" : JSON.stringify(feedsValues[i]),
+			"id" : ID,
+			"max_value" : "1.0",
+			"min_value" : "0.0"
+		});
 	}
-	
+
 	feedsToPush["title"] = formSubmitted[4];
 	feedsToPush["version"] = "1.0.0";
 	feedsToPush["website"] = "http://www.amroche.co.uk/netChimes";
 	feedsToPush["tags"] = new Array("Makey Makey", "NetChimes", "Net Chimes");
 	feedsToPush["location"] = {};
-	feedsToPush["location"]["lat"] = "0";
-	feedsToPush["location"]["lon"] = "-59";
+	feedsToPush["location"]["lat"] = latitude;
+	feedsToPush["location"]["lon"] = longitude;
 	feedsToPush["location"]["domain"] = "physical";
 	feedsToPush["location"]["name"] = "A Makey Makey being used.";
 	feedsToPush["location"]["exposure"] = "indoor";
 	feedsToPush["datastreams"] = info;
-	
+
 	$.ajax({
-	 type    : "PUT",
-	 url     : SendUrl,
-	 beforeSend: function (request)
-	 {
-	 request.setRequestHeader("X-ApiKey", apiKEY);
-	 },
-	 data    : feedsToPush,
-	 always  : function(){console.log("done");},
-	 success:function(response){
-	 //	document.getElementById("spanner").innerHTML = response;
-	 console.log(response);
-	 }
-	 });
+		type : "PUT",
+		url : SendUrl,
+		crossDomain : true,
+		beforeSend : function(request) {
+			request.overrideMimeType("text/plain; charset=utf-8");
+			request.setRequestHeader("X-ApiKey", apiKEY);
+		},
+		data : JSON.stringify(feedsToPush),
+		always : function() {
+			console.log("done");
+		},
+		success : function(response) {
+			//	document.getElementById("spanner").innerHTML = response;
+			console.log(response);
+		},
+		error : function(response) {
+			console.log(response);
+		}
+	});
 	console.log("cycled through things.");
 	console.log(JSON.stringify(feedsToPush));
 }

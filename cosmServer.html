@@ -2,6 +2,7 @@
 <html>
 	<header>
 		<script type="text/javascript" src="script/jquery164.min.js"></script>
+		<script type="text/javascript" src="script/location.js"></script>
 		<script type="text/javascript" src="script/formGenerator.js"></script>
 		<script type="text/javascript" src="script/streaming.js"></script>
 
@@ -19,13 +20,25 @@
 				<button onclick="(function(){window.clearInterval(interval);console.log('Ceasing Testing.');})();">
 					Stop Test Transmission
 				</button>
-				<button onclick="(function(){newFeed();})">
+				<button onclick="(function(){newFeed();})();">
 					Add a New Feed
 				</button>
 				<form id="form2" onsubmit = "return apiKeySet()">
 					API KEY :
 					<input type="text" id="apiDevAccess" value="LEXFCUfXTzzUiPhvL0tSAAkJFkWSAKxLQkVLSExCMHlZTT0g">
 					<input type="submit"\>
+				</form>
+				<form id="feedGetter" onsubmit = "return FeedGet()">
+					Feed Number : 
+					<input type="text" id="feedNum" value="105431"></input>
+					<input type="submit" \>
+					
+				</form>
+				<form id="underscoreAdding" onsubmit = "return underScore()">
+					Name of Stuff : 
+					<input type="text" id="FEEDid" value="things that move"></input>
+					<input type="submit" \>
+					
 				</form>
 			</div>
 			<div id="setup">
