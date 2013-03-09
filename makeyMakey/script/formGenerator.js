@@ -264,7 +264,6 @@ function resultParser() {
 		addFeed();
 	}
 	else if (document.getElementById("feedId").value != "") {
-		console.log("ti")
 		formSubmitted[3] = document.getElementById("feedId").value;
 		formSubmitted[4] = document.getElementById("feedTitle").value;
 

@@ -5,6 +5,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link rel="stylesheet" href="styles.css" type="text/css">
 
+			<link rel='stylesheet' href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css'>
+			<script src="http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js"></script>
+
 	</head>
 	<body>
 		<ul class="slideshow">
@@ -14,7 +17,7 @@
 					<!--cosm API -->
 					<div class="wrapper">
 						<div id="map"></div>
-						<div id="feedList"></div>
+						<div id="feedList"><h2> Click on a marker for more information!</h2></div>
 					</div>
 				</div>
 			</li>
@@ -68,8 +71,12 @@
 
 	</body>
 	<script type="text/javascript" src="script/zepto.min.js"></script>
-	<script type="text/javascript" src="script/hammer.js"></script>
+<!--	<script type="text/javascript" src="script/hammer.js"></script>-->
 	<script type="text/javascript" src = "script/transfers.js"></script>
-	<script type="text/javascript" src="script/formverify.js"></script>
+		<script type= "text/javascript" src="script/jquery164.min.js"></script>
 	<script type="text/javascript" src="script/history.js"></script>
+	<script type="text/javascript" src="script/maps.js"></script>
+	<script type="text/javascript" src="script/mapUpdater.js"></script>
+			<script src="script/location.js"></script>
+
 </html>

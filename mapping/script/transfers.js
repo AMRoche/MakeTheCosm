@@ -6,7 +6,7 @@
 		var increment = 0;
 		var active = $('.slideshow .slide.active');
 		var totalSlides = $('.slide');
-		var hammer = new Hammer(document.getElementsByClassName("slideshow")[0]);
+		//var //hammer = new Hammer(document.getElementsByClassName("slideshow")[0]);
 		if (hashThing.indexOf("#") != -1) {
 			changeScreen(hashThing);
 			history.pushState({
@@ -14,11 +14,12 @@
 			}, "", hashThing);
 		}//sort it defaulting to #blurb
 
-			
+			document.getElementById("map").addEventListener('onswipe',function(event){
+				//hammer.cancelEvent();
+			});
 		for (var i = 0; i < document.getElementsByClassName("slide").length; i++) {
 			document.getElementsByClassName("content")[i].addEventListener('onswipe', function(event) {
-				console.log("olololSwipe");
-				//hammer.cancelEvent();
+				////hammer.cancelEvent();
 			}, false);
 			document.getElementsByClassName("content")[i].addEventListener('touchend', function(event) {
 				event.stopPropagation();
@@ -28,7 +29,7 @@
 			}, false);
 		}
 
-		hammer.onswipe = function(ev) {
+		/*hammer.onswipe = function(ev) {
 			var direction = ev.direction;
 			var active = $('.slideshow .slide.active');
 			var totalSlides = $('.slide');
@@ -39,7 +40,7 @@
 			if (direction == "left") {//right moving
 				nextOne();
 			}
-		};
+		};*/
 
 		$(document).keydown(function(e) {
 			if (e.keyCode == 37) {
