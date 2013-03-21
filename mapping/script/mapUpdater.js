@@ -1,9 +1,9 @@
-var json;
+
 var apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
-var question = "MakeyMakey";
+var question = "arduino";
 var maxSize = 30;
 //console.log(getInfo("stuff"));
-
+//LINE 157 PROBLEMATIC
 //console.log(layer.markers());
 setInterval(function() {
 	getInfo(question)
@@ -75,25 +75,150 @@ function getInfo(query) {
 }
 
 function updateInfo(idOfDiv) {
-	var found = false;
+	console.log("being called");
+	if(document.getElementById("feedId") != null){
+	var idOfThing = document.getElementById("feedId").innerHTML;}
 	for (var i = 0; i < json.length; i++) {
-		if (idOfDiv == json[i].id) {
-			found = true;
-			document.getElementById("feedList").innerHTML = "<p>" + JSON.stringify(json[i]) + "</p>";
-			console.log("updating");
+		
+		if(JSON[json[i].id]!=undefined){
+			for(var dataI = 0; dataI < json[i].datastreams.length; dataI++){
+				for (var IJSON = 0; IJSON < JSON[json[i].id].length; IJSON++){
+					if(json[i].datastreams[dataI].id == JSON[json[i].id][IJSON][0]){
+						JSON[json[i].id][IJSON][1] = json[i].datastreams[dataI].current_value;//value   //json[i].datastreams[j].current_value
+						JSON[json[i].id][IJSON][2] = json[i].datastreams[dataI].max_value;//maxima
+						JSON[json[i].id][IJSON][3] = json[i].datastreams[dataI].min_value;//minima
+						console.log("values updated");
+					}
+				}
+			}
+		}
+		
+	if (idOfThing == json[i].id) {
+			console.log(json[i]);
+			var string = "<div id='dataWrapper'>";
+			string += "<h3>"+json[i].title+"</h3><h5 id='uniqueDataFeedDisplayIdentifier'>"+json[i].id+"</h5>";
+			string += "<p id='creator'>Creator : <a href='"+json[i].creator+"'target='_blank'>"+json[i].creator.substring(23,json[i].creator.length)+"</a></p>";
+			console.log();
+			if(json[i].description != undefined){
+			string += "<p id='feedDescription'>"+json[i].description+"</p>";}
+			string +="<div id='dataStreamDataList'>";
+			string += "<ul>";
+			
+			for(var j= 0; j < json[i].datastreams.length;j++){
+				var listed = false;
+			//JSON[feedId].push([dataId, currentVal]) ;
+				if(JSON[json[i].id]==undefined){
+					string+= "<li><div class='dataWrapping' id='"+json[i].datastreams[j].id+"'><div class='listItem' >";
+				}
+				else if(JSON[json[i].id]!= undefined){
+					var found = false;
+						//for loop to see if found.
+						for(var zed = 0; zed < JSON[json[i].id].length; zed++){
+							if(JSON[json[i].id][zed][0] == json[i].datastreams[j].id){
+								found = true;
+							}
+						}
+					
+					if(found == false){
+						string+= "<li><div class='dataWrapping' id='"+json[i].datastreams[j].id+"'><div class='listItem' >";
+					}
+					if(found != false){
+						listed = true;
+						string+= "<li><div class='dataWrapping listed' id='"+json[i].datastreams[j].id+"'><div class='listItem' >";
+					}
+				}
+				string+="<p id='id'>"+json[i].datastreams[j].id+"</p>" ; 
+				string+="<p>VALUE : <span id='value' data-val='"+json[i].datastreams[j].current_value+"'>"+json[i].datastreams[j].current_value+"</span></p>";
+				string+="<p>MAX_VALUE : <span id='maxVal'>"+json[i].datastreams[j].max_value+"</span></p>";
+				string+="<p>MIN_VALUE : <span id='minVal'>"+json[i].datastreams[j].min_value+"</span></p>";
+				string+="</div><div class='ButtonSection'>";
+				if(listed == false){
+					string+="<input type='button' value='Sonify Me!' id='addToMusic' onclick='(function(){sonifyAdd(\""+json[i].id+":"+json[i].datastreams[j].id+":"+json[i].datastreams[j].current_value+":"+json[i].datastreams[j].max_value+":"+json[i].datastreams[j].min_value+"\");})();'>";
+					string+="<input type='button' value='Maybe Not...' style='display:none' id='removeFromMusic' onclick='(function(){sonifyRemove(\""+json[i].id+":"+json[i].datastreams[j].id+"\");})();'>";
+				}
+				if(listed != false){
+					string+="<input type='button' value='Sonify Me!' id='addToMusic' style='display:none;' onclick='(function(){sonifyAdd(\""+json[i].id+":"+json[i].datastreams[j].id+":"+json[i].datastreams[j].current_value+"\");})();'>";
+					string+="<input type='button' value='Maybe Not...' style='display:inline-block;' id='removeFromMusic' onclick='(function(){sonifyRemove(\""+json[i].id+":"+json[i].datastreams[j].id+"\");})();'>";
+				}
+				//id,current_value, max_value, min_value
+				string+="</div>";
+				string+="</div>";
+			}
+			string +="</div>";
+			string += "</ul>";
+			string += "</div>";
+			document.getElementById("feedList").innerHTML = string;	
+			document.getElementById("feedList").setAttribute("FeedId", idOfThing);
 		}
 	}
 	if (found == false) {
 		document.getElementById("feedList").innerHTML = "Your feed seems to have vanished!";
 	}
+	console.log("thing being calleds");
+	displayListUpdate();
 }
 
 function getPertinentInfo() {
-	var idOfThing = document.getElementById("feedId").innerHTML;
+	if(document.getElementById("feedId") != null){
+	var idOfThing = document.getElementById("feedId").innerHTML;}
 	for (var i = 0; i < json.length; i++) {
 		if (idOfThing == json[i].id) {
-			document.getElementById("feedList").innerHTML = "<p>" + JSON.stringify(json[i]) + "</p>";
+			console.log(json[i]);
+			var string = "<div id='dataWrapper'>";
+			string += "<h3>"+json[i].title+"</h3><h5 id='uniqueDataFeedDisplayIdentifier'>"+json[i].id+"</h5>";
+			string += "<p id='creator'>Creator : <a href='"+json[i].creator+"'target='_blank'>"+json[i].creator.substring(23,json[i].creator.length)+"</a></p>";
+			console.log();
+			if(json[i].description != undefined){
+			string += "<p id='feedDescription'>"+json[i].description+"</p>";}
+			string +="<div id='dataStreamDataList'>";
+			string += "<ul>";
+			
+			for(var j= 0; j < json[i].datastreams.length;j++){
+				var listed = false;
+			//JSON[feedId].push([dataId, currentVal]) ;
+				if(JSON[json[i].id]==undefined){
+					string+= "<li><div class='dataWrapping' id='"+json[i].datastreams[j].id+"'><div class='listItem' >";
+				}
+				else if(JSON[json[i].id]!= undefined){
+					var found = false;
+						//for loop to see if found.
+						for(var zed = 0; zed < JSON[json[i].id].length; zed++){
+							if(JSON[json[i].id][zed][0] == json[i].datastreams[j].id){
+								found = true;
+							}
+						}
+					
+					if(found == false){
+						string+= "<li><div class='dataWrapping' id='"+json[i].datastreams[j].id+"'><div class='listItem' >";
+					}
+					if(found != false){
+						listed = true;
+						string+= "<li><div class='dataWrapping listed' id='"+json[i].datastreams[j].id+"'><div class='listItem' >";
+					}
+				}
+				string+="<p id='id'>"+json[i].datastreams[j].id+"</p>" ; 
+				string+="<p>VALUE : <span id='value' data-val='"+json[i].datastreams[j].current_value+"'>"+json[i].datastreams[j].current_value+"</span></p>";
+				string+="<p>MAX_VALUE : <span id='maxVal'>"+json[i].datastreams[j].max_value+"</span></p>";
+				string+="<p>MIN_VALUE : <span id='minVal'>"+json[i].datastreams[j].min_value+"</span></p>";
+				string+="</div><div class='ButtonSection'>";
+				if(listed == false){
+					string+="<input type='button' value='Sonify Me!' id='addToMusic' onclick='(function(){sonifyAdd(\""+json[i].id+":"+json[i].datastreams[j].id+":"+json[i].datastreams[j].current_value+":"+json[i].datastreams[j].max_value+":"+json[i].datastreams[j].min_value+"\");})();'>";
+					string+="<input type='button' value='Maybe Not...' style='display:none' id='removeFromMusic' onclick='(function(){sonifyRemove(\""+json[i].id+":"+json[i].datastreams[j].id+"\");})();'>";
+				}
+				if(listed != false){
+					string+="<input type='button' value='Sonify Me!' id='addToMusic' style='display:none;' onclick='(function(){sonifyAdd(\""+json[i].id+":"+json[i].datastreams[j].id+":"+json[i].datastreams[j].current_value+"\");})();'>";
+					string+="<input type='button' value='Maybe Not...' style='display:inline-block;' id='removeFromMusic' onclick='(function(){sonifyRemove(\""+json[i].id+":"+json[i].datastreams[j].id+"\");})();'>";
+				}
+				//id,current_value, max_value, min_value
+				string+="</div>";
+				string+="</div>";
+			}
+			string +="</div>";
+			string += "</ul>";
+			string += "</div>";
+			document.getElementById("feedList").innerHTML = string;
 			document.getElementById("feedList").setAttribute("FeedId", idOfThing);
 		}
 	}
 }
+

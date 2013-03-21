@@ -28,6 +28,12 @@ header .tri_bottom{float:left;width:0px;height:0px;border-style:solid;border-wid
 .content h2{font-size:18px;line-height:24px;margin-left:25%;margin-bottom:10px;}.content h2 span{clear:left;}
 .content p{font-size:14px;line-height:16px;}
 .content .wrapper{float:left;padding:20px;background:rgba(0, 0, 0, 0.1);width:100%;}.content .wrapper #userZone{margin:0 auto;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;}
-.content .wrapper #selectedFeeds{margin:0 auto;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;}
+.content .wrapper #selectedFeeds{float:left;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;}
+.content .wrapper #listOfFeeds{float:left;margin-left:5%;background:rgba(0, 0, 0, 0.1);width:25%;height:500px;}.content .wrapper #listOfFeeds #quickInfoSummation{background:rgba(0, 0, 0, 0.1);width:100%;height:400px;overflow-y:scroll;}.content .wrapper #listOfFeeds #quickInfoSummation ul{list-style:none;}.content .wrapper #listOfFeeds #quickInfoSummation ul li .quickWrapper{background-color:rgba(255, 255, 255, 0.2);float:left;width:100%;margin-top:5px;margin-bottom:5px;}
 .content .wrapper #map{float:left;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;}
-.content .wrapper #feedList{float:left;margin-left:5%;background:rgba(0, 0, 0, 0.1);width:25%;height:500px;}
+.content .wrapper #feedList{float:left;margin-left:5%;background:rgba(0, 0, 0, 0.1);width:25%;height:500px;}.content .wrapper #feedList #dataWrapper #creator a{color:#ffffff;}
+.content .wrapper #feedList #dataWrapper #feedDescription{font-style:italic;}
+.content .wrapper #feedList #dataWrapper #dataStreamDataList{margin-top:20px;height:350px;overflow-y:scroll;}.content .wrapper #feedList #dataWrapper #dataStreamDataList ul{list-style:none;}.content .wrapper #feedList #dataWrapper #dataStreamDataList ul li .chosen{background-color:rgba(100, 255, 100, 0.2);}
+.content .wrapper #feedList #dataWrapper #dataStreamDataList ul li .listed{background-color:rgba(255, 255, 255, 0.5) !important;}
+.content .wrapper #feedList #dataWrapper #dataStreamDataList ul li .dataWrapping{background-color:rgba(255, 255, 255, 0.2);float:left;width:100%;margin-top:5px;margin-bottom:5px;}.content .wrapper #feedList #dataWrapper #dataStreamDataList ul li .dataWrapping .listItem{width:60%;float:left;}.content .wrapper #feedList #dataWrapper #dataStreamDataList ul li .dataWrapping .listItem #id{font-weight:bold;}
+.content .wrapper #feedList #dataWrapper #dataStreamDataList ul li .dataWrapping .ButtonSection{width:40%;float:right;}.content .wrapper #feedList #dataWrapper #dataStreamDataList ul li .dataWrapping .ButtonSection input[type="button"]{float:right;width:70px;height:32px;}

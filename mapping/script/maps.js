@@ -48,12 +48,13 @@ map.addLayer(layer);
  interacting.formatter(function(feature) {
         var o = '<h3><span id="feedId" style="display:none;">'+feature.properties.id+"</span><span id='feedName'>"+feature.properties.feedName + '</span></h3>' +
             '<ul>';
-            if(feature.properties.datastreams.length > 3){var thing = 2;}
-             if(feature.properties.datastreams.length <= 3){var thing = feature.properties.datastreams.length;}
+    var thing = 3;
+             if(feature.properties.datastreams.length < 3){var thing = feature.properties.datastreams.length;}
+             if(feature.properties.datastreams.length > 3){var thing = 2;}
             for(var i = 0; i < thing; i++){
             	o += "<li>"+feature.properties.datastreams[i].id+":"+feature.properties.datastreams[i].current_value;
             }
-            if(thing==2){
+            if(feature.properties.datastreams.length>3){
             	o+= "<li>-> More than 3 inputs <-</li>";
             }
 			o+="</ul>";
