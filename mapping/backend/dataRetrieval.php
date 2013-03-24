@@ -33,6 +33,7 @@ $response = substr($response, $response_size);
 $response = JSON_decode($response, true);
 //print_r($response);
 //print_r(sizeof($response["results"]));
+if(array_key_exists("results",$response)){
 if (sizeof($response["results"]) >= $maxCount) {
 	while (sizeof($returnJSON) < $maxCount) {
 		for ($i = 0; $i < sizeof($response["results"]); $i++) {
@@ -52,6 +53,7 @@ if (sizeof($response["results"]) >= $maxCount) {
 		}
 	}
 }
+
 else{
 		for ($i = 0; $i < sizeof($response["results"]); $i++) {
 			if (array_key_exists("location", $response["results"][$i])) {
@@ -65,6 +67,7 @@ else{
 				}
 			}
 		}
+}
 }
 //print_r($returnJSON);
 if (isset($_GET['jsoncallback'])) {

@@ -259,6 +259,35 @@ header {
         background:rgba(0,0,0,0.1);
         width:70%;
         height:500px;
+        overflow-y:scroll;
+            #selectedFeedsList{
+                width:100%;
+                list-style:none;
+                    li{
+                        float:left;
+                        width:100%;
+                        margin:5px 0 5px 0;
+                        background:rgba(0,0,0,0.1);
+                        
+                        .graphDataContainer{
+                            width:100%;
+                            float: left;
+                                .graphInfo{
+                                    width: 30%;
+                                    float: left;
+                                }    
+                                .graphContainer{
+                                    float:left;
+                                    width:30%;
+                                    height:100px;
+                                }
+                                .options{
+                                    float:left;
+                                    width:40%;
+                                    }
+                            }
+                        }
+                }
         }
     #listOfFeeds{
         float:left;
@@ -280,10 +309,12 @@ header {
                                 width:100%;
                                 margin-top:5px;
                                 margin-bottom:5px;
+                                .infoWahn{
                                     .dataId{}
                                     .curVal{}
                                     .maxVal{}
                                     .minVal{}
+                                }
                                 }
                         }
                     }

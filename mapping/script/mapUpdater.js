@@ -5,6 +5,7 @@ var maxSize = 30;
 //console.log(getInfo("stuff"));
 //LINE 157 PROBLEMATIC
 //console.log(layer.markers());
+getInfo(question);
 setInterval(function() {
 	getInfo(question)
 }, 660);
@@ -87,7 +88,18 @@ function updateInfo(idOfDiv) {
 						JSON[json[i].id][IJSON][1] = json[i].datastreams[dataI].current_value;//value   //json[i].datastreams[j].current_value
 						JSON[json[i].id][IJSON][2] = json[i].datastreams[dataI].max_value;//maxima
 						JSON[json[i].id][IJSON][3] = json[i].datastreams[dataI].min_value;//minima
-						console.log("values updated");
+						
+						console.log(JSON[json[i].id][IJSON][4]);
+						console.log("updating "+JSON[json[i].id][IJSON][0]);
+					//	JSON[json[i].id][IJSON][4].series[0]
+						JSON[json[i].id][IJSON][4].series[0].addPoint(
+							[
+							(new Date()).getTime()
+							,
+							parseFloat(JSON[json[i].id][IJSON][1])
+							],true,true
+							);
+						//JSON[json[i].id][IJSON][4].series[0].data.push([(new Date()).getTime(),json[i].datastreams[dataI].current_value]);
 					}
 				}
 			}

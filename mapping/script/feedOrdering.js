@@ -2,6 +2,10 @@ var JSON = {};
 //information object for feeds that have been chosen.
 var json;
 //global information object
+//add extra part in to global information object to be checked for to see if there is any listen requirements already set.
+//based on what is in the array at that point act on it in seperate method called every time there's a successful ajax call
+//returned to us. Should do it.
+
 function sonifyAdd(input) {
 	var feedId = input.split(":")[0];
 	var dataId = input.split(":")[1];
@@ -20,7 +24,115 @@ function sonifyAdd(input) {
 		console.log("found" + dataId + "," + feedId);
 		JSON[feedId].push([dataId, currentVal, maxVal, minVal]);
 	}
-	console.log(JSON);
+	
+	console.log(JSON); 
+	var stringToInsert = "<li id='"+feedId+dataId+"sonNode'>";
+		stringToInsert += "<div class = 'graphDataContainer' id='"+feedId+dataId+"container'>";
+	stringToInsert += "<div class = 'graphInfo'>";
+	stringToInsert += "<h2>"+feedId+"://"+dataId  + "</h2>";
+	stringToInsert += "<h3> Value >> " + currentVal + "</h3>";
+	stringToInsert += "<h3> Maxima >> " + maxVal + "</h3>";
+	stringToInsert += "<h3> Minima >> " + minVal + "</h3>";
+	stringToInsert += "<input type='button' value='Maybe Not...' style='display:inline-block;' class='removeFromArrayGraphing' onclick='(function(){sonifyRemoveArray(\"" + feedId + ":" + dataId + "\");})();'>";
+	stringToInsert += "</div>";
+
+	stringToInsert += "<div class='graphContainer' id='"+feedId + dataId +"graph'></div>";
+	stringToInsert += "<div class='options' id='"+feedId + dataId +"options'>";
+	stringToInsert += "<select id='"+feedId + dataId +"select'>"
++"<option> -Select a trigger- </option>"
++"<option> GREEN </option>"
++"<option> YELLOW </option>"
++"<option> BLUE </option>"
++"<option> ORANGE </option>"
++"</select>"
++"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea' />";
+	stringToInsert += "</div>";
+	stringToInsert += "</div>";
+	document.getElementById("selectedFeedsList").innerHTML += stringToInsert;
+	 JSON[feedId][JSON[feedId].length-1].push(
+	 	new Highcharts.Chart({
+            chart: {
+                renderTo: feedId + dataId +"graph",
+                //type: 'spline',
+                type : 'area',
+                marginRight: 10,
+                events: {
+                    load: function() {
+    
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        
+                    }
+                }
+            },
+            title: false,
+            
+	        credits: {
+	            enabled: false
+	        },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+            	max : maxVal,
+            	min : minVal,
+                title: false,
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+Highcharts.numberFormat(this.y, 2);
+                }
+            },
+              plotOptions: {
+                area: {
+           			threshold : -999999,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Streamed Data',
+                data: (function() {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+                    for (i = -50; i <= 0; i++) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: -999999
+                        });
+                    }
+                    return data;
+                })()
+            }]
+        })
+    
+    //  JSON[feedId][JSON[feedId].length-1]);
+	);
+	
+	
+	
 	displayListUpdate();
 	//document.getElementById(dataId).getElementsByClassName("ButtonSection")[0].childNodes.item("removeFromMusic").style.display = "inline-block";
 	//start here tomorrow.
@@ -28,11 +140,14 @@ function sonifyAdd(input) {
 
 function sonifyRemove(input) {
 	//.splice(2,1)
+	
 	var feedId = input.split(":")[0];
 	var dataId = input.split(":")[1];
 	document.getElementById(dataId).getElementsByClassName("ButtonSection")[0].childNodes[0].style.display = "inline-block";
 	document.getElementById(dataId).getElementsByClassName("ButtonSection")[0].childNodes[1].style.display = "none";
 	console.log(input);
+	element = document.getElementById(feedId + dataId + "sonNode");//these two lines remove the graph node element.
+element.parentNode.removeChild(element);
 	document.getElementById(dataId).className = "dataWrapping";
 	for (var i = 0; i < JSON[feedId].length; i++) {
 		if (JSON[feedId][i][0] == dataId) {
@@ -43,6 +158,7 @@ function sonifyRemove(input) {
 	if (JSON[feedId].length == 0) {
 		delete JSON[feedId];
 	}
+
 	displayListUpdate();
 }
 
@@ -54,7 +170,9 @@ var StreamId = input.split(":")[1];
 		document.getElementById(StreamId).getElementsByClassName("ButtonSection")[0].childNodes[0].style.display = "inline-block";
 		document.getElementById(StreamId).getElementsByClassName("ButtonSection")[0].childNodes[1].style.display = "none";
 	}
-	
+element = document.getElementById(FeedId + StreamId + "sonNode");//these two lines remove the graph node element.
+element.parentNode.removeChild(element);
+
 	for (var i = 0; i < JSON[FeedId].length; i++) {
 		if (JSON[FeedId][i][0] == StreamId) {
 			JSON[FeedId].splice(i, 1);
@@ -81,11 +199,24 @@ function displayListUpdate() {
 			insertThing += "<div class='maxVal'>Maxima >> " + JSON[key][i][2] + "</div>";
 			insertThing += "<div class='minVal'>Minima >> " + JSON[key][i][3] + "</div>";
 			insertThing += "</div>";
-			insertThing += "<input type='button' value='Maybe Not...' style='display:inline-block;' id='removeFromArray' onclick='(function(){sonifyRemoveArray(\"" + key + ":" + JSON[key][i][0] + "\");})();'>";
+			insertThing += "<input type='button' value='Maybe Not...' style='display:inline-block;' class='removeFromArray' onclick='(function(){sonifyRemoveArray(\"" + key + ":" + JSON[key][i][0] + "\");})();'>";
 			insertThing += "</div>";
 		}
 	}
 
 	insertThing += "</ul>";
 	document.getElementById("quickInfoSummation").innerHTML = insertThing;
+	
+	
+	
+	
+	
+	
+	
+for(var key in JSON){
+
+	
+}
+	
+	
 }
