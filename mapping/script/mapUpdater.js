@@ -2,9 +2,9 @@
 var apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
 var question = "arduino";
 var maxSize = 30;
-//console.log(getInfo("stuff"));
+////console.log(getInfo("stuff"));
 //LINE 157 PROBLEMATIC
-//console.log(layer.markers());
+////console.log(layer.markers());
 getInfo(question);
 setInterval(function() {
 	getInfo(question)
@@ -29,18 +29,18 @@ function getInfo(query) {
 			"maxCount" : "50"
 		},
 		always : function() {
-			console.log("done");
+			//console.log("done");
 		},
 		success : function(response) {
 			//	document.getElementById("spanner").innerHTML = response;
-			//	console.log(response);
-			//			console.log();
-			//console.log(response.totalResults);
+			//	//console.log(response);
+			//			//console.log();
+			////console.log(response.totalResults);
 			json = new Array();
 			layer.features([]);
 			//for(var i = 0; i < response.length; i++){
 			for (var i = 0; i < response.length; i++) {
-				//console.log(response.results[i]);
+				////console.log(response.results[i]);
 				json.push(response[i]);
 				layer.add_feature({
 					'geometry' : {
@@ -69,14 +69,14 @@ function getInfo(query) {
 			}
 		},
 		error : function(response) {
-			console.log(response);
+			//console.log(response);
 		}
 	});
 
 }
 
 function updateInfo(idOfDiv) {
-	console.log("being called");
+	//console.log("being called");
 	if(document.getElementById("feedId") != null){
 	var idOfThing = document.getElementById("feedId").innerHTML;}
 	for (var i = 0; i < json.length; i++) {
@@ -85,13 +85,41 @@ function updateInfo(idOfDiv) {
 			for(var dataI = 0; dataI < json[i].datastreams.length; dataI++){
 				for (var IJSON = 0; IJSON < JSON[json[i].id].length; IJSON++){
 					if(json[i].datastreams[dataI].id == JSON[json[i].id][IJSON][0]){
+						
+						//DO ALL OF THE PLAYCHECKING HERE BITCHES!!!!
+						//"Greater>> Less<< Changes from Original=|="
+						var tester = JSON[json[i].id][IJSON][5];
+						if(tester[0] != undefined && tester[1]!=undefined&&tester[2]!=undefined){
+							//0 is mode, 1 is threshold, 2 is sound //checks values set in audioSettings.js
+							if(tester[0] == "=|="){
+								if(tester[1]!=json[i].datastreams[dataI].current_value){
+									playNoise(tester[1]);
+								}
+							}
+							else if(tester[0] == ">>"){
+								if(tester[1]>json[i].datastreams[dataI].current_value){
+									playNoise(tester[1]);
+								}
+							}
+							else if(tester[0] == "<<"){
+								if(tester[1]<json[i].datastreams[dataI].current_value){
+									playNoise(tester[1]);
+								}
+							}
+							else if(tester[0] == "==" || tester[0] == "|==|"){
+								if(tester[1]==json[i].datastreams[dataI].current_value){
+									playNoise(tester[1]);
+								}
+							}							
+						}
 						JSON[json[i].id][IJSON][1] = json[i].datastreams[dataI].current_value;//value   //json[i].datastreams[j].current_value
 						JSON[json[i].id][IJSON][2] = json[i].datastreams[dataI].max_value;//maxima
 						JSON[json[i].id][IJSON][3] = json[i].datastreams[dataI].min_value;//minima
 						
-						console.log(JSON[json[i].id][IJSON][4]);
-						console.log("updating "+JSON[json[i].id][IJSON][0]);
+						//console.log(JSON[json[i].id][IJSON][6]);
+						////console.log("updating "+JSON[json[i].id][IJSON][0]);
 					//	JSON[json[i].id][IJSON][4].series[0]
+					console.log(JSON[json[i].id][IJSON][5]);
 						JSON[json[i].id][IJSON][4].series[0].addPoint(
 							[
 							(new Date()).getTime()
@@ -106,11 +134,11 @@ function updateInfo(idOfDiv) {
 		}
 		
 	if (idOfThing == json[i].id) {
-			console.log(json[i]);
+			//console.log(json[i]);
 			var string = "<div id='dataWrapper'>";
 			string += "<h3>"+json[i].title+"</h3><h5 id='uniqueDataFeedDisplayIdentifier'>"+json[i].id+"</h5>";
 			string += "<p id='creator'>Creator : <a href='"+json[i].creator+"'target='_blank'>"+json[i].creator.substring(23,json[i].creator.length)+"</a></p>";
-			console.log();
+			//console.log();
 			if(json[i].description != undefined){
 			string += "<p id='feedDescription'>"+json[i].description+"</p>";}
 			string +="<div id='dataStreamDataList'>";
@@ -166,7 +194,7 @@ function updateInfo(idOfDiv) {
 	if (found == false) {
 		document.getElementById("feedList").innerHTML = "Your feed seems to have vanished!";
 	}
-	console.log("thing being calleds");
+	//console.log("thing being calleds");
 	displayListUpdate();
 }
 
@@ -175,11 +203,11 @@ function getPertinentInfo() {
 	var idOfThing = document.getElementById("feedId").innerHTML;}
 	for (var i = 0; i < json.length; i++) {
 		if (idOfThing == json[i].id) {
-			console.log(json[i]);
+			//console.log(json[i]);
 			var string = "<div id='dataWrapper'>";
 			string += "<h3>"+json[i].title+"</h3><h5 id='uniqueDataFeedDisplayIdentifier'>"+json[i].id+"</h5>";
 			string += "<p id='creator'>Creator : <a href='"+json[i].creator+"'target='_blank'>"+json[i].creator.substring(23,json[i].creator.length)+"</a></p>";
-			console.log();
+			//console.log();
 			if(json[i].description != undefined){
 			string += "<p id='feedDescription'>"+json[i].description+"</p>";}
 			string +="<div id='dataStreamDataList'>";

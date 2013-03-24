@@ -1,13 +1,3 @@
-var JSON = {};
-//information object for feeds that have been chosen.
-var json;
-//global information object
-//add extra part in to global information object to be checked for to see if there is any listen requirements already set.
-//based on what is in the array at that point act on it in seperate method called every time there's a successful ajax call
-//returned to us. Should do it.
-
-//add a select box for the sound to trigger. That needs doing.
-//save the sound selected to an array too in name form and, on cycling through it, have it played. Wham.
 
 function sonifyAdd(input) {
 	var feedId = input.split(":")[0];
@@ -41,14 +31,22 @@ function sonifyAdd(input) {
 
 	stringToInsert += "<div class='graphContainer' id='"+feedId + dataId +"graph'></div>";
 	stringToInsert += "<div class='options' id='"+feedId + dataId +"options'>";
-	stringToInsert += "<select id='"+feedId + dataId +"select'>"
+	stringToInsert += "<select id='"+feedId + dataId +"select' onChange = (function(){setPlayArray(0,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"select').value,currentVal)})();>"
++"<option> -Select a trigger- </option>"
++"<option> Is Equal To Current </option>"
++"<option> Is Equal To (set Threshold) </option>"
++"<option> Greater Than </option>"
++"<option> Less Than </option>"
++"<option> Value Changes </option>"
++"</select>"
++"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,currentVal)})(); />";
+		stringToInsert += "Select a track: <select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,currentVal)})();>"
 +"<option> -Select a trigger- </option>"
 +"<option> GREEN </option>"
 +"<option> YELLOW </option>"
 +"<option> BLUE </option>"
 +"<option> ORANGE </option>"
 +"</select>"
-+"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea' />";
 	stringToInsert += "</div>";
 	stringToInsert += "</div>";
 	document.getElementById("selectedFeedsList").innerHTML += stringToInsert;
@@ -130,7 +128,7 @@ function sonifyAdd(input) {
                 })()
             }]
         })
-    
+    , new Array(6)
     //  JSON[feedId][JSON[feedId].length-1]);
 	);
 	
