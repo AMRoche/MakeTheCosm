@@ -6,6 +6,9 @@ var json;
 //based on what is in the array at that point act on it in seperate method called every time there's a successful ajax call
 //returned to us. Should do it.
 
+//add a select box for the sound to trigger. That needs doing.
+//save the sound selected to an array too in name form and, on cycling through it, have it played. Wham.
+
 function sonifyAdd(input) {
 	var feedId = input.split(":")[0];
 	var dataId = input.split(":")[1];
