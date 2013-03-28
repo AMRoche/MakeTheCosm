@@ -89,7 +89,7 @@ function updateInfo(idOfDiv) {
 						//DO ALL OF THE PLAYCHECKING HERE BITCHES!!!!
 						//"Greater>> Less<< Changes from Original=|="
 						var tester = JSON[json[i].id][IJSON][5];
-						if(tester[0] != undefined && tester[1]!=undefined&&tester[2]!=undefined){
+						if(tester[0] != undefined && tester[1]!=undefined&&tester[2]!=undefined && tester[3]==true){
 							//0 is mode, 1 is threshold, 2 is sound //checks values set in audioSettings.js
 							if(tester[0] == "=|="){
 								if(tester[1]!=json[i].datastreams[dataI].current_value){

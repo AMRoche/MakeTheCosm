@@ -8,7 +8,8 @@
 			<option>thing1</option>
 			<option>thing2</option>
 		</select>
-		<textarea onChange = "console.log(this.value.match(/^\d+$/))"></textarea>
+		<input type="checkbox" onChange = "printout(this.checked)"/>
+		<textarea onChange = "console.log(getType(this.value))"></textarea>
 	</body>
 	<footer>
 		<script>
@@ -18,6 +19,25 @@
 		thing = new Array();
 		thing.push("lol");
 		console.log(thing);
+		function printout(input){
+			console.log(input);
+		}
+		function getType(input) {
+    var m = (/[\d]+(\.[\d]+)?/).exec(input);
+    if (m) {
+    	console.log(m);
+       // Check if there is a decimal place
+       if (m[1]) {
+       	console.log(m[1]); 
+       	if(input.contains(".")){
+       	return 'float';}
+    
+       	 }
+       	 
+       else { return 'int'; }          
+    }
+    return 'string';
+}
 			
 		</script>
 	</footer>

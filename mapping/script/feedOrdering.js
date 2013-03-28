@@ -46,7 +46,8 @@ function sonifyAdd(input) {
 +"<option> YELLOW </option>"
 +"<option> BLUE </option>"
 +"<option> ORANGE </option>"
-+"</select>"
++"</select>";
+stringToInsert += "Make me scream: <input type='checkbox' onChange='setPlayArray(3,'"+feedId+"','"+dataId+"',this.checked, null)' />";
 	stringToInsert += "</div>";
 	stringToInsert += "</div>";
 	document.getElementById("selectedFeedsList").innerHTML += stringToInsert;

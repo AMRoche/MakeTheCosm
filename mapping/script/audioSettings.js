@@ -35,9 +35,10 @@ function getType(input) {
 			console.log("found");
 			if(index == 1){
 				if(getType(value)=='float' || getType(value)=='int') {
-					if(JSON[feed][i][5][0]!= "=|="){
+					if(value.contains(",")){value.replace(",",".");} 
+					//float recognition fails on nums with string on end
+					//int recognition fails with anything after int.
 						JSON[feed][i][5][index] = value;
-					}
 				}
 				else{
 					console.log("FAIL OF STRING VALUE BEOTCH");
