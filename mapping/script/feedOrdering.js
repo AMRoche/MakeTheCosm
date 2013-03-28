@@ -17,21 +17,21 @@ function sonifyAdd(input) {
 		console.log("found" + dataId + "," + feedId);
 		JSON[feedId].push([dataId, currentVal, maxVal, minVal]);
 	}
-	
+	var index = JSON[feedId].length-1;
 	console.log(JSON); 
 	var stringToInsert = "<li id='"+feedId+dataId+"sonNode'>";
 		stringToInsert += "<div class = 'graphDataContainer' id='"+feedId+dataId+"container'>";
 	stringToInsert += "<div class = 'graphInfo'>";
 	stringToInsert += "<h2>"+feedId+"://"+dataId  + "</h2>";
-	stringToInsert += "<h3> Value >> " + currentVal + "</h3>";
-	stringToInsert += "<h3> Maxima >> " + maxVal + "</h3>";
-	stringToInsert += "<h3> Minima >> " + minVal + "</h3>";
+	stringToInsert += "<h3> Value >> <span id='"+feedId+dataId+"liveValue'>" + currentVal + "</span></h3>";
+	stringToInsert += "<h3> Maxima >> <span id='"+feedId+dataId+"liveMax'>" + maxVal + "</span></h3>";
+	stringToInsert += "<h3> Minima >> <span id='"+feedId+dataId+"liveMin'>" + minVal + "</span></h3>";
 	stringToInsert += "<input type='button' value='Maybe Not...' style='display:inline-block;' class='removeFromArrayGraphing' onclick='(function(){sonifyRemoveArray(\"" + feedId + ":" + dataId + "\");})();'>";
 	stringToInsert += "</div>";
 
 	stringToInsert += "<div class='graphContainer' id='"+feedId + dataId +"graph'></div>";
 	stringToInsert += "<div class='options' id='"+feedId + dataId +"options'>";
-	stringToInsert += "<select id='"+feedId + dataId +"select' onChange = (function(){setPlayArray(0,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"select').value,currentVal)})();>"
+	stringToInsert += "<select id='"+feedId + dataId +"select' onChange = (function(){setPlayArray(0,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"select').value,"+JSON[feedId][index][1]+")})();>"
 +"<option> -Select a trigger- </option>"
 +"<option> Is Equal To Current </option>"
 +"<option> Is Equal To (set Threshold) </option>"
@@ -39,15 +39,20 @@ function sonifyAdd(input) {
 +"<option> Less Than </option>"
 +"<option> Value Changes </option>"
 +"</select>"
-+"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,currentVal)})(); />";
-		stringToInsert += "Select a track: <select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,currentVal)})();>"
++"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,"+JSON[feedId][index][1]+")})(); />";
+
+	stringToInsert += "Select a track: <select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,"+JSON[feedId][index][1]+")})();>"
 +"<option> -Select a trigger- </option>"
 +"<option> GREEN </option>"
 +"<option> YELLOW </option>"
 +"<option> BLUE </option>"
 +"<option> ORANGE </option>"
 +"</select>";
-stringToInsert += "Make me scream: <input type='checkbox' onChange='setPlayArray(3,'"+feedId+"','"+dataId+"',this.checked, null)' />";
+
+	stringToInsert += "Make some noise: <input type='checkbox' id='"+feedId+dataId+"checkBox' onChange='"
++"(function(){setPlayArray(3,\""+feedId+"\",\""+dataId+"\",document.getElementById(\""+feedId + dataId +"checkBox\").checked, null)})();'"
++" /> ";
+
 	stringToInsert += "</div>";
 	stringToInsert += "</div>";
 	document.getElementById("selectedFeedsList").innerHTML += stringToInsert;
@@ -119,7 +124,7 @@ stringToInsert += "Make me scream: <input type='checkbox' onChange='setPlayArray
                     var data = [],
                         time = (new Date()).getTime(),
                         i;
-                    for (i = -50; i <= 0; i++) {
+                    for (i = graphUpdateTime * graphResolution * -1; i <= 0; i++) {
                         data.push({
                             x: time + i * 1000,
                             y: -999999

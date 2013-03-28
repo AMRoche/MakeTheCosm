@@ -9,7 +9,7 @@
 			<option>thing2</option>
 		</select>
 		<input type="checkbox" onChange = "printout(this.checked)"/>
-		<textarea onChange = "console.log(getType(this.value))"></textarea>
+		<textarea onChange = "thingS(this.value)"></textarea>
 	</body>
 	<footer>
 		<script>
@@ -19,6 +19,11 @@
 		thing = new Array();
 		thing.push("lol");
 		console.log(thing);
+		function thingS(value){
+			//value = value.toString();
+			console.log(parseFloat(value.rep));
+			console.log(value.indexOf("thing"));
+		}
 		function printout(input){
 			console.log(input);
 		}

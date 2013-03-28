@@ -8,7 +8,7 @@ var maxSize = 30;
 getInfo(question);
 setInterval(function() {
 	getInfo(question)
-}, 660);
+}, 660); //if you need strictly data things updating, update them in getInfo. Else, go find checkForSongData and graph updating.
 //getInfo(question);
 function getInfo(query) {
 	$.ajax({
@@ -85,48 +85,19 @@ function updateInfo(idOfDiv) {
 			for(var dataI = 0; dataI < json[i].datastreams.length; dataI++){
 				for (var IJSON = 0; IJSON < JSON[json[i].id].length; IJSON++){
 					if(json[i].datastreams[dataI].id == JSON[json[i].id][IJSON][0]){
-						
-						//DO ALL OF THE PLAYCHECKING HERE BITCHES!!!!
-						//"Greater>> Less<< Changes from Original=|="
-						var tester = JSON[json[i].id][IJSON][5];
-						if(tester[0] != undefined && tester[1]!=undefined&&tester[2]!=undefined && tester[3]==true){
-							//0 is mode, 1 is threshold, 2 is sound //checks values set in audioSettings.js
-							if(tester[0] == "=|="){
-								if(tester[1]!=json[i].datastreams[dataI].current_value){
-									playNoise(tester[1]);
-								}
-							}
-							else if(tester[0] == ">>"){
-								if(tester[1]>json[i].datastreams[dataI].current_value){
-									playNoise(tester[1]);
-								}
-							}
-							else if(tester[0] == "<<"){
-								if(tester[1]<json[i].datastreams[dataI].current_value){
-									playNoise(tester[1]);
-								}
-							}
-							else if(tester[0] == "==" || tester[0] == "|==|"){
-								if(tester[1]==json[i].datastreams[dataI].current_value){
-									playNoise(tester[1]);
-								}
-							}							
-						}
 						JSON[json[i].id][IJSON][1] = json[i].datastreams[dataI].current_value;//value   //json[i].datastreams[j].current_value
 						JSON[json[i].id][IJSON][2] = json[i].datastreams[dataI].max_value;//maxima
 						JSON[json[i].id][IJSON][3] = json[i].datastreams[dataI].min_value;//minima
-						
+						console.log(json[i].id+JSON[json[i].id][IJSON][0]+"liveValue");
+						document.getElementById(json[i].id+JSON[json[i].id][IJSON][0]+"liveValue").innerHTML = JSON[json[i].id][IJSON][1]
+						document.getElementById(json[i].id+JSON[json[i].id][IJSON][0]+"liveMax").innerHTML  = JSON[json[i].id][IJSON][2]
+						document.getElementById(json[i].id+JSON[json[i].id][IJSON][0]+"liveMin").innerHTML = JSON[json[i].id][IJSON][3]
+						//liveValue. liveMin, liveMax
 						//console.log(JSON[json[i].id][IJSON][6]);
 						////console.log("updating "+JSON[json[i].id][IJSON][0]);
 					//	JSON[json[i].id][IJSON][4].series[0]
-					console.log(JSON[json[i].id][IJSON][5]);
-						JSON[json[i].id][IJSON][4].series[0].addPoint(
-							[
-							(new Date()).getTime()
-							,
-							parseFloat(JSON[json[i].id][IJSON][1])
-							],true,true
-							);
+					//console.log(JSON[json[i].id][IJSON][5]);
+						
 						//JSON[json[i].id][IJSON][4].series[0].data.push([(new Date()).getTime(),json[i].datastreams[dataI].current_value]);
 					}
 				}
