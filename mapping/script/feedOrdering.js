@@ -9,16 +9,16 @@ function sonifyAdd(input) {
 	document.getElementById(dataId).getElementsByClassName("ButtonSection")[0].childNodes[1].style.display = "inline-block";
 	document.getElementById(dataId).className = "dataWrapping listed";
 
-	if (JSON[feedId] == undefined) {
+	if (chosenFeeds[feedId] == undefined) {
 		console.log("undefined");
-		JSON[feedId] = new Array();
-		JSON[feedId].push([dataId, currentVal, maxVal, minVal]);
-	} else if (JSON[feedId] != undefined) {
+		chosenFeeds[feedId] = new Array();
+		chosenFeeds[feedId].push([dataId, currentVal, maxVal, minVal]);
+	} else if (chosenFeeds[feedId] != undefined) {
 		console.log("found" + dataId + "," + feedId);
-		JSON[feedId].push([dataId, currentVal, maxVal, minVal]);
+		chosenFeeds[feedId].push([dataId, currentVal, maxVal, minVal]);
 	}
-	var index = JSON[feedId].length-1;
-	console.log(JSON); 
+	var index = chosenFeeds[feedId].length-1;
+	console.log(chosenFeeds); 
 	var stringToInsert = "<li id='"+feedId+dataId+"sonNode'>";
 		stringToInsert += "<div class = 'graphDataContainer' id='"+feedId+dataId+"container'>";
 	stringToInsert += "<div class = 'graphInfo'>";
@@ -31,7 +31,7 @@ function sonifyAdd(input) {
 
 	stringToInsert += "<div class='graphContainer' id='"+feedId + dataId +"graph'></div>";
 	stringToInsert += "<div class='options' id='"+feedId + dataId +"options'>";
-	stringToInsert += "<select id='"+feedId + dataId +"select' onChange = (function(){setPlayArray(0,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"select').value,"+JSON[feedId][index][1]+")})();>"
+	stringToInsert += "<select id='"+feedId + dataId +"select' onChange = (function(){setPlayArray(0,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"select').value,"+chosenFeeds[feedId][index][1]+")})();>"
 +"<option> -Select a trigger- </option>"
 +"<option> Is Equal To Current </option>"
 +"<option> Is Equal To (set Threshold) </option>"
@@ -39,10 +39,10 @@ function sonifyAdd(input) {
 +"<option> Less Than </option>"
 +"<option> Value Changes </option>"
 +"</select>"
-+"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,"+JSON[feedId][index][1]+")})(); />";
++"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,"+chosenFeeds[feedId][index][1]+")})(); />";
 
-	stringToInsert += "Select a track: <select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,"+JSON[feedId][index][1]+")})();>"
-+"<option> -Select a trigger- </option>"
+	stringToInsert += "Select a track: <select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,"+chosenFeeds[feedId][index][1]+")})();>"
++"<option> -Select a sound- </option>"
 +"<option> GREEN </option>"
 +"<option> YELLOW </option>"
 +"<option> BLUE </option>"
@@ -56,7 +56,7 @@ function sonifyAdd(input) {
 	stringToInsert += "</div>";
 	stringToInsert += "</div>";
 	document.getElementById("selectedFeedsList").innerHTML += stringToInsert;
-	 JSON[feedId][JSON[feedId].length-1].push(
+	 chosenFeeds[feedId][chosenFeeds[feedId].length-1].push(
 	 	new Highcharts.Chart({
             chart: {
                 renderTo: feedId + dataId +"graph",
@@ -135,7 +135,7 @@ function sonifyAdd(input) {
             }]
         })
     , new Array(6)
-    //  JSON[feedId][JSON[feedId].length-1]);
+    //  chosenFeeds[feedId][chosenFeeds[feedId].length-1]);
 	);
 	
 	
@@ -156,14 +156,14 @@ function sonifyRemove(input) {
 	element = document.getElementById(feedId + dataId + "sonNode");//these two lines remove the graph node element.
 element.parentNode.removeChild(element);
 	document.getElementById(dataId).className = "dataWrapping";
-	for (var i = 0; i < JSON[feedId].length; i++) {
-		if (JSON[feedId][i][0] == dataId) {
-			JSON[feedId].splice(i, 1);
-			console.log(JSON[feedId]);
+	for (var i = 0; i < chosenFeeds[feedId].length; i++) {
+		if (chosenFeeds[feedId][i][0] == dataId) {
+			chosenFeeds[feedId].splice(i, 1);
+			console.log(chosenFeeds[feedId]);
 		}
 	}
-	if (JSON[feedId].length == 0) {
-		delete JSON[feedId];
+	if (chosenFeeds[feedId].length == 0) {
+		delete chosenFeeds[feedId];
 	}
 
 	displayListUpdate();
@@ -180,14 +180,14 @@ var StreamId = input.split(":")[1];
 element = document.getElementById(FeedId + StreamId + "sonNode");//these two lines remove the graph node element.
 element.parentNode.removeChild(element);
 
-	for (var i = 0; i < JSON[FeedId].length; i++) {
-		if (JSON[FeedId][i][0] == StreamId) {
-			JSON[FeedId].splice(i, 1);
-			console.log(JSON[FeedId]);
+	for (var i = 0; i < chosenFeeds[FeedId].length; i++) {
+		if (chosenFeeds[FeedId][i][0] == StreamId) {
+			chosenFeeds[FeedId].splice(i, 1);
+			console.log(chosenFeeds[FeedId]);
 		}
 	}
-	if (JSON[FeedId].length == 0) {
-		delete JSON[FeedId];
+	if (chosenFeeds[FeedId].length == 0) {
+		delete chosenFeeds[FeedId];
 	}
 	displayListUpdate();
 }
@@ -196,17 +196,17 @@ function displayListUpdate() {
 	console.log("running!");
 	var insertThing = "<ul>";
 
-	for (var key in JSON) {
-		for (var i = 0; i < JSON[key].length; i++) {
+	for (var key in chosenFeeds) {
+		for (var i = 0; i < chosenFeeds[key].length; i++) {
 			insertThing += "<li>";
 			insertThing += "<div class='quickWrapper'>";
 			insertThing += "<div class='infoWahn'>";
-			insertThing += "<div class='dataId'><h3>"+key + " :// " + JSON[key][i][0] + "</h3></div>";
-			insertThing += "<div class='curVal'>Value >> " + JSON[key][i][1] + "</div>";
-			insertThing += "<div class='maxVal'>Maxima >> " + JSON[key][i][2] + "</div>";
-			insertThing += "<div class='minVal'>Minima >> " + JSON[key][i][3] + "</div>";
+			insertThing += "<div class='dataId'><h3>"+key + " :// " + chosenFeeds[key][i][0] + "</h3></div>";
+			insertThing += "<div class='curVal'>Value >> " + chosenFeeds[key][i][1] + "</div>";
+			insertThing += "<div class='maxVal'>Maxima >> " + chosenFeeds[key][i][2] + "</div>";
+			insertThing += "<div class='minVal'>Minima >> " + chosenFeeds[key][i][3] + "</div>";
 			insertThing += "</div>";
-			insertThing += "<input type='button' value='Maybe Not...' style='display:inline-block;' class='removeFromArray' onclick='(function(){sonifyRemoveArray(\"" + key + ":" + JSON[key][i][0] + "\");})();'>";
+			insertThing += "<input type='button' value='Maybe Not...' style='display:inline-block;' class='removeFromArray' onclick='(function(){sonifyRemoveArray(\"" + key + ":" + chosenFeeds[key][i][0] + "\");})();'>";
 			insertThing += "</div>";
 		}
 	}

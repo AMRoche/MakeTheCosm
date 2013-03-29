@@ -81,24 +81,24 @@ function updateInfo(idOfDiv) {
 	var idOfThing = document.getElementById("feedId").innerHTML;}
 	for (var i = 0; i < json.length; i++) {
 		
-		if(JSON[json[i].id]!=undefined){
+		if(chosenFeeds[json[i].id]!=undefined){
 			for(var dataI = 0; dataI < json[i].datastreams.length; dataI++){
-				for (var IJSON = 0; IJSON < JSON[json[i].id].length; IJSON++){
-					if(json[i].datastreams[dataI].id == JSON[json[i].id][IJSON][0]){
-						JSON[json[i].id][IJSON][1] = json[i].datastreams[dataI].current_value;//value   //json[i].datastreams[j].current_value
-						JSON[json[i].id][IJSON][2] = json[i].datastreams[dataI].max_value;//maxima
-						JSON[json[i].id][IJSON][3] = json[i].datastreams[dataI].min_value;//minima
-						console.log(json[i].id+JSON[json[i].id][IJSON][0]+"liveValue");
-						document.getElementById(json[i].id+JSON[json[i].id][IJSON][0]+"liveValue").innerHTML = JSON[json[i].id][IJSON][1]
-						document.getElementById(json[i].id+JSON[json[i].id][IJSON][0]+"liveMax").innerHTML  = JSON[json[i].id][IJSON][2]
-						document.getElementById(json[i].id+JSON[json[i].id][IJSON][0]+"liveMin").innerHTML = JSON[json[i].id][IJSON][3]
+				for (var IJSON = 0; IJSON < chosenFeeds[json[i].id].length; IJSON++){
+					if(json[i].datastreams[dataI].id == chosenFeeds[json[i].id][IJSON][0]){
+						chosenFeeds[json[i].id][IJSON][1] = json[i].datastreams[dataI].current_value;//value   //json[i].datastreams[j].current_value
+						chosenFeeds[json[i].id][IJSON][2] = json[i].datastreams[dataI].max_value;//maxima
+						chosenFeeds[json[i].id][IJSON][3] = json[i].datastreams[dataI].min_value;//minima
+						console.log(json[i].id+chosenFeeds[json[i].id][IJSON][0]+"liveValue");
+						document.getElementById(json[i].id+chosenFeeds[json[i].id][IJSON][0]+"liveValue").innerHTML = chosenFeeds[json[i].id][IJSON][1]
+						document.getElementById(json[i].id+chosenFeeds[json[i].id][IJSON][0]+"liveMax").innerHTML  = chosenFeeds[json[i].id][IJSON][2]
+						document.getElementById(json[i].id+chosenFeeds[json[i].id][IJSON][0]+"liveMin").innerHTML = chosenFeeds[json[i].id][IJSON][3]
 						//liveValue. liveMin, liveMax
-						//console.log(JSON[json[i].id][IJSON][6]);
-						////console.log("updating "+JSON[json[i].id][IJSON][0]);
-					//	JSON[json[i].id][IJSON][4].series[0]
-					//console.log(JSON[json[i].id][IJSON][5]);
+						//console.log(chosenFeeds[json[i].id][IJSON][6]);
+						////console.log("updating "+chosenFeeds[json[i].id][IJSON][0]);
+					//	chosenFeeds[json[i].id][IJSON][4].series[0]
+					//console.log(chosenFeeds[json[i].id][IJSON][5]);
 						
-						//JSON[json[i].id][IJSON][4].series[0].data.push([(new Date()).getTime(),json[i].datastreams[dataI].current_value]);
+						//chosenFeeds[json[i].id][IJSON][4].series[0].data.push([(new Date()).getTime(),json[i].datastreams[dataI].current_value]);
 					}
 				}
 			}
@@ -117,15 +117,15 @@ function updateInfo(idOfDiv) {
 			
 			for(var j= 0; j < json[i].datastreams.length;j++){
 				var listed = false;
-			//JSON[feedId].push([dataId, currentVal]) ;
-				if(JSON[json[i].id]==undefined){
+			//chosenFeeds[feedId].push([dataId, currentVal]) ;
+				if(chosenFeeds[json[i].id]==undefined){
 					string+= "<li><div class='dataWrapping' id='"+json[i].datastreams[j].id+"'><div class='listItem' >";
 				}
-				else if(JSON[json[i].id]!= undefined){
+				else if(chosenFeeds[json[i].id]!= undefined){
 					var found = false;
 						//for loop to see if found.
-						for(var zed = 0; zed < JSON[json[i].id].length; zed++){
-							if(JSON[json[i].id][zed][0] == json[i].datastreams[j].id){
+						for(var zed = 0; zed < chosenFeeds[json[i].id].length; zed++){
+							if(chosenFeeds[json[i].id][zed][0] == json[i].datastreams[j].id){
 								found = true;
 							}
 						}
@@ -186,15 +186,15 @@ function getPertinentInfo() {
 			
 			for(var j= 0; j < json[i].datastreams.length;j++){
 				var listed = false;
-			//JSON[feedId].push([dataId, currentVal]) ;
-				if(JSON[json[i].id]==undefined){
+			//chosenFeeds[feedId].push([dataId, currentVal]) ;
+				if(chosenFeeds[json[i].id]==undefined){
 					string+= "<li><div class='dataWrapping' id='"+json[i].datastreams[j].id+"'><div class='listItem' >";
 				}
-				else if(JSON[json[i].id]!= undefined){
+				else if(chosenFeeds[json[i].id]!= undefined){
 					var found = false;
 						//for loop to see if found.
-						for(var zed = 0; zed < JSON[json[i].id].length; zed++){
-							if(JSON[json[i].id][zed][0] == json[i].datastreams[j].id){
+						for(var zed = 0; zed < chosenFeeds[json[i].id].length; zed++){
+							if(chosenFeeds[json[i].id][zed][0] == json[i].datastreams[j].id){
 								found = true;
 							}
 						}

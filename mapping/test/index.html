@@ -16,6 +16,12 @@
 		</div>
 		<div id="soundDiv">
 		</div>
+		<div id="listTest">
+			<select id="emListen">
+				<option>lulz</option>
+				<option>win</option>
+			</select>
+		</div>
 	</body>
 	<footer>
 		<script>
@@ -25,9 +31,10 @@
 		//audio.setAttribute("src","../audio/samples/testSample.wav");
 		//audio.load();
 		//audio.play();
-		//
-		
-			addAudioList();
+		//#=
+		console.log();
+			//addAudioList();
+			setTimeout(function(){document.getElementById("emListen").innerHTML+="<option>wat</option>"},5000);
 function testStuff(){
 	console.log("testing");
 	var test = document.getElementsByClassName("hiddenAudioPlayers");

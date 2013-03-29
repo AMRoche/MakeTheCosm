@@ -1,4 +1,5 @@
 {
 "opts":[["ogg","ogg"],["mp3","mpeg"],["wav","wav"]],
-"samples":["test_sample","melancholyHill"]
+"init":["samples/test_sample"],
+"samples":[["test_sample","A test sample to show that stuff works."]]
 }

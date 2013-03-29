@@ -27,7 +27,11 @@ header .tri_bottom{float:left;width:0px;height:0px;border-style:solid;border-wid
 .content h1{font-size:36px;line-height:36px;margin-left:25%;margin-bottom:10px;}.content h1 span{clear:left;}
 .content h2{font-size:18px;line-height:24px;margin-left:25%;margin-bottom:10px;}.content h2 span{clear:left;}
 .content p{font-size:14px;line-height:16px;}
-.content .wrapper{float:left;padding:20px;background:rgba(0, 0, 0, 0.1);width:100%;}.content .wrapper #userZone{margin:0 auto;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;}
+.content .wrapper{float:left;padding:20px;background:rgba(0, 0, 0, 0.1);width:100%;}.content .wrapper #audioSelection{background:rgba(0, 0, 0, 0.1);margin:0 auto 20px auto;width:90%;height:90px;}.content .wrapper #audioSelection #audioList{float:left;}
+.content .wrapper #audioSelection #previewButton{float:left;}
+.content .wrapper #audioSelection #addToListButton{float:left;}
+.content .wrapper #audioSelection #soundDescriptionPreview{float:left;height:100%;overflow-y:scroll;width:300px;margin-right:10px;}
+.content .wrapper #audioZone{margin:0 auto;background:rgba(0, 0, 0, 0.1);width:90%;height:390px;}.content .wrapper #audioZone #audioZoneList{width:100%;list-style:none;}.content .wrapper #audioZone #audioZoneList li{float:left;width:100%;margin:5px 0 5px 0;background:rgba(0, 0, 0, 0.1);}
 .content .wrapper #selectedFeeds{float:left;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;overflow-y:scroll;}.content .wrapper #selectedFeeds #selectedFeedsList{width:100%;list-style:none;}.content .wrapper #selectedFeeds #selectedFeedsList li{float:left;width:100%;margin:5px 0 5px 0;background:rgba(0, 0, 0, 0.1);}.content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer{width:100%;float:left;}.content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .graphInfo{width:30%;float:left;}
 .content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .graphContainer{float:left;width:30%;height:100px;}
 .content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .options{float:left;width:40%;}
