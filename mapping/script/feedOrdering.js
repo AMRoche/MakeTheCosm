@@ -212,18 +212,5 @@ function displayListUpdate() {
 	}
 
 	insertThing += "</ul>";
-	document.getElementById("quickInfoSummation").innerHTML = insertThing;
-	
-	
-	
-	
-	
-	
-	
-for(var key in JSON){
-
-	
-}
-	
-	
+	document.getElementById("quickInfoSummation").innerHTML = insertThing;	
 }

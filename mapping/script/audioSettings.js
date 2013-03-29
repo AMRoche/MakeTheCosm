@@ -5,6 +5,11 @@ var json;
 var BPM = 120;
 var graphUpdateTime = 2; //graph updates per second.
 var graphResolution = 100; //period in seconds to display on the graph.
+var basePath = "audio/"; //base path to all of the files in question. folder structure is handled in the json file.
+var soundFiles = loadJSON(basePath+"audioList.json");
+var idPrefix = "addSound";
+var songsSelected = [];
+
 //add extra part in to global information object to be checked for to see if there is any listen requirements already set.
 //based on what is in the array at that point act on it in seperate method called every time there's a successful ajax call
 //returned to us. Should do it.
@@ -22,6 +27,49 @@ setInterval(function() {
 setInterval(function(){
 	graphUpdate();
 }, 1000/graphUpdateTime);
+//addAudioList(); //uncomment this once you've sorted it for the heirachy of your page. Shit works super fine though.
+//have audio dump to a hidden div for preview function, and then once added have it add to the div with the list of stuff.
+//list for the audio file. Include vital stats (maybe? Length? Description? Ask Brock?);
+
+function addAudioList(){
+	var fileTypes = soundFiles.opts;
+	var stringToInsert = "<select id='addAudioMenu' onchange = (function(){addAudio(document.getElementById('addAudioMenu').value)})();>"
+	stringToInsert+="<option value = ''>- Select an audio track -</option>";
+	var songsSelected = [];
+	for(var key in soundFiles){
+		if(key != "opts"){
+			for(var i = 0; i < soundFiles[key].length; i++){
+				stringToInsert+="<option value = '"+key+"||"+soundFiles[key][i]+"'>"+soundFiles[key][i].replace(/_/g,' ')+"</option>";
+			}
+		}
+	}
+	stringToInsert += "</select>"
+	document.getElementById("audioList").innerHTML = stringToInsert;
+}
+function addAudio(songToAdd){
+	var songFolder = songToAdd.split("||")[0];
+	var songName = songToAdd.split("||")[1];
+	if(songToAdd != "" && document.getElementById(idPrefix+songFolder+songName) == undefined){
+		songsSelected.push(songName);
+		//now to add audio element
+		var insertString = "<audio class='hiddenAudioPlayers' id='"+idPrefix+songFolder+songName+"'>";
+		for(var i = 0; i < soundFiles.opts.length; i++){
+			//console.log(soundFiles.opts[i][0]);
+			insertString += "<source src='"+basePath+songFolder+"/"+songName+"."+soundFiles.opts[i][0]+"' type='audio/"+soundFiles.opts[i][1]+"'>";
+		}
+		insertString += "</audio>";
+		document.getElementById("soundDiv").innerHTML += insertString;
+		//document.getElementById(idPrefix + songFolder + songName).play();
+	}
+}
+
+function removeAudio(songToRemove){
+	var songFolder = songToAdd.split("||")[0];
+	var songName = songToAdd.split("||")[1];
+
+var element = document.getElementById(idPrefix + songFolder + songName);
+element.parentNode.removeChild(element);
+}
 
 function graphUpdate(){
 for(var key in JSON){
@@ -128,3 +176,31 @@ function getType(input) {
  	console.log(songId);
  	
  }
+
+function loadJSON(filePath) {
+  // Load json file;
+  var json = loadTextFileAjaxSync(filePath, "application/json");
+  // Parse json
+  return JSON.parse(json);
+}   
+
+function loadTextFileAjaxSync(filePath, mimeType)
+{
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.open("GET",filePath,false);
+  if (mimeType != null) {
+    if (xmlhttp.overrideMimeType) {
+      xmlhttp.overrideMimeType(mimeType);
+    }
+  }
+  xmlhttp.send();
+  if (xmlhttp.status==200)
+  {
+    return xmlhttp.responseText;
+  }
+  else {
+    // TODO Throw exception
+    return null;
+  }
+}
+
