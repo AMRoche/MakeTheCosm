@@ -167,6 +167,7 @@ function removeAudioFromList(songToRemove) {
 function graphUpdate() {
 	for (var key in chosenFeeds) {
 		for (var i = 0; i < chosenFeeds[key].length; i++) {
+			console.log(key+"_"+chosenFeeds[key][i][1]);
 			chosenFeeds[key][i][4].series[0].addPoint([(new Date()).getTime(), parseFloat(chosenFeeds[key][i][1])], true, true);
 		}
 	}
