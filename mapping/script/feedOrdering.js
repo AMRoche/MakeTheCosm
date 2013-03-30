@@ -22,7 +22,7 @@ function sonifyAdd(input) {
 	var stringToInsert = "<li id='"+feedId+dataId+"sonNode'>";
 		stringToInsert += "<div class = 'graphDataContainer' id='"+feedId+dataId+"container'>";
 	stringToInsert += "<div class = 'graphInfo'>";
-	stringToInsert += "<h2>"+feedId+"://"+dataId  + "</h2>";
+	stringToInsert += "<h2 class = 'feedVitalStats'>"+feedId+"://"+dataId  + "</h2>";
 	stringToInsert += "<h3> Value >> <span id='"+feedId+dataId+"liveValue'>" + currentVal + "</span></h3>";
 	stringToInsert += "<h3> Maxima >> <span id='"+feedId+dataId+"liveMax'>" + maxVal + "</span></h3>";
 	stringToInsert += "<h3> Minima >> <span id='"+feedId+dataId+"liveMin'>" + minVal + "</span></h3>";
@@ -42,12 +42,12 @@ function sonifyAdd(input) {
 +"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,"+chosenFeeds[feedId][index][1]+")})(); />";
 
 	stringToInsert += "Select a track: <select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,"+chosenFeeds[feedId][index][1]+")})();>"
-+"<option> -Select a sound- </option>"
-+"<option> GREEN </option>"
-+"<option> YELLOW </option>"
-+"<option> BLUE </option>"
-+"<option> ORANGE </option>"
-+"</select>";
++"<option> -Select a sound- </option>";
+for(var i = 0; i < songsSelected.length; i++){
+	stringToInsert += "<option value='"+songsSelected[i]+"'>"+songsSelected[i].split("||")[2].replace(/_/g, ' ')+"</option>";
+}
+
+stringToInsert+="</select>";
 
 	stringToInsert += "Make some noise: <input type='checkbox' id='"+feedId+dataId+"checkBox' onChange='"
 +"(function(){setPlayArray(3,\""+feedId+"\",\""+dataId+"\",document.getElementById(\""+feedId + dataId +"checkBox\").checked, null)})();'"

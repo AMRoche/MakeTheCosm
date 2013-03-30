@@ -18,13 +18,18 @@
 		</div>
 		<div id="listTest">
 			<select id="emListen">
-				<option>lulz</option>
+				<option>-win-</option>
+				<option value="thing">lulz</option>
 				<option>win</option>
 			</select>
 		</div>
+		<input type="button" value = "thingHelp" onclick="thingHelp"/>
 	</body>
 	<footer>
 		<script>
+		function thingHelp(){
+			document.getElementById("emListen").value="thing";
+		}
 		//var audio = new Audio().canPlayType('audio/ogg','audio/mp3', 'audio/wav');
 		//audio.setAttribute("src","../audio/samples/testSample.mp3");
 		//audio.setAttribute("src","../audio/samples/testSample.ogg");
