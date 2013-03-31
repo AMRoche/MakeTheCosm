@@ -122,7 +122,7 @@ function addAudioToList(songToAdd) {
 	console.log(document.getElementById("listItem" + songFolder + songName));
 	if (document.getElementById("listItem" + songFolder + songName) == null) {
 		songsSelected.push(songToAdd);
-		updateAudioLists();
+		
 		var stringToAdd = "<li data-index='" + index + "' id='listItem" + songFolder + songName + "'>";
 		stringToAdd += '<h3 class="songName">' + songFolder + "://" + songName + "¬"+songName.replace(/_/g, ' ')+"</h3>";
 		stringToAdd += '<div id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
@@ -140,7 +140,7 @@ function addAudioToList(songToAdd) {
 		insertString += "</audio>";
 		document.getElementById("audioTryoutWrapper").innerHTML = insertString;
 		document.getElementById("audioListWrapper").innerHTML += document.getElementById("audioTryoutWrapper").innerHTML;
-
+		updateAudioLists();
 	}
 }
 
