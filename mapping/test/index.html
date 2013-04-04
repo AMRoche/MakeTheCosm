@@ -3,6 +3,11 @@
 		
 	</head>
 	<body>
+		<div id="graph0" style="width:200px; height:100px;"></div>
+		<div id="graph1"style="width:200px; height:100px;"></div>
+		<div id="graph2"style="width:200px; height:100px;"></div>
+		<div id="graph3"style="width:200px; height:100px;"></div>
+	
 		<select onChange="console.log(this.value)">
 			<option>-|-</option>
 			<option>thing1</option>
@@ -26,7 +31,199 @@
 		<input type="button" value = "thingHelp" onclick="thingHelp"/>
 	</body>
 	<footer>
+			<script type= "text/javascript" src="../script/jquery164.min.js"></script>
+	<script type="text/javascript" src="../script/highcharts.js"></script>
 		<script>
+		var graphings = new Array();
+		graphs();
+		setInterval(updateGraphs,250);
+		setTimeout(addGraph,2500);
+		
+	function addGraph(){
+		graphings.push(
+	new Highcharts.Chart({
+            chart: {
+                renderTo:	"graph3",
+                //type: 'spline',
+                type : 'area',
+                marginRight: 10,
+                ignoreHiddenSeries : true,
+                events: {
+                    load: function() {
+    
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        
+                    }
+                }
+            },
+            title: false,
+            
+	        credits: {
+	            enabled: false
+	        },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+            	max : 10,
+            	min : 0,
+                title: false,
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+Highcharts.numberFormat(this.y, 2);
+                }
+            },
+              plotOptions: {
+                area: {
+           			threshold : -999999,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Streamed Data',
+                data: (function() {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+                    for (i = 50 * -1; i <= 0; i++) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: -999999
+                        });
+                    }
+                    return data;
+                })()
+            }]
+        }));
+	}
+		//updateGraphs();
+		
+		function updateGraphs(){
+			for(var i = 0; i < graphings.length; i++){
+				graphings[i].series[0].addPoint([(new Date()).getTime(), Math.random()*10], true, true);
+			}
+		}
+		function graphs(){
+
+for(var i = 0; i < 3; i++){
+graphings.push(
+	new Highcharts.Chart({
+            chart: {
+                renderTo:	"graph"+i,
+                //type: 'spline',
+                type : 'area',
+                marginRight: 10,
+                ignoreHiddenSeries : true,
+                events: {
+                    load: function() {
+    
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        
+                    }
+                }
+            },
+            title: false,
+            
+	        credits: {
+	            enabled: false
+	        },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+            	max : 10,
+            	min : 0,
+                title: false,
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+Highcharts.numberFormat(this.y, 2);
+                }
+            },
+              plotOptions: {
+                area: {
+           			threshold : -999999,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Streamed Data',
+                data: (function() {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+                    for (i = 50 * -1; i <= 0; i++) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: -999999
+                        });
+                    }
+                    return data;
+                })()
+            }]
+        }));
+	}
+
+}
+
+
+
+
+		
+		
+		
+		
+		
+		
+		
+		
 		function thingHelp(){
 			document.getElementById("emListen").value="thing";
 		}

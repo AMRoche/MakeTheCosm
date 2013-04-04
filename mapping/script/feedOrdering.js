@@ -3,8 +3,9 @@ function sonifyAdd(input) {
 	var feedId = input.split(":")[0];
 	var dataId = input.split(":")[1];
 	var currentVal = input.split(":")[2];
-	var maxVal = input.split(":")[3];
-	var minVal = input.split(":")[4];
+	var maxVal = parseFloat(input.split(":")[3]);
+	var minVal = parseFloat(input.split(":")[4]);
+	console.log(maxVal);
 	document.getElementById(dataId).getElementsByClassName("ButtonSection")[0].childNodes[0].style.display = "none";
 	document.getElementById(dataId).getElementsByClassName("ButtonSection")[0].childNodes[1].style.display = "inline-block";
 	document.getElementById(dataId).className = "dataWrapping listed";
@@ -18,11 +19,13 @@ function sonifyAdd(input) {
 		chosenFeeds[feedId].push([dataId, currentVal, maxVal, minVal]);
 	}
 	var index = chosenFeeds[feedId].length-1;
-	console.log(chosenFeeds); 
-	var stringToInsert = "<li id='"+feedId+dataId+"sonNode'>";
-		stringToInsert += "<div class = 'graphDataContainer' id='"+feedId+dataId+"container'>";
+	console.log(chosenFeeds);
+	  var li = document.createElement('li');
+	li.setAttribute('id',feedId+dataId+"sonNode");
+	document.getElementById("selectedFeedsList").appendChild(li);
+	var stringToInsert = "<div class = 'graphDataContainer' id='"+feedId+dataId+"container'>";
 	stringToInsert += "<div class = 'graphInfo'>";
-	stringToInsert += "<h2 class = 'feedVitalStats'>"+feedId+"://"+dataId  + "</h2>";
+	stringToInsert += "<h2 class = 'feedVitalStats'>"+feedId+" :// "+dataId  + "</h2>";
 	stringToInsert += "<h3> Value >> <span id='"+feedId+dataId+"liveValue'>" + currentVal + "</span></h3>";
 	stringToInsert += "<h3> Maxima >> <span id='"+feedId+dataId+"liveMax'>" + maxVal + "</span></h3>";
 	stringToInsert += "<h3> Minima >> <span id='"+feedId+dataId+"liveMin'>" + minVal + "</span></h3>";
@@ -39,9 +42,9 @@ function sonifyAdd(input) {
 +"<option> Less Than </option>"
 +"<option> Value Changes </option>"
 +"</select>"
-+"Threshold Value : <input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,"+chosenFeeds[feedId][index][1]+")})(); />";
++"<label class = 'thresholdVal'>Threshold Value : </label><input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,"+chosenFeeds[feedId][index][1]+")})(); />";
 
-	stringToInsert += "Select a track: <select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,"+chosenFeeds[feedId][index][1]+")})();>"
+	stringToInsert += "<label class='trackVal'>Select a track : </label><select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,"+chosenFeeds[feedId][index][1]+")})();>"
 +"<option> -Select a sound- </option>";
 for(var i = 0; i < songsSelected.length; i++){
 	stringToInsert += "<option value='"+songsSelected[i]+"'>"+songsSelected[i].split("||")[2].replace(/_/g, ' ')+"</option>";
@@ -49,17 +52,17 @@ for(var i = 0; i < songsSelected.length; i++){
 
 stringToInsert+="</select>";
 
-	stringToInsert += "Make some noise: <input type='checkbox' id='"+feedId+dataId+"checkBox' onChange='"
+	stringToInsert += "<label class='noiseVal'>Make some noise : </label><input type='checkbox' id='"+feedId+dataId+"checkBox' onChange='"
 +"(function(){setPlayArray(3,\""+feedId+"\",\""+dataId+"\",document.getElementById(\""+feedId + dataId +"checkBox\").checked, null)})();'"
 +" /> ";
 
 	stringToInsert += "</div>";
 	stringToInsert += "</div>";
-	document.getElementById("selectedFeedsList").innerHTML += stringToInsert;
+	document.getElementById(feedId+dataId+"sonNode").innerHTML = stringToInsert;
 	 chosenFeeds[feedId][chosenFeeds[feedId].length-1].push(
 	 	new Highcharts.Chart({
             chart: {
-                renderTo: feedId + dataId +"graph",
+                renderTo: document.getElementById(feedId + dataId +"graph"),
                 //type: 'spline',
                 type : 'area',
                 marginRight: 10,
@@ -82,8 +85,8 @@ stringToInsert+="</select>";
                 tickPixelInterval: 150
             },
             yAxis: {
-            	max : maxVal,
-            	min : minVal,
+            	max : Math.ceil(maxVal),
+            	min : Math.ceil(minVal),
                 title: false,
                 plotLines: [{
                     value: 0,

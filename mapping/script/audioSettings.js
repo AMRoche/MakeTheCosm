@@ -61,13 +61,13 @@ function addAudio(songToAdd) {
 	var songFolder = songToAdd.split("||")[1];
 	var songName = songToAdd.split("||")[2];
 
-	console.log(index);
+	//console.log(index);
 	if (songToAdd != "" && document.getElementById(idPrefix + songFolder + songName) == undefined) {
 		songsSelected.push(songToAdd);
 		//now to add audio element
 		var insertString = "<audio class='hiddenAudioPlayers' id='" + idPrefix + songFolder + songName + "'>";
 		for (var i = 0; i < soundFiles.opts.length; i++) {
-			//console.log(soundFiles.opts[i][0]);
+			////console.log(soundFiles.opts[i][0]);
 			insertString += "<source src='" + basePath + songFolder + "/" + songName + "." + soundFiles.opts[i][0] + "' type='audio/" + soundFiles.opts[i][1] + "'>";
 		}
 		insertString += "</audio>";
@@ -76,8 +76,8 @@ function addAudio(songToAdd) {
 	if(document.getElementById(idPrefix+songFolder+songName)!=undefined){
 		document.getElementById("previewButton").innerHTML = "<input value = 'Preview Sound'type = 'button' onclick='document.getElementById(\"" + idPrefix + songFolder + songName + "\").play()'>";
 		document.getElementById("pauseButton").innerHTML = "<input value = 'Pause Sound'type = 'button' onclick='document.getElementById(\"" + idPrefix + songFolder + songName + "\").pause()'>";
-		console.log(soundFiles);
-		console.log(songFolder);
+		//console.log(soundFiles);
+		//console.log(songFolder);
 		document.getElementById("soundDescriptionPreview").innerHTML = "<p>" + soundFiles[songFolder.toString()][index][1] + "</p>";
 		//document.getElementById(idPrefix + songFolder + songName).play();
 		document.getElementById("addToListButton").innerHTML = '<input type="button" value="Add Sound To List"onclick="(function(){addAudioToList(document.getElementById(\'addAudioMenu\').value)})();"/>';
@@ -119,7 +119,7 @@ function addAudioToList(songToAdd) {
 	var index = songToAdd.split("||")[0];
 	var songFolder = songToAdd.split("||")[1];
 	var songName = songToAdd.split("||")[2];
-	console.log(document.getElementById("listItem" + songFolder + songName));
+	//console.log(document.getElementById("listItem" + songFolder + songName));
 	if (document.getElementById("listItem" + songFolder + songName) == null) {
 		songsSelected.push(songToAdd);
 		
@@ -134,7 +134,7 @@ function addAudioToList(songToAdd) {
 		document.getElementById("audioZoneList").innerHTML += stringToAdd + "</li>";
 		var insertString = "<audio class='hiddenAudioPlayers' id='" + idPrefix + songFolder + songName + "'>";
 		for (var i = 0; i < soundFiles.opts.length; i++) {
-			//console.log(soundFiles.opts[i][0]);
+			////console.log(soundFiles.opts[i][0]);
 			insertString += "<source src='" + basePath + songFolder + "/" + songName + "." + soundFiles.opts[i][0] + "' type='audio/" + soundFiles.opts[i][1] + "'>";
 		}
 		insertString += "</audio>";
@@ -145,7 +145,7 @@ function addAudioToList(songToAdd) {
 }
 
 function removeAudioFromList(songToRemove) {
-	console.log(songToRemove);
+	//console.log(songToRemove);
 	for(var i = 0; i < songsSelected.length; i++){
 		if(songsSelected[i] == songToRemove){
 			songsSelected.splice(i,1);
@@ -167,14 +167,13 @@ function removeAudioFromList(songToRemove) {
 function graphUpdate() {
 	for (var key in chosenFeeds) {
 		for (var i = 0; i < chosenFeeds[key].length; i++) {
-			console.log(key+"_"+chosenFeeds[key][i][1]);
 			chosenFeeds[key][i][4].series[0].addPoint([(new Date()).getTime(), parseFloat(chosenFeeds[key][i][1])], true, true);
 		}
 	}
 }
 
 function checkForSongData() {
-	//console.log(chosenFeeds);
+	////console.log(chosenFeeds);
 	//DO ALL OF THE PLAYCHECKING HERE BITCHES!!!!
 	for (var key in chosenFeeds) {
 		for (var i = 0; i < chosenFeeds[key].length; i++) {
@@ -182,9 +181,9 @@ function checkForSongData() {
 			var tester = chosenFeeds[key][i][5];
 			if (tester[0] != undefined && tester[1] != undefined && tester[2] != undefined && tester[3] == true) {
 				//0 is mode, 1 is threshold, 2 is sound //checks values set in audioSettings.js
-				console.log("allDef'd");
-				console.log(tester);
-				console.log(tester[1]+"")
+				//console.log("allDef'd");
+				//console.log(tester);
+				//console.log(tester[1]+"")
 				if (tester[0] == "=|=") {
 					if (tester[1] != chosenFeeds[key][i][1]) {
 						playNoise(tester[2]);
@@ -223,21 +222,21 @@ function getType(input) {
 function populateAudioList() {
 	songsSelected = soundFiles["init"];
 	for (var i = 0; i < songsSelected.length; i++) {
-		console.log("LOLZ");
+		//console.log("LOLZ");
 		var toUse = songsSelected[i];
 		var index = toUse.split("||")[0];
 		var songFolder = toUse.split("||")[1];
 		var songName = toUse.split("||")[2];
 		var insertString = "<audio class='hiddenAudioPlayers' id='" + idPrefix + songFolder + songName + "'>";
 		for (var j = 0; j < soundFiles.opts.length; j++) {
-			//console.log(soundFiles.opts[i][0]);
+			////console.log(soundFiles.opts[i][0]);
 			insertString += "<source src='" + basePath + songFolder + "/" + songName + "." + soundFiles.opts[j][0] + "' type='audio/" + soundFiles.opts[j][1] + "'>";
 		}
 		insertString += "</audio>";
 		document.getElementById("audioListWrapper").innerHTML += insertString;
 		insertString = "";
 		var stringToAdd = "<li data-index='" + index + "' id='listItem" + songFolder + songName + "'>";
-		stringToAdd += '<h3 class="songName">' + songFolder + "://" + songName + " ~"+songName.replace(/_/g, ' ')+"</h3>";
+		stringToAdd += '<h3 class="songName">' + songFolder + " :// " + songName + " ~ "+songName.replace(/_/g, ' ')+"</h3>";
 		stringToAdd += '<div id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
 		stringToAdd += '<input type="button" value="Remove Sound From List"onclick="(function(){removeAudioFromList(\'' + toUse + '\')})();"/>';
 		stringToAdd += '<input type="button" value="Play" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
@@ -253,16 +252,16 @@ function populateAudioList() {
 }
 
 function setPlayArray(index, feed, idOfFeed, value, currentVal) {
-	console.log(index + "," + feed);
-	console.log(idOfFeed);
-	console.log(value);
+	//console.log(index + "," + feed);
+	//console.log(idOfFeed);
+	//console.log(value);
 	index = parseInt(index);
 	//if(index == 1){value = parseFloat(value);}
-	console.log(value);
+	//console.log(value);
 	//chosenFeeds[feedId].push([dataId, currentVal, maxVal, minVal,new Array(6)]);
 	for (var i = 0; i < chosenFeeds[feed].length; i++) {
 		if (idOfFeed == chosenFeeds[feed][i][0]) {
-			console.log("found");
+			//console.log("found");
 			if (index == 1) {
 				if (getType(value) == 'float' || getType(value) == 'int') {
 					value = value.toString();
@@ -273,7 +272,7 @@ function setPlayArray(index, feed, idOfFeed, value, currentVal) {
 					//int recognition fails with anything after int.
 					chosenFeeds[feed][i][5][index] = parseFloat(value);
 				} else {
-					console.log("FAIL OF STRING VALUE BEOTCH");
+					//console.log("FAIL OF STRING VALUE BEOTCH");
 				}
 			} else {
 				if (value == "Greater Than") {
@@ -294,7 +293,7 @@ function setPlayArray(index, feed, idOfFeed, value, currentVal) {
 				chosenFeeds[feed][i][5][index] = value;
 			}
 		}
-		console.log(chosenFeeds[feed][i][5]);
+		//console.log(chosenFeeds[feed][i][5]);
 	}
 }
 
@@ -302,7 +301,7 @@ function playNoise(songId) {
 	var index = songId.split("||")[0];
 	var songFolder = songId.split("||")[1];
 	var songName = songId.split("||")[2];
-	console.log(songId);
+	//console.log(songId);
 	document.getElementById(idPrefix + songFolder + songName).play();
 
 }
