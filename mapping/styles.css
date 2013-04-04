@@ -1,5 +1,4 @@
 /* CSS crunched with Crunch - http://crunchapp.net/ */
-*{border-radius:10px;}
 body{word-wrap:break-word;}
 .hidden{display:none;visibility:hidden;width:0px;height:0px;}
 .big-text{font-size:36px;line-height:36px;}
@@ -9,6 +8,7 @@ body{word-wrap:break-word;}
 #slide-1{background:#646e96;}
 #slide-2{background:#96a0c8;}
 #slide-3{background:#c8d2fa;}
+#overlay{position:absolute;top:0px;left:0px;width:100%;height:100%;background-color:white;z-index:9000;background:#646e96;}#overlay #formVerifyContainer{width:200px;margin:0 auto;}#overlay #formVerifyContainer .normal{position:relative;width:100px;height:20px;font-size:12px;line-height:12px;}
 .slideshow{position:fixed;left:-100%;display:block;width:300%;height:100%;padding:0;margin:0;}.slideshow .slide{position:absolute;top:0;left:0;z-index:2;display:block;width:33.333333%;height:100%;-webkit-transform:translatex(0);-moz-transform:translatex(0);transform:translatex(0);-webkit-transition:-webkit-transform 600ms ease-out 0;-moz-transition:-moz-transform 600ms ease-out 0;transition:transform 600ms ease-out 0;}
 .slideshow .slide.active{-webkit-transform:translatex(100%);-moz-transform:translatex(100%);transform:translatex(100%);}
 .slideshow .slide.active~.slide{-webkit-transform:translatex(200%);-moz-transform:translatex(200%);transform:translatex(200%);}
@@ -32,12 +32,12 @@ header .tri_bottom{float:left;width:0px;height:0px;border-style:solid;border-wid
 .content .wrapper #audioSelection #previewButton{float:left;}
 .content .wrapper #audioSelection #addToListButton{float:left;}
 .content .wrapper #audioSelection #soundDescriptionPreview{float:left;height:100%;overflow-y:scroll;width:300px;margin-right:10px;}
-.content .wrapper #audioZone{margin:0 auto;background:rgba(0, 0, 0, 0.1);width:90%;height:390px;}.content .wrapper #audioZone #audioZoneList{width:100%;list-style:none;padding-left:1%;}.content .wrapper #audioZone #audioZoneList li{float:left;width:31%;margin:15px 1%;background:rgba(0, 0, 0, 0.1);}
+.content .wrapper #audioZone{margin:0 auto;background:rgba(0, 0, 0, 0.1);width:90%;height:390px;overflow-y:scroll;}.content .wrapper #audioZone #audioZoneList{width:100%;list-style:none;padding-left:1%;}.content .wrapper #audioZone #audioZoneList li{float:left;width:31%;margin:15px 1%;background:rgba(0, 0, 0, 0.1);}
 .content .wrapper #selectedFeeds{float:left;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;overflow-y:scroll;}.content .wrapper #selectedFeeds #selectedFeedsList{width:100%;list-style:none;}.content .wrapper #selectedFeeds #selectedFeedsList li{float:left;width:100%;margin:5px 0 5px 0;background:rgba(0, 0, 0, 0.1);}.content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer{width:100%;float:left;}.content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .graphInfo{width:30%;float:left;}
 .content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .graphContainer{float:left;width:30%;height:130px;}
 .content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .options{float:left;width:40%;}
 .content .wrapper #listOfFeeds{float:left;margin-left:5%;background:rgba(0, 0, 0, 0.1);width:25%;height:500px;}.content .wrapper #listOfFeeds #quickInfoSummation{background:rgba(0, 0, 0, 0.1);width:100%;height:400px;overflow-y:scroll;}.content .wrapper #listOfFeeds #quickInfoSummation ul{list-style:none;}.content .wrapper #listOfFeeds #quickInfoSummation ul li .quickWrapper{background-color:rgba(255, 255, 255, 0.2);float:left;width:100%;margin-top:5px;margin-bottom:5px;}
-.content .wrapper #map{float:left;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;}
+.content .wrapper #mapWrapper{float:left;background:rgba(0, 0, 0, 0.1);width:70%;height:500px;}.content .wrapper #mapWrapper #map{height:470px;}
 .content .wrapper #feedList{float:left;margin-left:5%;background:rgba(0, 0, 0, 0.1);width:25%;height:500px;}.content .wrapper #feedList #dataWrapper #creator a{color:#ffffff;}
 .content .wrapper #feedList #dataWrapper #feedDescription{font-style:italic;}
 .content .wrapper #feedList #dataWrapper #dataStreamDataList{margin-top:20px;height:350px;overflow-y:scroll;}.content .wrapper #feedList #dataWrapper #dataStreamDataList ul{list-style:none;}.content .wrapper #feedList #dataWrapper #dataStreamDataList ul li .chosen{background-color:rgba(100, 255, 100, 0.2);}

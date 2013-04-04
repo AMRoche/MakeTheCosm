@@ -7,18 +7,15 @@
 
 @base: 32px;
 @m-height: 16px;
-*{
-    border-radius:10px;
-    }
+
 body{
-    
-    word-wrap:break-word;
+        word-wrap:break-word;
     }
 .hidden{
-display:none;
-visibility:hidden;
-width:0px;
-height:0px;
+    display:none;
+    visibility:hidden;
+    width:0px;
+    height:0px;
 }
 .big-text {
 	font-size: 36px;
@@ -44,7 +41,27 @@ height:0px;
 #slide-2 {background: rgb(150,160,200);}
 //#slide-2 { background: green url('http://placekitten.com/g/800/800') center center no-repeat; }
 #slide-3 { background:  rgb(200,210,250);}
-
+#overlay{
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-color:white;
+    z-index:9000;
+    background: rgb(100,110,150);
+        #formVerifyContainer{
+            width:200px;
+            margin: 0 auto;
+            .normal{
+                position:relative;
+                width:100px;
+                height:20px;
+                font-size:12px;
+                line-height:12px;
+                }
+        }
+    }
 .slideshow {
 
 	position: fixed;
@@ -280,6 +297,7 @@ header {
         background:rgba(0,0,0,0.1);
         width:90%;
         height:390px;
+        overflow-y:scroll;
         #audioZoneList{
                 width:100%;
                 list-style:none;
@@ -358,11 +376,14 @@ header {
                     }
             }
         }
-    #map{
+    #mapWrapper{
         float:left;
         background:rgba(0,0,0,0.1);
         width:70%;
         height:500px;
+        #map{
+            height:470px;
+            }
         }
     #feedList{
         float:left;
