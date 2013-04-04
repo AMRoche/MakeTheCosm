@@ -1,0 +1,7 @@
+Original Title								Renamed To				User and Source
+100397__zgump__snare-05.wav 				-> Snare_1.wav 			-> zgump on freesounds.org
+103362__dmlandrum__dml-bass-drum.wav 		-> Bass_1.wav			-> dmlandrum on freesounds.org
+182300__goup-1__saturated-hat-130-bpm.wav	-> High_Hat_1.wav		-> goup-1 on freesounds.org
+21688__ice9ine__distorted-vox-bass.wav		-> Bass_2.wav			-> ice9ine on freesounds.org
+16722__crescendo__snr125.wav				-> Snare_2.wav			-> crescendo on freesounds.org
+67211__akosombo__xbride.wav					-> Ride_1.wav			-> akosombo on freesounds.org
