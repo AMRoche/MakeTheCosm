@@ -316,10 +316,20 @@ header {
                 list-style:none;
                 padding-left:1%;
                     li{
+                        
                         float:left;
                         width:31%;
                         margin:15px 1%;
+                        padding:5px;
+                        
                         background:rgba(0,0,0,0.1);
+                        .playSound{
+                            float:right;
+                            }
+                        .pauseSound{
+                            float:right;
+                            }
+                        .removeAudioFromList{}
                     }
             }
         }
@@ -344,15 +354,41 @@ header {
                                 .graphInfo{
                                     width: 30%;
                                     float: left;
+                                    h2{margin-top:5px;}
+                                    h3{margin-bottom:5px;}
+                                    input[type="button"]{
+                                        margin-top:20px;
+                                        }
                                 }    
                                 .graphContainer{
                                     float:left;
                                     width:30%;
-                                    height:130px;
+                                    padding:10px 0 10px 0;
+                                    height:150px;
                                 }
                                 .options{
+                                    margin-top:10px;
+                                    margin-bottom:10px;
                                     float:left;
                                     width:40%;
+                                    .graphSettings{
+                                        margin: 5px 0 5px 0;
+                                        width:100%;
+                                        float:left;
+                                        padding:0 5px 0 10px;
+                                        .triggerSelection{
+                                                float:right;
+                                            }
+                                        .thresholdValue{
+                                                float:right;
+                                            }
+                                        .soundOptions{
+                                                float:right;
+                                            }
+                                        .noiseCheckboxThing{
+                                                float:right;
+                                            }
+                                        }
                                     }
                             }
                         }
@@ -395,6 +431,7 @@ header {
         width:70%;
         height:500px;
         #map{
+            margin-top:10px;
             height:470px;
             }
         }

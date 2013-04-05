@@ -34,29 +34,31 @@ function sonifyAdd(input) {
 
 	stringToInsert += "<div class='graphContainer' id='"+feedId + dataId +"graph'></div>";
 	stringToInsert += "<div class='options' id='"+feedId + dataId +"options'>";
-	stringToInsert += "<select id='"+feedId + dataId +"select' onChange = (function(){setPlayArray(0,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"select').value,"+chosenFeeds[feedId][index][1]+")})();>"
+	stringToInsert += "<div class='graphSettings'><label class = 'graphVal'>Graph Value : </label>"
+	stringToInsert += "<select class='triggerSelection'id='"+feedId + dataId +"select' onChange = (function(){setPlayArray(0,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"select').value,"+chosenFeeds[feedId][index][1]+")})();>"
 +"<option> -Select a trigger- </option>"
 +"<option> Is Equal To Current </option>"
 +"<option> Is Equal To (set Threshold) </option>"
 +"<option> Greater Than </option>"
 +"<option> Less Than </option>"
 +"<option> Value Changes </option>"
-+"</select>"
-+"<label class = 'thresholdVal'>Threshold Value : </label><input type='textarea'id='"+feedId + dataId +"textArea'  onChange = (function(){setPlayArray(1,'"+feedId+"','"+dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,"+chosenFeeds[feedId][index][1]+")})(); />";
++"</select></div>"
++"<div class='graphSettings'><label class = 'thresholdVal'>Threshold Value : </label><input type='textarea'class='thresholdValue'id='"+feedId + dataId +"textArea'" 
++"onChange = \"(function(){setPlayArray(1,'"+ feedId + "','" +dataId+"',document.getElementById('"+feedId + dataId +"textArea').value,"+chosenFeeds[feedId][index][1]+")})();\"/>";
 
-	stringToInsert += "<label class='trackVal'>Select a track : </label><select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,"+chosenFeeds[feedId][index][1]+")})();>"
+	stringToInsert += "</div><div class='graphSettings'><label class='trackVal'>Select a track : </label><select class = 'soundOptions' id='"+feedId + dataId +"soundSelect' onChange = (function(){setPlayArray(2,'"+feedId+"','"+dataId.toString()+"',document.getElementById('"+feedId + dataId +"soundSelect').value,"+chosenFeeds[feedId][index][1]+")})();>"
 +"<option> -Select a sound- </option>";
 for(var i = 0; i < songsSelected.length; i++){
 	stringToInsert += "<option value='"+songsSelected[i]+"'>"+songsSelected[i].split("||")[2].replace(/_/g, ' ')+"</option>";
 }
 
-stringToInsert+="</select>";
+stringToInsert+="</select></div>";
 
-	stringToInsert += "<label class='noiseVal'>Make some noise : </label><input type='checkbox' id='"+feedId+dataId+"checkBox' onChange='"
+	stringToInsert += "<graph class='graphSettings'><label class='noiseVal'>Make some noise : </label><input type='checkbox' class='noiseCheckboxThing' id='"+feedId+dataId+"checkBox' onChange='"
 +"(function(){setPlayArray(3,\""+feedId+"\",\""+dataId+"\",document.getElementById(\""+feedId + dataId +"checkBox\").checked, null)})();'"
 +" /> ";
 
-	stringToInsert += "</div>";
+	stringToInsert += "</div></div>";
 	stringToInsert += "</div>";
 	document.getElementById(feedId+dataId+"sonNode").innerHTML = stringToInsert;
 	 chosenFeeds[feedId][chosenFeeds[feedId].length-1].push(

@@ -124,9 +124,9 @@ function addAudioToList(songToAdd) {
 		var stringToAdd = "<li data-index='" + index + "' id='listItem" + songFolder + songName + "'>";
 		stringToAdd += '<h3 class="songName">' + songFolder + "://" + songName + " ~ "+songName.replace(/_/g, ' ')+"</h3>";
 		stringToAdd += '<div id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
-		stringToAdd += '<input type="button" value="Remove Sound From List"onclick="(function(){removeAudioFromList(\'' + songToAdd + '\')})();"/>';
-		stringToAdd += '<input type="button" value="Play" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
-		stringToAdd += '<input type="button" value="Pause" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').pause()" />';
+		stringToAdd += '<input type="button" class="removeSoundFromList" value="Remove Sound From List"onclick="(function(){removeAudioFromList(\'' + songToAdd + '\')})();"/>';
+		stringToAdd += '<input type="button" class="playSound" value="Play" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
+		stringToAdd += '<input type="button" class="pauseSound" value="Pause" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').pause()" />';
 	
 		//ADD A BUTTON HERE WHICH LETS THE USER PLAY THE FRACKIN' SOUND.
 		document.getElementById("audioZoneList").innerHTML += stringToAdd + "</li>";
@@ -184,18 +184,23 @@ function checkForSongData() {
 				//console.log(tester);
 				//console.log(tester[1]+"")
 				if (tester[0] == "=|=") {
+					console.log("=|="+tester[1]+"||"+chosenFeeds[key][i][1]);
 					if (tester[1] != chosenFeeds[key][i][1]) {
 						playNoise(tester[2]);
+						tester[1] = chosenFeeds[key][i][1];
 					}
 				} else if (tester[0] == ">>") {
+					console.log(">>"+tester[1]+"||"+chosenFeeds[key][i][1]);
 					if (tester[1] > chosenFeeds[key][i][1]) {
 						playNoise(tester[2]);
 					}
 				} else if (tester[0] == "<<") {
+					console.log("<<"+tester[1]+"||"+chosenFeeds[key][i][1]);
 					if (tester[1] < chosenFeeds[key][i][1]) {
 						playNoise(tester[2]);
 					}
 				} else if (tester[0] == "==" || tester[0] == "|==|") {
+					console.log("|--|"+tester[1]+"||"+chosenFeeds[key][i][1]);
 					if (tester[1] == chosenFeeds[key][i][1]) {
 						playNoise(tester[2]);
 					}
@@ -229,7 +234,7 @@ function populateAudioList() {
 	var audioElement = document.createElement('audio');
 	audioElement.setAttribute('class','hiddenAudioPlayers');
 	audioElement.setAttribute('id', idPrefix + songFolder + songName);
-	document.getElementById("selectedFeedsList").appendChild(audioElement);
+	document.getElementById("audioListWrapper").appendChild(audioElement);
 		var insertString = "";
 		for (var j = 0; j < soundFiles.opts.length; j++) {
 			////console.log(soundFiles.opts[i][0]);
@@ -243,9 +248,9 @@ function populateAudioList() {
 		insertString = "";
 		insertString = '<h3 class="songName">' + songFolder + " :// " + songName + " ~ "+songName.replace(/_/g, ' ')+"</h3>";
 		insertString += '<div id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
-		insertString += '<input type="button" value="Remove Sound From List"onclick="(function(){removeAudioFromList(\'' + toUse + '\')})();"/>';
-		insertString += '<input type="button" value="Play" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
-		insertString += '<input type="button" value="Pause" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').pause()" />';
+		insertString += '<input type="button"  class="removeSoundFromList" value="Remove Sound From List"onclick="(function(){removeAudioFromList(\'' + toUse + '\')})();"/>';
+		insertString += '<input type="button" class="playSound" value="Play" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
+		insertString += '<input type="button" class="pauseSound" value="Pause" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').pause()" />';
 		//ADD A BUTTON HERE WHICH LETS THE USER PLAY THE FRACKIN' SOUND.
 		document.getElementById("listItem"+songFolder+songName).innerHTML = insertString;
 
@@ -281,16 +286,17 @@ function setPlayArray(index, feed, idOfFeed, value, currentVal) {
 				}
 			} else {
 				if (value == "Greater Than") {
-					value = ">>";
-				} else if (value == "Less Than") {
 					value = "<<";
+				} else if (value == "Less Than") {
+					value = ">>";
 				} else if (value == "Value Changes") {
 					value = "=|=";
 				} else if (value == "Is Equal To Current") {
 					value = "==";
 				} else if (value == "Is Equal To (set Threshold)") {
 					value = "|==|";
-				} else if (value == "=|=") {
+				} 
+				if (value == "=|=") {
 					chosenFeeds[feed][i][5][1] = currentVal;
 				} else if (value == "==") {
 					chosenFeeds[feed][i][5][1] = currentVal;
@@ -306,7 +312,6 @@ function playNoise(songId) {
 	var index = songId.split("||")[0];
 	var songFolder = songId.split("||")[1];
 	var songName = songId.split("||")[2];
-	//console.log(songId);
 	document.getElementById(idPrefix + songFolder + songName).play();
 
 }
