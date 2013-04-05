@@ -1,4 +1,5 @@
 /* CSS crunched with Crunch - http://crunchapp.net/ */
+.marker-popup{background:red;}
 body{word-wrap:break-word;}
 .hidden{display:none;visibility:hidden;width:0px;height:0px;}
 .big-text{font-size:36px;line-height:36px;}
@@ -16,9 +17,8 @@ body{word-wrap:break-word;}
 .slideshow .slide.static-background.active{-webkit-transition-delay:0;-moz-transition-delay:0;transition-delay:0;}.slideshow .slide.static-background.active .content{-webkit-transform:translatex(0);-moz-transform:translatex(0);transform:translatex(0);}
 .slideshow .slide.active~.slide.static-background .content{-webkit-transform:translatex(100%);-moz-transform:translatex(100%);transform:translatex(100%);}
 html,body{padding:0;margin:0;font:normal 14px/16px "Helvetica Neue",Helvetica,Arial,sans-serif;color:#ffffff;}
-button{position:fixed;display:block;width:50px;height:50px;font-size:20px;font-weight:bold;line-height:50px;text-align:center;}
-button#prev-button{bottom:20px;left:20px;}
-button#next-button{right:20px;bottom:20px;}
+button#prev-button{bottom:20px;left:20px;position:fixed;display:block;width:50px;height:50px;border-radius:50px;font-size:20px;font-weight:bold;text-align:center;}
+button#next-button{right:20px;bottom:20px;position:fixed;display:block;width:50px;height:50px;border-radius:50px;font-size:20px;font-weight:bold;text-align:center;}
 *{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 header{position:absolute;top:60px;display:block;}header .header_wrapper{width:470px;}
 header h1{float:left;color:#ffffff;width:390px;height:65px;background-color:#f4692b;font-size:36px;line-height:36px;margin:0;padding:32px 30px 68px 70px;}

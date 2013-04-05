@@ -1,32 +1,35 @@
 var apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
 var question = "arduino";
 var maxSize = 30;
-////console.log(getInfo("stuff"));
+//////console.log(getInfo("stuff"));
 //LINE 157 PROBLEMATIC
-////console.log(layer.markers());
+//////console.log(layer.markers());
+startStuff();
 function startStuff() {
+	document.getElementById("queryBox").value = question;
 	getInfo(question);
 	setInterval(function() {
-		getInfo(question)
-	}, 660);
+		getInfo(question)
+	}, 660); 
+	getInfo(question);
 	//if you need strictly data things updating, update them in getInfo. Else, go find checkForSongData and graph updating.
 	//getInfo(question);
 }
 
 function validateAPIkey() {
-	console.log(document.getElementById('apiQueryAccess').value.length);
+	//console.log(document.getElementById('apiQueryAccess').value.length);
 	if(document.getElementById('apiQueryAccess').value.length == 0){
-		console.log("QUESTION");
+		//console.log("QUESTION");
 		document.getElementById('QUESTIONfail').style.display = 'inline-block';
 		document.getElementById('APIfail').style.display = 'none';
 	}
 	else if(document.getElementById('apiAccess').value.length == 0){
-		console.log("APILENGTH");
+		//console.log("APILENGTH");
 		document.getElementById('APIfail').style.display = 'inline-block';
 		document.getElementById('QUESTIONfail').style.display = 'none';
 	}
 	else{
-		console.log("stuff");
+		//console.log("stuff");
 		if (apiValidation(document.getElementById('apiAccess').value)) {
 			apiKEY = document.getElementById('apiAccess').value;
 			question = document.getElementById('apiQueryAccess').value;
@@ -42,7 +45,7 @@ function validateAPIkey() {
 }
 function apiValidation(supposedKey) {
 	var validKey = false;
-	console.log("testing");
+	//console.log("testing");
 	$.ajax({
 		type : "GET",
 		url : "http://api.cosm.com/v2/" + "feeds",
@@ -52,10 +55,10 @@ function apiValidation(supposedKey) {
 		async : false,
 		data : "{}",
 		always : function() {
-			console.log("done");
+			//console.log("done");
 		},
 		error : function(response) {
-			console.log(response);
+			//console.log(response);
 		},
 		success : function(response) {
 			validKey = true;
@@ -67,10 +70,10 @@ function apiValidation(supposedKey) {
 		}
 	});
 	if (!validKey) {
-		console.log("false");
+		//console.log("false");
 		return false;
 	} else {
-		console.log("true");
+		//console.log("true");
 		return true;
 	}
 }
@@ -94,18 +97,18 @@ function getInfo(query) {
 			"maxCount" : "50"
 		},
 		always : function() {
-			//console.log("done");
+			////console.log("done");
 		},
 		success : function(response) {
 			//	document.getElementById("spanner").innerHTML = response;
-			//	//console.log(response);
-			//			//console.log();
-			////console.log(response.totalResults);
+			//	////console.log(response);
+			//			////console.log();
+			//////console.log(response.totalResults);
 			json = new Array();
 			layer.features([]);
 			//for(var i = 0; i < response.length; i++){
 			for (var i = 0; i < response.length; i++) {
-				////console.log(response.results[i]);
+				//////console.log(response.results[i]);
 				json.push(response[i]);
 				layer.add_feature({
 					'geometry' : {
@@ -123,7 +126,7 @@ function getInfo(query) {
 				});
 			}
 			var checkId = document.getElementById("feedList").getAttribute("feedId");
-			if (checkId != undefined) {
+			if (checkId != undefined && checkId != "") {
 				updateInfo(checkId);
 			}
 			//			layer.features(layer.markers());
@@ -133,14 +136,14 @@ function getInfo(query) {
 			}
 		},
 		error : function(response) {
-			//console.log(response);
+			////console.log(response);
 		}
 	});
 
 }
 
 function updateInfo(idOfDiv) {
-	//console.log("being called");
+	////console.log("being called");
 	if (document.getElementById("feedId") != null) {
 		var idOfThing = document.getElementById("feedId").innerHTML;
 	}
@@ -156,15 +159,15 @@ function updateInfo(idOfDiv) {
 						//maxima
 						chosenFeeds[json[i].id][IJSON][3] = json[i].datastreams[dataI].min_value;
 						//minima
-						console.log(json[i].id + chosenFeeds[json[i].id][IJSON][0] + "liveValue");
+						//console.log(json[i].id + chosenFeeds[json[i].id][IJSON][0] + "liveValue");
 						document.getElementById(json[i].id + chosenFeeds[json[i].id][IJSON][0] + "liveValue").innerHTML = chosenFeeds[json[i].id][IJSON][1]
 						document.getElementById(json[i].id + chosenFeeds[json[i].id][IJSON][0] + "liveMax").innerHTML = chosenFeeds[json[i].id][IJSON][2]
 						document.getElementById(json[i].id + chosenFeeds[json[i].id][IJSON][0] + "liveMin").innerHTML = chosenFeeds[json[i].id][IJSON][3]
 						//liveValue. liveMin, liveMax
-						//console.log(chosenFeeds[json[i].id][IJSON][6]);
-						////console.log("updating "+chosenFeeds[json[i].id][IJSON][0]);
+						////console.log(chosenFeeds[json[i].id][IJSON][6]);
+						//////console.log("updating "+chosenFeeds[json[i].id][IJSON][0]);
 						//	chosenFeeds[json[i].id][IJSON][4].series[0]
-						//console.log(chosenFeeds[json[i].id][IJSON][5]);
+						////console.log(chosenFeeds[json[i].id][IJSON][5]);
 
 						//chosenFeeds[json[i].id][IJSON][4].series[0].data.push([(new Date()).getTime(),json[i].datastreams[dataI].current_value]);
 					}
@@ -173,11 +176,11 @@ function updateInfo(idOfDiv) {
 		}
 
 		if (idOfThing == json[i].id) {
-			//console.log(json[i]);
+			////console.log(json[i]);
 			var string = "<div id='dataWrapper'>";
 			string += "<h3>" + json[i].title + "</h3><h5 id='uniqueDataFeedDisplayIdentifier'>" + json[i].id + "</h5>";
 			string += "<p id='creator'>Creator : <a href='" + json[i].creator + "'target='_blank'>" + json[i].creator.substring(23, json[i].creator.length) + "</a></p>";
-			//console.log();
+			////console.log();
 			if (json[i].description != undefined) {
 				string += "<p id='feedDescription'>" + json[i].description + "</p>";
 			}
@@ -233,7 +236,7 @@ function updateInfo(idOfDiv) {
 	if (found == false) {
 		document.getElementById("feedList").innerHTML = "Your feed seems to have vanished!";
 	}
-	//console.log("thing being calleds");
+	////console.log("thing being calleds");
 	displayListUpdate();
 }
 
@@ -243,11 +246,11 @@ function getPertinentInfo() {
 	}
 	for (var i = 0; i < json.length; i++) {
 		if (idOfThing == json[i].id) {
-			//console.log(json[i]);
+			////console.log(json[i]);
 			var string = "<div id='dataWrapper'>";
 			string += "<h3>" + json[i].title + "</h3><h5 id='uniqueDataFeedDisplayIdentifier'>" + json[i].id + "</h5>";
 			string += "<p id='creator'>Creator : <a href='" + json[i].creator + "'target='_blank'>" + json[i].creator.substring(23, json[i].creator.length) + "</a></p>";
-			//console.log();
+			////console.log();
 			if (json[i].description != undefined) {
 				string += "<p id='feedDescription'>" + json[i].description + "</p>";
 			}

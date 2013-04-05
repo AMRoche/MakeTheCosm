@@ -63,7 +63,7 @@ function addAudio(songToAdd) {
 
 	//console.log(index);
 	if (songToAdd != "" && document.getElementById(idPrefix + songFolder + songName) == undefined) {
-		songsSelected.push(songToAdd);
+	//	songsSelected.push(songToAdd);
 		//now to add audio element
 		var insertString = "<audio class='hiddenAudioPlayers' id='" + idPrefix + songFolder + songName + "'>";
 		for (var i = 0; i < soundFiles.opts.length; i++) {
@@ -85,32 +85,31 @@ function addAudio(songToAdd) {
 
 	}
 }
-function updateAudioLists(){
+function updateAudioLists(type, info){
+	var index = info.split("||")[0];
+	var songFolder = info.split("||")[1];
+	var songName = info.split("||")[2];
 	var domList = document.getElementsByClassName("soundOptions");
 	var vitalStats = document.getElementsByClassName("feedVitalStats");
-	if(domList.length > 0){
-		for(var i = 0; i > domList.length; i++){
-			var stringToInsert = "<option> -Select a sound- </option>";
-			for(var i = 0; i < songsSelected.length; i++){
-				stringToInsert += "<option value='"+songsSelected[i]+"'>"+songsSelected[i].split("||")[2].replace(/_/g, ' ')+"</option>";
-			}
-			domList[i].innerHTML = stringToInsert;
-			var options = domList[i].getElementsByTagName("option");
-			var numId = vitalStats[i].split("://")[0].toString();
-			var name = vitalStats[i].split("://")[1].toString();
-				for(var j = 0; j < options.length; j++){					
-					for(var x = 0; x < chosenFeeds[numId].length; x++){
-						if(chosenFeeds[numId][j][5]!=undefined){
-							if(chosenFeeds[numId][j][5][2]!=undefined){
-								if(chosenFeeds[numId][j][5][2]==options[j].value){
-									options[j].selected='selected';
-								}
-							}
-						}
-					}
+	console.log(songName);
+	if(type == "add"){
+		for(var i = 0; i < domList.length; i++){ 
+			 var element = document.createElement('option');
+			element.setAttribute('value',songName);
+			element.appendChild(document.createTextNode(songName.replace(/_/g,' ')));
+			document.getElementsByClassName("soundOptions")[i].appendChild(element);	
+		}
+	}
+	if(type == "remove"){
+		for(var i = 0; i < domList.length; i++){ 
+			 var element = document.createElement('option');
+			element.setAttribute('value',songName);
+			element.appendChild(document.createTextNode(songName.replace(/_/g,' ')));
+			for(var j = 0; j < domList[i].length; j++){
+				if(document.getElementsByClassName("soundOptions")[i][j].value == info){
+					document.getElementsByClassName("soundOptions")[i].removeChild(document.getElementsByClassName("soundOptions")[i][j]);		
 				}
-			
-			// document.getElementById('HouseSelect').getElementsByTagName('option')[2].selected = 'selected'
+			}
 		}
 	}
 }
@@ -122,7 +121,6 @@ function addAudioToList(songToAdd) {
 	//console.log(document.getElementById("listItem" + songFolder + songName));
 	if (document.getElementById("listItem" + songFolder + songName) == null) {
 		songsSelected.push(songToAdd);
-		
 		var stringToAdd = "<li data-index='" + index + "' id='listItem" + songFolder + songName + "'>";
 		stringToAdd += '<h3 class="songName">' + songFolder + "://" + songName + " ~ "+songName.replace(/_/g, ' ')+"</h3>";
 		stringToAdd += '<div id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
@@ -140,18 +138,19 @@ function addAudioToList(songToAdd) {
 		insertString += "</audio>";
 		document.getElementById("audioTryoutWrapper").innerHTML = insertString;
 		document.getElementById("audioListWrapper").innerHTML += document.getElementById("audioTryoutWrapper").innerHTML;
-		updateAudioLists();
+		updateAudioLists("add",songToAdd);
 	}
 }
 
 function removeAudioFromList(songToRemove) {
 	//console.log(songToRemove);
+	
 	for(var i = 0; i < songsSelected.length; i++){
 		if(songsSelected[i] == songToRemove){
 			songsSelected.splice(i,1);
 		}
 	}
-	updateAudioLists();
+	updateAudioLists("remove",songToRemove);
 	var index = songToRemove.split("||")[0];
 	var songFolder = songToRemove.split("||")[1].toString();
 	var songName = songToRemove.split("||")[2].toString();

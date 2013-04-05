@@ -7,7 +7,9 @@
 
 @base: 32px;
 @m-height: 16px;
-
+.marker-popup{
+    background:red;
+    }
 body{
         word-wrap:break-word;
     }
@@ -169,18 +171,29 @@ html, body {
 }
 
 button {
-	position: fixed;
+
+}
+button#prev-button { bottom: 20px; left: 20px; 
+    position: fixed;
 	display: block;
 	width: 50px;
 	height: 50px;
+	border-radius:50px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+button#next-button { right: 20px; bottom: 20px; 
+    position: fixed;
+	display: block;
+	width: 50px;
+	height: 50px;
+    border-radius:50px;
 		
 	font-size: 20px;
 	font-weight: bold;
-	line-height: 50px;
 	text-align: center;
 }
-button#prev-button { bottom: 20px; left: 20px; }
-button#next-button { right: 20px; bottom: 20px; }
 
 * {
   -moz-box-sizing: border-box;
