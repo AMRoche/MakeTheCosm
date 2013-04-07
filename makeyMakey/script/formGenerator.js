@@ -72,7 +72,6 @@ $(function() {
 	});
 	$(document).keyup(function(e) {
 		if (toStream == true) {
-
 			scanSubmit(charGet(e.keyCode));
 			console.log(feedsValues);
 		}
@@ -285,6 +284,7 @@ function resultParser() {
 			},
 			success : function(response) {
 				//	document.getElementById("spanner").innerHTML = response;
+				
 				if (response.datastreams != undefined) {
 					for (var i = 0; i < response.datastreams.length; i++) {
 						containArray.push(response.datastreams[i].id);
@@ -348,7 +348,7 @@ function addFeed() {
 					formSubmitted[3] = urlLink;
 					formSubmitted[4] = document.getElementById("feedTitle").value;
 					toStream = true;
-				
+					document.getElementById("feedId").value = urlLink;
 					if (formSubmitted[4].length == 0) {
 						formSubmitted[4] = "A test title for you.";
 					}
