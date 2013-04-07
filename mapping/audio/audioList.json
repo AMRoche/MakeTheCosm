@@ -1,50 +1,41 @@
 {
-"opts":[["ogg","ogg"],["mp3","mpeg"],["wav","wav"]],
-"init":[
-"0||samples||test_sample",
-"0||chimes||Chimes_a",
-"2||chimes||Chimes_b",
-"4||chimes||Chimes_c",
-"6||chimes||Chimes_d",
-"7||chimes||Chimes_e",
-"9||chimes||Chimes_f",
-"11||chimes||Chimes_g"
-],
-"samples":[
-["test_sample","A sad, sad music box."],
-["Snare_1","A snare drum."],
-["Snare_2","Another snare drum."],
-["Bass_1","A bass drum."],
-["Bass_2","Another bass drum."],
-["High_Hat_1","A high hat."],
-["Ride_1","A ride cymbal."]
-],
-"guitar":[
-	["Guitar_a","A Telecaster Guitar playing the note of A."],
-	["Guitar_ab","A Telecaster Guitar playing the note of A Flat."],
-	["Guitar_b","A Telecaster Guitar playing the note of B."],
-	["Guitar_c","A Telecaster Guitar playing the note of C."],
-	["Guitar_d","A Telecaster Guitar playing the note of D."],
-	["Guitar_db","A Telecaster Guitar playing the note of D Flat."],
-	["Guitar_e","A Telecaster Guitar playing the note of E."],
-	["Guitar_eb","A Telecaster Guitar playing the note of E Flat."],
-	["Guitar_f","A Telecaster Guitar playing the note of F."],
-	["Guitar_g","A Telecaster Guitar playing the note of G."],
-	["Guitar_gb","A Telecaster Guitar playing the note of G Flat."]
-],
-"chimes":[
-	["Chimes_a","A chime at the note of A."],
-	["Chimes_ab","A chime at the note of A Flat."],
-	["Chimes_b","A chime at the note of B."],
-	["Chimes_bb","A chime at the note of B Flat."],
-	["Chimes_c","A chime at the note of C."],
-	["Chimes_cb","A chime at the note of C Flat."],
-	["Chimes_d","A chime at the note of D."],
-	["Chimes_e","A chime at the note of E."],
-	["Chimes_eb","A chime at the note of E Flat."],
-	["Chimes_f","A chime at the note of F."],
-	["Chimes_fb","A chime at the note of F Flat."],
-	["Chimes_g","A chime at the note of G."]
-]
-
+	"opts": [["mp3", "mpeg"],["wav", "wav"]
+	],
+	"init": ["0||samples||test_sample", "0||chimes||Chimes_a", "2||chimes||Chimes_b", "4||chimes||Chimes_c", "6||chimes||Chimes_d", "7||chimes||Chimes_e", "9||chimes||Chimes_f", "11||chimes||Chimes_g"],
+	"samples": [
+		["test_sample", "A sad, sad music box."],
+		["Snare_1", "A snare drum."],
+		["Snare_2", "Another snare drum."],
+		["Bass_1", "A bass drum."],
+		["Bass_2", "Another bass drum."],
+		["High_Hat_1", "A high hat."],
+		["Ride_1", "A ride cymbal."]
+	],
+	"guitar": [
+		["Guitar_a", "A Telecaster Guitar playing the note of A."],
+		["Guitar_ab", "A Telecaster Guitar playing the note of A Flat."],
+		["Guitar_b", "A Telecaster Guitar playing the note of B."],
+		["Guitar_c", "A Telecaster Guitar playing the note of C."],
+		["Guitar_d", "A Telecaster Guitar playing the note of D."],
+		["Guitar_db", "A Telecaster Guitar playing the note of D Flat."],
+		["Guitar_e", "A Telecaster Guitar playing the note of E."],
+		["Guitar_eb", "A Telecaster Guitar playing the note of E Flat."],
+		["Guitar_f", "A Telecaster Guitar playing the note of F."],
+		["Guitar_g", "A Telecaster Guitar playing the note of G."],
+		["Guitar_gb", "A Telecaster Guitar playing the note of G Flat."]
+	],
+	"chimes": [
+		["Chimes_a", "A chime at the note of A."],
+		["Chimes_ab", "A chime at the note of A Flat."],
+		["Chimes_b", "A chime at the note of B."],
+		["Chimes_bb", "A chime at the note of B Flat."],
+		["Chimes_c", "A chime at the note of C."],
+		["Chimes_cb", "A chime at the note of C Flat."],
+		["Chimes_d", "A chime at the note of D."],
+		["Chimes_e", "A chime at the note of E."],
+		["Chimes_eb", "A chime at the note of E Flat."],
+		["Chimes_f", "A chime at the note of F."],
+		["Chimes_fb", "A chime at the note of F Flat."],
+		["Chimes_g", "A chime at the note of G."]
+	]
 }

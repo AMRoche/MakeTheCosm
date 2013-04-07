@@ -5,7 +5,6 @@ var userLayer;
 var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
 ( function(d, t) {
 		var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-		//g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
 		s.parentNode.insertBefore(g, s)
 	}(document, 'script'));
 
@@ -15,8 +14,7 @@ map.zoom(2).center({
 	lat : 20,
 	lon : 0
 });
-//map.ui.zoomer.add();
-//map.ui.zoombox.add();
+
 userLayer = mapbox.markers.layer();
 mapbox.markers.interaction(userLayer);
 map.addLayer(userLayer);
@@ -37,12 +35,6 @@ map.addLayer(layer);
           e.stopPropagation();
       });
       return elem;
-  });
-
-  // clear the content of alert when the user clicks on a map area other
-  // than a tooltip
-  MM.addEvent(map.parent, 'click', function() {
-      alert.innerHTML = '';
   });
 
  interacting.formatter(function(feature) {

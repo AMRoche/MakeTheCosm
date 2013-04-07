@@ -159,7 +159,7 @@ function sonifyRemove(input) {
 	document.getElementById(dataId).getElementsByClassName("ButtonSection")[0].childNodes[1].style.display = "none";
 	console.log(input);
 	element = document.getElementById(feedId + dataId + "sonNode");//these two lines remove the graph node element.
-element.parentNode.removeChild(element);
+	element.parentNode.removeChild(element);
 	document.getElementById(dataId).className = "dataWrapping";
 	for (var i = 0; i < chosenFeeds[feedId].length; i++) {
 		if (chosenFeeds[feedId][i][0] == dataId) {

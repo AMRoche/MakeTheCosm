@@ -94,7 +94,7 @@ function updateAudioLists(type, info){
 	console.log(songName);
 	if(type == "add"){
 		for(var i = 0; i < domList.length; i++){ 
-			 var element = document.createElement('option');
+			var element = document.createElement('option');
 			element.setAttribute('value',songName);
 			element.appendChild(document.createTextNode(songName.replace(/_/g,' ')));
 			document.getElementsByClassName("soundOptions")[i].appendChild(element);	
