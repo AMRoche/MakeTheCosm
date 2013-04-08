@@ -18,8 +18,6 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-ApiKey:" . $apiKEY));
 // -H
 curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
 // -0
-curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
-// -0
 curl_setopt($ch, CURLOPT_POSTFIELDS, "per_page=100&q=" . $q . "&order=created_at&status=live");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);

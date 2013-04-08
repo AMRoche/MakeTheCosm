@@ -1,9 +1,7 @@
 var apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
 var question = "arduino";
 var maxSize = 30;
-//////console.log(getInfo("stuff"));
-//LINE 157 PROBLEMATIC
-//////console.log(layer.markers());
+
 startStuff();
 function startStuff() {
 	document.getElementById("queryBox").value = question;
@@ -100,13 +98,8 @@ function getInfo(query) {
 			////console.log("done");
 		},
 		success : function(response) {
-			//	document.getElementById("spanner").innerHTML = response;
-			//	////console.log(response);
-			//			////console.log();
-			//////console.log(response.totalResults);
 			json = new Array();
 			layer.features([]);
-			//for(var i = 0; i < response.length; i++){
 			for (var i = 0; i < response.length; i++) {
 				//////console.log(response.results[i]);
 				json.push(response[i]);
@@ -115,7 +108,6 @@ function getInfo(query) {
 						'coordinates' : [response[i].location.lon, response[i].location.lat]
 					},
 					'properties' : {
-						// https://github.com/mapbox/simplestyle-spec
 						'marker-color' : colour,
 						'marker-symbol' : 'embassy',
 						'feedName' : response[i].title,

@@ -1,15 +1,10 @@
 var colour = "#0055ff";
 var userColour = "#550055";
-var layer;
+var layer = mapbox.layer().id('examples.map-vyofok3q');
 var userLayer;
-var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
-( function(d, t) {
-		var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-		s.parentNode.insertBefore(g, s)
-	}(document, 'script'));
 
 var map = mapbox.map('map',layer,null,[]);
-map.addLayer(mapbox.layer().id('examples.map-vyofok3q'));
+
 map.zoom(2).center({
 	lat : 20,
 	lon : 0
@@ -40,7 +35,7 @@ map.addLayer(layer);
  interacting.formatter(function(feature) {
         var o = '<h3><span id="feedId" style="display:none;">'+feature.properties.id+"</span><span id='feedName'>"+feature.properties.feedName + '</span></h3>' +
             '<ul>';
-    var thing = 3;
+   			 var thing = 3;
              if(feature.properties.datastreams.length < 3){var thing = feature.properties.datastreams.length;}
              if(feature.properties.datastreams.length > 3){var thing = 2;}
             for(var i = 0; i < thing; i++){
