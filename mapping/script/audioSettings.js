@@ -95,7 +95,7 @@ function updateAudioLists(type, info){
 	if(type == "add"){
 		for(var i = 0; i < domList.length; i++){ 
 			var element = document.createElement('option');
-			element.setAttribute('value',songName);
+			element.setAttribute('value',info);
 			element.appendChild(document.createTextNode(songName.replace(/_/g,' ')));
 			document.getElementsByClassName("soundOptions")[i].appendChild(element);	
 		}
@@ -312,6 +312,7 @@ function playNoise(songId) {
 	var index = songId.split("||")[0];
 	var songFolder = songId.split("||")[1];
 	var songName = songId.split("||")[2];
+	console.log(songId);
 	document.getElementById(idPrefix + songFolder + songName).play();
 
 }
