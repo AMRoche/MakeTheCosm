@@ -65,7 +65,6 @@ stringToInsert+="</select></div>";
 	 	new Highcharts.Chart({
             chart: {
                 renderTo: document.getElementById(feedId + dataId +"graph"),
-                //type: 'spline',
                 type : 'area',
                 marginRight: 10,
                 events: {
@@ -98,7 +97,7 @@ stringToInsert+="</select></div>";
             },
             tooltip: {
                 formatter: function() {
-                        return Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+Highcharts.numberFormat(this.y, 2);
+                     return Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+Highcharts.numberFormat(this.y, 2);
                 }
             },
               plotOptions: {

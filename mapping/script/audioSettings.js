@@ -60,8 +60,11 @@ function addAudio(songToAdd) {
 	var index = songToAdd.split("||")[0];
 	var songFolder = songToAdd.split("||")[1];
 	var songName = songToAdd.split("||")[2];
+	document.getElementById("removeFromListButton").style.display = "block";
+	document.getElementById("addToListButton").style.display = "block";
+	document.getElementById("pauseButton").style.display = "block";
+	document.getElementById("previewButton").style.display = "block";
 
-	//console.log(index);
 	if (songToAdd != "" && document.getElementById(idPrefix + songFolder + songName) == undefined) {
 	//	songsSelected.push(songToAdd);
 		//now to add audio element
@@ -74,14 +77,14 @@ function addAudio(songToAdd) {
 		document.getElementById("audioTryoutWrapper").innerHTML = insertString;
 	}
 	if(document.getElementById(idPrefix+songFolder+songName)!=undefined){
-		document.getElementById("previewButton").innerHTML = "<input value = 'Preview Sound'type = 'button' onclick='document.getElementById(\"" + idPrefix + songFolder + songName + "\").play()'>";
-		document.getElementById("pauseButton").innerHTML = "<input value = 'Pause Sound'type = 'button' onclick='document.getElementById(\"" + idPrefix + songFolder + songName + "\").pause()'>";
+		document.getElementById("previewButton").innerHTML = "<input value = '>'type = 'button' onclick='document.getElementById(\"" + idPrefix + songFolder + songName + "\").play()'>";
+		document.getElementById("pauseButton").innerHTML = "<input value = '||'type = 'button' onclick='document.getElementById(\"" + idPrefix + songFolder + songName + "\").pause()'>";
 		//console.log(soundFiles);
 		//console.log(songFolder);
 		document.getElementById("soundDescriptionPreview").innerHTML = "<p>" + soundFiles[songFolder.toString()][index][1] + "</p>";
 		//document.getElementById(idPrefix + songFolder + songName).play();
-		document.getElementById("addToListButton").innerHTML = '<input type="button" value="Add Sound To List"onclick="(function(){addAudioToList(document.getElementById(\'addAudioMenu\').value)})();"/>';
-		document.getElementById("removeFromListButton").innerHTML = '<input type="button" value="Remove Sound From List"onclick="(function(){removeAudioFromList(document.getElementById(\'addAudioMenu\').value)})();"/>';
+		document.getElementById("addToListButton").innerHTML = '<input type="button" value="+"onclick="(function(){addAudioToList(document.getElementById(\'addAudioMenu\').value)})();"/>';
+		document.getElementById("removeFromListButton").innerHTML = '<input type="button" value="-"onclick="(function(){removeAudioFromList(document.getElementById(\'addAudioMenu\').value)})();"/>';
 
 	}
 }
@@ -123,10 +126,10 @@ function addAudioToList(songToAdd) {
 		songsSelected.push(songToAdd);
 		var stringToAdd = "<li data-index='" + index + "' id='listItem" + songFolder + songName + "'>";
 		stringToAdd += '<h3 class="songName">' + songFolder + "://" + songName + " ~ "+songName.replace(/_/g, ' ')+"</h3>";
-		stringToAdd += '<div id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
-		stringToAdd += '<input type="button" class="removeSoundFromList" value="Remove Sound From List"onclick="(function(){removeAudioFromList(\'' + songToAdd + '\')})();"/>';
-		stringToAdd += '<input type="button" class="playSound" value="Play" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
-		stringToAdd += '<input type="button" class="pauseSound" value="Pause" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').pause()" />';
+			stringToAdd += '<input type="button" class="removeSoundFromList" value="x"onclick="(function(){removeAudioFromList(\'' + songToAdd + '\')})();"/>';
+		stringToAdd += '<div class = "uniqueSoundDescription" id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
+		stringToAdd += '<input type="button" class="playSound" value=">" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
+		stringToAdd += '<input type="button" class="pauseSound" value="||" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').pause()" />';
 	
 		//ADD A BUTTON HERE WHICH LETS THE USER PLAY THE FRACKIN' SOUND.
 		document.getElementById("audioZoneList").innerHTML += stringToAdd + "</li>";
@@ -183,9 +186,11 @@ function checkForSongData() {
 				//console.log("allDef'd");
 				//console.log(tester);
 				//console.log(tester[1]+"")
+				console.log(tester);
 				if (tester[0] == "=|=") {
 					console.log("=|="+tester[1]+"||"+chosenFeeds[key][i][1]);
 					if (tester[1] != chosenFeeds[key][i][1]) {
+						
 						playNoise(tester[2]);
 						tester[1] = chosenFeeds[key][i][1];
 					}
@@ -247,10 +252,10 @@ function populateAudioList() {
 		document.getElementById("audioZoneList").appendChild(listElement);
 		insertString = "";
 		insertString = '<h3 class="songName">' + songFolder + " :// " + songName + " ~ "+songName.replace(/_/g, ' ')+"</h3>";
-		insertString += '<div id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
-		insertString += '<input type="button"  class="removeSoundFromList" value="Remove Sound From List"onclick="(function(){removeAudioFromList(\'' + toUse + '\')})();"/>';
-		insertString += '<input type="button" class="playSound" value="Play" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
-		insertString += '<input type="button" class="pauseSound" value="Pause" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').pause()" />';
+		insertString += '<input type="button"  class="removeSoundFromList" value="x"onclick="(function(){removeAudioFromList(\'' + toUse + '\')})();"/>';
+		insertString += '<div class = "uniqueSoundDescription" id="description' + songFolder + songName + '"><p>' + soundFiles[songFolder.toString()][index][1] + '</p></div>';
+		insertString += '<input type="button" class="playSound" value=">" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').play()" />';
+		insertString += '<input type="button" class="pauseSound" value="||" onclick="document.getElementById(\'' + idPrefix + songFolder + songName + '\').pause()" />';
 		//ADD A BUTTON HERE WHICH LETS THE USER PLAY THE FRACKIN' SOUND.
 		document.getElementById("listItem"+songFolder+songName).innerHTML = insertString;
 

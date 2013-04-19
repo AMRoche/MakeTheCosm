@@ -1,10 +1,13 @@
 var apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
 var question = "arduino";
 var maxSize = 30;
+var maxRender = 5;
 
 startStuff();
 function startStuff() {
 	document.getElementById("queryBox").value = question;
+	document.getElementById("maxRenderSetter").value = maxRender;
+	console.log("initiated");
 	getInfo(question);
 	setInterval(function() {
 		getInfo(question)
@@ -92,12 +95,13 @@ function getInfo(query) {
 		data : {
 			"APIkey" : apiKEY,
 			"question" : query,
-			"maxCount" : "50"
+			"maxCount" : maxRender.toString()
 		},
 		always : function() {
-			////console.log("done");
+			onsole.log("done");
 		},
 		success : function(response) {
+			console.log(response);
 			json = new Array();
 			layer.features([]);
 			for (var i = 0; i < response.length; i++) {
@@ -128,7 +132,7 @@ function getInfo(query) {
 			}
 		},
 		error : function(response) {
-			////console.log(response);
+		console.log(response);
 		}
 	});
 
@@ -175,6 +179,9 @@ function updateInfo(idOfDiv) {
 			////console.log();
 			if (json[i].description != undefined) {
 				string += "<p id='feedDescription'>" + json[i].description + "</p>";
+			}
+			else if(json[i].description == undefined){
+				string += "<p id='feedDescription'></p>";
 			}
 			string += "<div id='dataStreamDataList'>";
 			string += "<ul>";
@@ -245,6 +252,9 @@ function getPertinentInfo() {
 			////console.log();
 			if (json[i].description != undefined) {
 				string += "<p id='feedDescription'>" + json[i].description + "</p>";
+			}
+			else if(json[i].description == undefined){
+				string += "<p id='feedDescription'></p>";
 			}
 			string += "<div id='dataStreamDataList'>";
 			string += "<ul>";

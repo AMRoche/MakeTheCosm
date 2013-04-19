@@ -17,8 +17,14 @@
 					<!--cosm API -->
 					<div class="wrapper">
 						<div id="mapWrapper">
-						<label>Change the value in the box to change the search parameter: </label>
-						<input type="text" id = "queryBox" onchange="question = this.value"/>
+						<div id="questionSetter">
+							<label>Change the value in the box to change the search parameter: </label>
+							<input type="text" id = "queryBox" onchange="question = this.value"/>
+						</div>
+						<div id="renderSetter">
+							<label>Datastreams rendered: </label>
+							<input type="number" id="maxRenderSetter"onchange = "maxRender = this.value">
+						</div>
 						<div id="map"></div>
 						</div>
 						<div id="feedList"><h2> Click on a marker for more information!</h2></div>
@@ -61,18 +67,21 @@
 							</div>
 							<div id="audioList">
 							</div>
-							<div id="previewButton">
+								<div id="previewButton">
 								<input type="button" value="Sound not Loaded"/>
 							</div>
-							<div id="pauseButton">
+								<div id="pauseButton">
 								<input type="button" value="Sound not Loaded"/>
 							</div>
-							<div id="addToListButton">
-								<input type="button" value="Add Sound To List"/>
+							
+								<div id="addToListButton">
+								<input type="button" value="+"/>
 							</div>
 							<div id="removeFromListButton">
-								<input type="button" value="Remove Sound From List"/>
+								<input type="button" value="-"/>
 							</div>
+						
+							
 						
 						</div>
 						<div id="audioZone">

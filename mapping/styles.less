@@ -7,6 +7,7 @@
 
 @base: 32px;
 @m-height: 16px;
+
 .marker-popup{
     background:red;
     }
@@ -277,25 +278,48 @@ header {
 		.small-text;
 	}
     .wrapper{
+        height:90%;
         float:left;
         padding:20px;
         background:rgba(0,0,0,0.1);
         width:100%;
+        border-radius:30px;
+        
     #audioSelection{
+        padding:1%;
+        border-radius:15px;
         background:rgba(0,0,0,0.1);
         margin : 0 auto 20px auto;
         width:90%;
         height:90px;
+         input[type="button"]{
+                border-radius:15px;
+                width:65px;
+                height:65px;
+                font-weight:bold;
+               }
         #audioList{
+            line-height:65px;
             float:left;
+            }
+        #removeFromListButton{
+            float:right;
+            display:none;          
+            }
+        #pauseButton{
+            float:right;
+            display:none;
             }
         #previewButton{
-            float:left;
+            display:none;
+            float:right;
             }
         #addToListButton{
-            float:left;
+            float:right;
+            display:none;
             }
         #soundDescriptionPreview{
+           
             float:left;
             height:100%;
             overflow-y:scroll;
@@ -309,27 +333,45 @@ header {
         margin:0 auto;
         background:rgba(0,0,0,0.1);
         width:90%;
-        height:390px;
+        height:76%;
+        border-radius:15px;
         overflow-y:scroll;
         #audioZoneList{
                 width:100%;
                 list-style:none;
                 padding-left:1%;
                     li{
-                        
+                        border-radius:15px;
                         float:left;
                         width:31%;
                         margin:15px 1%;
                         padding:5px;
-                        
+                       input[type="button"]{
+                           width:20px;
+                           height:20px;
+                           margin-left:10px;
+                           } 
                         background:rgba(0,0,0,0.1);
                         .playSound{
+                            border-radius:10px;
                             float:right;
                             }
                         .pauseSound{
+                            border-radius:15px;
                             float:right;
                             }
-                        .removeAudioFromList{}
+                            h3{
+                                float: left;
+                                
+                                }
+                        .removeSoundFromList{
+                            border-radius:15px;
+                            float:right;
+                            }
+                        .uniqueSoundDescription{
+                            float:left;
+                            clear:both;
+                            }
                     }
             }
         }
@@ -337,26 +379,34 @@ header {
         float:left;
         background:rgba(0,0,0,0.1);
         width:70%;
-        height:500px;
+                  height:100%;
+                border-radius:20px;
         overflow-y:scroll;
             #selectedFeedsList{
                 width:100%;
+   
                 list-style:none;
                     li{
                         float:left;
                         width:100%;
                         margin:5px 0 5px 0;
                         background:rgba(0,0,0,0.1);
-                        
+                         border-radius:15px;
                         .graphDataContainer{
+                           
                             width:100%;
                             float: left;
                                 .graphInfo{
+                                    padding-left:5px;
                                     width: 30%;
                                     float: left;
                                     h2{margin-top:5px;}
                                     h3{margin-bottom:5px;}
-                                    input[type="button"]{
+                                    .feedVitalStats{
+                                        margin-left:15%;
+                                        }
+                                    input[type="button"]{ 
+                                        border-radius:15px;
                                         margin-top:20px;
                                         }
                                 }    
@@ -395,64 +445,101 @@ header {
                 }
         }
     #listOfFeeds{
+        border-radius:20px;
+        h3{margin-left:15%;}
+        h5{margin-left:15%}
+        padding:1%;
         float:left;
         margin-left:5%;
           background:rgba(0,0,0,0.1);
           width:25%;
-          height:500px;
+          height:100%;
             #quickInfoSummation{
+                border-radius:10px;
+                margin-top:10px;
                 background :rgba(0,0,0,0.1);
             width:100%;
-            height:400px;
+            height:89%;
             overflow-y:scroll;
                 ul{
                     list-style:none;
                     li{
                             .quickWrapper{
+                                border-radius:10px;
+                                padding:2%;
                                  background-color:rgba(255,255,255,0.2);
                                 float:left;
                                 width:100%;
                                 margin-top:5px;
                                 margin-bottom:5px;
-                                .infoWahn{
-                                    .dataId{}
-                                    .curVal{}
-                                    .maxVal{}
-                                    .minVal{}
-                                }
+                                input[type="button"]{
+                                    float:right;
+                                    border-radius:15px;
+                                    }
+                                    .infoWahn{
+                                        .dataId{}
+                                        .curVal{}
+                                        .maxVal{}
+                                        .minVal{}
+                                    }
                                 }
                         }
                     }
             }
         }
     #mapWrapper{
+        border-radius:20px;
         float:left;
         background:rgba(0,0,0,0.1);
         width:70%;
-        height:500px;
+        height:100%;
+        padding:10px 1% ;
+      #questionSetter{
+       float:left;
+       }
+      #maxRenderSetter{
+       float:right;
+       
+       }
         #map{
-            margin-top:10px;
-            height:470px;
+            border-radius:20px;
+      clear:both;
+            height:95%;
+      
             }
         }
     #feedList{
+        height:100%;
+        padding:1%;
         float:left;
         margin-left:5%;
+        border-radius:20px;
           background:rgba(0,0,0,0.1);
           width:25%;
-          height:500px;
+          height:99%;
+        h2{
+            text-align:center;
+            }
         #dataWrapper{
+            height:100%;
+            h3{margin-left:15%;height:1em; overflow:hidden;
+            }
+            h5{margin-left:15%;}
                 #creator{
+                    margin-left:15%;
                         a{
                             color:#ffffff;
                         }
                     }
                 #feedDescription{
+                    overflow-y:scroll;
+                    
                     font-style:italic;
+                    height:20%;
                     }
                     #dataStreamDataList{
-                        margin-top:20px;
-                        height:350px;
+                        margin-top:10px;
+                        height:67%;
                         overflow-y:scroll;
                         ul{list-style:none;
                             li{
@@ -464,8 +551,10 @@ header {
                                 }
                             .dataWrapping{
                                  background-color:rgba(255,255,255,0.2);
+                                 border-radius:10px;
                                 float:left;
                                 width:100%;
+                                padding:2%;
                                 margin-top:5px;
                                 margin-bottom:5px;
                                 .listItem{                                    
@@ -475,9 +564,10 @@ header {
                                     #value{}  
                                     }
                                 .ButtonSection{
-                                    width:40%;
+                                    
                                     float:right;
                                         input[type="button"]{
+                                            border-radius:15px;
                                             float:right;
                                             width:70px;
                                             height:32px;                                        

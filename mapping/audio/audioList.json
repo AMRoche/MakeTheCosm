@@ -1,5 +1,5 @@
 {
-	"opts": [["mp3", "mpeg"],["wav", "wav"]
+	"opts": [["mp3", "mpeg"],["wav", "wav"],["ogg","ogg"]
 	],
 	"init": ["0||samples||test_sample", "0||chimes||Chimes_a", "2||chimes||Chimes_b", "4||chimes||Chimes_c", "6||chimes||Chimes_d", "7||chimes||Chimes_e", "9||chimes||Chimes_f", "11||chimes||Chimes_g"],
 	"samples": [
