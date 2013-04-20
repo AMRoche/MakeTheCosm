@@ -65,7 +65,7 @@ stringToInsert+="</select></div>";
 	var chartMax = maxVal;
 	var chartMin = minVal;
 	
-	if(chartMax == chartMin){
+	if((chartMax-chartMin) <= 10){
 		chartMax = chartMax + 25;
 		chartMin = chartMin - 25;
 	}

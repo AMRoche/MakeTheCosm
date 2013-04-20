@@ -1,8 +1,8 @@
 ( function() {"use strict";
 		var hashThing = document.URL.substr(document.URL.indexOf('#'), document.URL.length);
 		//#blurb, #mailSubscribe, #speakerSubmit
-		var hashes = ["", "#soundList", "#userArea"];
-		//var hashes = ["","","#userArea"]; //multiple blank hashlinks breaks history in this caes.
+		var hashes = ["", "#soundList", "#soundSelection"];
+		//var hashes = ["","","#soundSelection"]; //multiple blank hashlinks breaks history in this caes.
 		var increment = 0;
 		var active = $('.slideshow .slide.active');
 		var totalSlides = $('.slide');
