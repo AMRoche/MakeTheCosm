@@ -303,20 +303,76 @@ header {
             float:left;
             }
         #removeFromListButton{
+            margin-left: 15px;
             float:right;
-            display:none;          
+            display:none;  
+            input[type="button"]{
+            font-size: 50px;
+            line-height: 50px;
+            padding-bottom: 8px;
+            background-color:rgb(255,255,255);
+            border-color:rgb(235,235,235);
+            
+            }
+             input[type="button"]:hover{
+                 background-color:rgb(250,250,250);
+                 border-color:rgb(215,215,215);
+              
+                 }
             }
         #pauseButton{
+            margin-left: 15px;
             float:right;
             display:none;
+        input[type="button"]{   border-color:rgb(115,230,115);
+        background-color:rgb(135,255,135);
+            }
+        input[type="button"]:hover{
+              border-color:rgb(95,210,95);
+              background-color:rgb(115,235,115);
+        }
             }
         #previewButton{
+            margin-left: 15px;
             display:none;
             float:right;
+          
+            input[type="button"]{  
+                  font-size:50px;
+                border-color:rgb(115,230,115);
+        background-color:rgb(135,255,135);
+            }
+        input[type="button"]:hover{
+              border-color:rgb(95,210,95);
+              background-color:rgb(115,235,115);
+        }
+        }
+        #pauseButton{
+            input[type="button"]{
+             line-height: 20px;
+            font-size: 50px;
+            padding-bottom: 10px;
+            border-color:rgb(230,115,115);
+            background-color:rgb(255,135,135);
+            }
+            input[type="button"]:hover{
+                   border-color:rgb(210,95,95);
+                    background-color:rgb(235,115,115);
+                }
             }
         #addToListButton{
+            margin-left: 15px;
             float:right;
             display:none;
+            input[type="button"]{
+            font-size: 50px;
+            background-color:rgb(255,255,255);
+                 border-color:rgb(235,235,235);
+            }
+               input[type="button"]:hover{
+                 background-color:rgb(250,250,250);
+                 border-color:rgb(215,215,215);
+                 }
             }
         #soundDescriptionPreview{
            
@@ -349,26 +405,59 @@ header {
                        input[type="button"]{
                            width:20px;
                            height:20px;
+                           border-radius:10px;
                            margin-left:10px;
+                           font-weight:bold;
                            } 
                         background:rgba(0,0,0,0.1);
-                        .playSound{
-                            border-radius:10px;
-                            float:right;
+                        .playSound{                           
+                                float:right;
+                                border-color:rgb(115,230,115);
+                                background-color:rgb(135,255,135);
+                            }
+                            .playSound:hover{
+                                border-color:rgb(95,210,95);
+                                  background-color:rgb(115,235,115);
                             }
                         .pauseSound{
-                            border-radius:15px;
+                           
+                            margin-top:4px;
+                         line-height:8px;
                             float:right;
+                             border-color:rgb(230,115,115);
+                            background-color:rgb(255,135,135);
                             }
+                            .pauseSound:hover{
+                               border-color:rgb(210,95,95);
+                            background-color:rgb(235,115,115);
+                                }
                             h3{
                                 float: left;
                                 
                                 }
                         .removeSoundFromList{
-                            border-radius:15px;
+                            margin-right:3px;
+                            width:15px;
+                            height:15px;
+                            background-color:rgb(220,220,220);
+                            border-width:2px;
+                            border-color:rgb(255,255,255);
+                            border-style:solid;
+                            border-radius:10px;
                             float:right;
+                            font-size:15px;
+                            line-height:12px;
+                            padding-left:1px;
                             }
+                            .removeSoundFromList:hover{
+                                 background-color:rgb(200,200,200);
+                                 border-color:rgb(220,220,220);
+                                 cursor:default;
+                                }
                         .uniqueSoundDescription{
+                            height:3em;
+                            overflow-y:scroll;
+                            width:90%;
                             float:left;
                             clear:both;
                             }

@@ -30,17 +30,26 @@ header .tri_bottom{float:left;width:0px;height:0px;border-style:solid;border-wid
 .content p{font-size:14px;line-height:16px;}
 .content .wrapper{height:90%;float:left;padding:20px;background:rgba(0, 0, 0, 0.1);width:100%;border-radius:30px;}.content .wrapper #audioSelection{padding:1%;border-radius:15px;background:rgba(0, 0, 0, 0.1);margin:0 auto 20px auto;width:90%;height:90px;}.content .wrapper #audioSelection input[type="button"]{border-radius:15px;width:65px;height:65px;font-weight:bold;}
 .content .wrapper #audioSelection #audioList{line-height:65px;float:left;}
-.content .wrapper #audioSelection #removeFromListButton{float:right;display:none;}
-.content .wrapper #audioSelection #pauseButton{float:right;display:none;}
-.content .wrapper #audioSelection #previewButton{display:none;float:right;}
-.content .wrapper #audioSelection #addToListButton{float:right;display:none;}
+.content .wrapper #audioSelection #removeFromListButton{margin-left:15px;float:right;display:none;}.content .wrapper #audioSelection #removeFromListButton input[type="button"]{font-size:50px;line-height:50px;padding-bottom:8px;background-color:#ffffff;border-color:#ebebeb;}
+.content .wrapper #audioSelection #removeFromListButton input[type="button"]:hover{background-color:#fafafa;border-color:#d7d7d7;}
+.content .wrapper #audioSelection #pauseButton{margin-left:15px;float:right;display:none;}.content .wrapper #audioSelection #pauseButton input[type="button"]{border-color:#73e673;background-color:#87ff87;}
+.content .wrapper #audioSelection #pauseButton input[type="button"]:hover{border-color:#5fd25f;background-color:#73eb73;}
+.content .wrapper #audioSelection #previewButton{margin-left:15px;display:none;float:right;}.content .wrapper #audioSelection #previewButton input[type="button"]{font-size:50px;border-color:#73e673;background-color:#87ff87;}
+.content .wrapper #audioSelection #previewButton input[type="button"]:hover{border-color:#5fd25f;background-color:#73eb73;}
+.content .wrapper #audioSelection #pauseButton input[type="button"]{line-height:20px;font-size:50px;padding-bottom:10px;border-color:#e67373;background-color:#ff8787;}
+.content .wrapper #audioSelection #pauseButton input[type="button"]:hover{border-color:#d25f5f;background-color:#eb7373;}
+.content .wrapper #audioSelection #addToListButton{margin-left:15px;float:right;display:none;}.content .wrapper #audioSelection #addToListButton input[type="button"]{font-size:50px;background-color:#ffffff;border-color:#ebebeb;}
+.content .wrapper #audioSelection #addToListButton input[type="button"]:hover{background-color:#fafafa;border-color:#d7d7d7;}
 .content .wrapper #audioSelection #soundDescriptionPreview{float:left;height:100%;overflow-y:scroll;width:300px;margin-right:10px;}
-.content .wrapper #audioZone{margin:0 auto;background:rgba(0, 0, 0, 0.1);width:90%;height:76%;border-radius:15px;overflow-y:scroll;}.content .wrapper #audioZone #audioZoneList{width:100%;list-style:none;padding-left:1%;}.content .wrapper #audioZone #audioZoneList li{border-radius:15px;float:left;width:31%;margin:15px 1%;padding:5px;background:rgba(0, 0, 0, 0.1);}.content .wrapper #audioZone #audioZoneList li input[type="button"]{width:20px;height:20px;margin-left:10px;}
-.content .wrapper #audioZone #audioZoneList li .playSound{border-radius:10px;float:right;}
-.content .wrapper #audioZone #audioZoneList li .pauseSound{border-radius:15px;float:right;}
+.content .wrapper #audioZone{margin:0 auto;background:rgba(0, 0, 0, 0.1);width:90%;height:76%;border-radius:15px;overflow-y:scroll;}.content .wrapper #audioZone #audioZoneList{width:100%;list-style:none;padding-left:1%;}.content .wrapper #audioZone #audioZoneList li{border-radius:15px;float:left;width:31%;margin:15px 1%;padding:5px;background:rgba(0, 0, 0, 0.1);}.content .wrapper #audioZone #audioZoneList li input[type="button"]{width:20px;height:20px;border-radius:10px;margin-left:10px;font-weight:bold;}
+.content .wrapper #audioZone #audioZoneList li .playSound{float:right;border-color:#73e673;background-color:#87ff87;}
+.content .wrapper #audioZone #audioZoneList li .playSound:hover{border-color:#5fd25f;background-color:#73eb73;}
+.content .wrapper #audioZone #audioZoneList li .pauseSound{margin-top:4px;line-height:8px;float:right;border-color:#e67373;background-color:#ff8787;}
+.content .wrapper #audioZone #audioZoneList li .pauseSound:hover{border-color:#d25f5f;background-color:#eb7373;}
 .content .wrapper #audioZone #audioZoneList li h3{float:left;}
-.content .wrapper #audioZone #audioZoneList li .removeSoundFromList{border-radius:15px;float:right;}
-.content .wrapper #audioZone #audioZoneList li .uniqueSoundDescription{float:left;clear:both;}
+.content .wrapper #audioZone #audioZoneList li .removeSoundFromList{margin-right:3px;width:15px;height:15px;background-color:#dcdcdc;border-width:2px;border-color:#ffffff;border-style:solid;border-radius:10px;float:right;font-size:15px;line-height:12px;padding-left:1px;}
+.content .wrapper #audioZone #audioZoneList li .removeSoundFromList:hover{background-color:#c8c8c8;border-color:#dcdcdc;cursor:default;}
+.content .wrapper #audioZone #audioZoneList li .uniqueSoundDescription{height:3em;overflow-y:scroll;width:90%;float:left;clear:both;}
 .content .wrapper #selectedFeeds{float:left;background:rgba(0, 0, 0, 0.1);width:70%;height:100%;border-radius:20px;overflow-y:scroll;}.content .wrapper #selectedFeeds #selectedFeedsList{width:100%;list-style:none;}.content .wrapper #selectedFeeds #selectedFeedsList li{float:left;width:100%;margin:5px 0 5px 0;background:rgba(0, 0, 0, 0.1);border-radius:15px;}.content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer{width:100%;float:left;}.content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .graphInfo{padding-left:5px;width:30%;float:left;}.content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .graphInfo h2{margin-top:5px;}
 .content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .graphInfo h3{margin-bottom:5px;}
 .content .wrapper #selectedFeeds #selectedFeedsList li .graphDataContainer .graphInfo .feedVitalStats{margin-left:15%;}
