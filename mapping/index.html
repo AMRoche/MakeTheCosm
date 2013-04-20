@@ -103,7 +103,7 @@
 				</li>
 
 		</ul>
-	<div id="overlay" style="display:none;">
+	<div id="overlay">
 		<div id="formVerifyContainer">
 			<form id="formVerify" onsubmit="return false;">
 					<label>API KEY : </label>
@@ -112,6 +112,7 @@
 					<input type="text" id="apiQueryAccess" value="arduino">
 					<button class="normal" type="submit" onclick = "validateAPIkey()">Submit</button>
 				</form>
+					<span id="checkingAPIkey"></span>
 					<span id="APIfail" class="label label-important"style="display:none;">Your API Key has failed to validate. Please try another one.</span>
 					<span id="QUESTIONfail" class="label label-important"style="display:none;">Your Query string is empty. Please try another one.</span>
 		</div>	

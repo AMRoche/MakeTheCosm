@@ -1,9 +1,11 @@
-var apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
+//var apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
+var apiKEY;
 var question = "arduino";
 var maxSize = 30;
 var maxRender = 5;
 
-startStuff();
+//startStuff();
+//validateAPIkey();
 function startStuff() {
 	document.getElementById("queryBox").value = question;
 	document.getElementById("maxRenderSetter").value = maxRender;
@@ -18,6 +20,7 @@ function startStuff() {
 }
 
 function validateAPIkey() {
+	
 	//console.log(document.getElementById('apiQueryAccess').value.length);
 	if(document.getElementById('apiQueryAccess').value.length == 0){
 		//console.log("QUESTION");
