@@ -214,12 +214,12 @@ function updateInfo(idOfDiv) {
 				string += "<p>MIN_VALUE : <span id='minVal'>" + json[i].datastreams[j].min_value + "</span></p>";
 				string += "</div><div class='ButtonSection'>";
 				if (listed == false) {
-					string += "<input type='button' value='Sonify Me!' id='addToMusic' onclick='(function(){sonifyAdd(\"" + json[i].id + ":" + json[i].datastreams[j].id + ":" + json[i].datastreams[j].current_value + ":" + json[i].datastreams[j].max_value + ":" + json[i].datastreams[j].min_value + "\");})();'>";
-					string += "<input type='button' value='Maybe Not...' style='display:none' id='removeFromMusic' onclick='(function(){sonifyRemove(\"" + json[i].id + ":" + json[i].datastreams[j].id + "\");})();'>";
+					string += "<input type='button' value='Sonify' id='addToMusic' onclick='(function(){sonifyAdd(\"" + json[i].id + ":" + json[i].datastreams[j].id + ":" + json[i].datastreams[j].current_value + ":" + json[i].datastreams[j].max_value + ":" + json[i].datastreams[j].min_value + "\");})();'>";
+					string += "<input type='button' value='Remove' style='display:none' id='removeFromMusic' onclick='(function(){sonifyRemove(\"" + json[i].id + ":" + json[i].datastreams[j].id + "\");})();'>";
 				}
 				if (listed != false) {
-					string += "<input type='button' value='Sonify Me!' id='addToMusic' style='display:none;' onclick='(function(){sonifyAdd(\"" + json[i].id + ":" + json[i].datastreams[j].id + ":" + json[i].datastreams[j].current_value + "\");})();'>";
-					string += "<input type='button' value='Maybe Not...' style='display:inline-block;' id='removeFromMusic' onclick='(function(){sonifyRemove(\"" + json[i].id + ":" + json[i].datastreams[j].id + "\");})();'>";
+					string += "<input type='button' value='Sonify' id='addToMusic' style='display:none;' onclick='(function(){sonifyAdd(\"" + json[i].id + ":" + json[i].datastreams[j].id + ":" + json[i].datastreams[j].current_value + "\");})();'>";
+					string += "<input type='button' value='Remove' style='display:inline-block;' id='removeFromMusic' onclick='(function(){sonifyRemove(\"" + json[i].id + ":" + json[i].datastreams[j].id + "\");})();'>";
 				}
 				//id,current_value, max_value, min_value
 				string += "</div>";
@@ -287,12 +287,12 @@ function getPertinentInfo() {
 				string += "<p>MIN_VALUE : <span id='minVal'>" + json[i].datastreams[j].min_value + "</span></p>";
 				string += "</div><div class='ButtonSection'>";
 				if (listed == false) {
-					string += "<input type='button' value='Sonify Me!' id='addToMusic' onclick='(function(){sonifyAdd(\"" + json[i].id + ":" + json[i].datastreams[j].id + ":" + json[i].datastreams[j].current_value + ":" + json[i].datastreams[j].max_value + ":" + json[i].datastreams[j].min_value + "\");})();'>";
-					string += "<input type='button' value='Maybe Not...' style='display:none' id='removeFromMusic' onclick='(function(){sonifyRemove(\"" + json[i].id + ":" + json[i].datastreams[j].id + "\");})();'>";
+					string += "<input type='button' value='Sonify' id='addToMusic' onclick='(function(){sonifyAdd(\"" + json[i].id + ":" + json[i].datastreams[j].id + ":" + json[i].datastreams[j].current_value + ":" + json[i].datastreams[j].max_value + ":" + json[i].datastreams[j].min_value + "\");})();'>";
+					string += "<input type='button' value='Remove' style='display:none' id='removeFromMusic' onclick='(function(){sonifyRemove(\"" + json[i].id + ":" + json[i].datastreams[j].id + "\");})();'>";
 				}
 				if (listed != false) {
-					string += "<input type='button' value='Sonify Me!' id='addToMusic' style='display:none;' onclick='(function(){sonifyAdd(\"" + json[i].id + ":" + json[i].datastreams[j].id + ":" + json[i].datastreams[j].current_value + "\");})();'>";
-					string += "<input type='button' value='Maybe Not...' style='display:inline-block;' id='removeFromMusic' onclick='(function(){sonifyRemove(\"" + json[i].id + ":" + json[i].datastreams[j].id + "\");})();'>";
+					string += "<input type='button' value='Sonify' id='addToMusic' style='display:none;' onclick='(function(){sonifyAdd(\"" + json[i].id + ":" + json[i].datastreams[j].id + ":" + json[i].datastreams[j].current_value + "\");})();'>";
+					string += "<input type='button' value='Remove' style='display:inline-block;' id='removeFromMusic' onclick='(function(){sonifyRemove(\"" + json[i].id + ":" + json[i].datastreams[j].id + "\");})();'>";
 				}
 				//id,current_value, max_value, min_value
 				string += "</div>";

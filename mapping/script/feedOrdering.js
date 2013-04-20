@@ -29,7 +29,7 @@ function sonifyAdd(input) {
 	stringToInsert += "<h3> Value >> <span id='"+feedId+dataId+"liveValue'>" + currentVal + "</span></h3>";
 	stringToInsert += "<h3> Maxima >> <span id='"+feedId+dataId+"liveMax'>" + maxVal + "</span></h3>";
 	stringToInsert += "<h3> Minima >> <span id='"+feedId+dataId+"liveMin'>" + minVal + "</span></h3>";
-	stringToInsert += "<input type='button' value='Maybe Not...' style='display:inline-block;' class='removeFromArrayGraphing' onclick='(function(){sonifyRemoveArray(\"" + feedId + ":" + dataId + "\");})();'>";
+	stringToInsert += "<input type='button' value='Remove' style='display:inline-block;' class='removeFromArrayGraphing' onclick='(function(){sonifyRemoveArray(\"" + feedId + ":" + dataId + "\");})();'>";
 	stringToInsert += "</div>";
 
 	stringToInsert += "<div class='graphContainer' id='"+feedId + dataId +"graph'></div>";
@@ -61,6 +61,15 @@ stringToInsert+="</select></div>";
 	stringToInsert += "</div></div>";
 	stringToInsert += "</div>";
 	document.getElementById(feedId+dataId+"sonNode").innerHTML = stringToInsert;
+	
+	var chartMax = maxVal;
+	var chartMin = minVal;
+	
+	if(chartMax == chartMin){
+		chartMax = chartMax + 25;
+		chartMin = chartMin - 25;
+	}
+	
 	 chosenFeeds[feedId][chosenFeeds[feedId].length-1].push(
 	 	new Highcharts.Chart({
             chart: {
@@ -69,10 +78,8 @@ stringToInsert+="</select></div>";
                 marginRight: 10,
                 events: {
                     load: function() {
-    
                         // set up the updating of the chart each second
-                        var series = this.series[0];
-                        
+                        var series = this.series[0];                        
                     }
                 }
             },
@@ -86,9 +93,10 @@ stringToInsert+="</select></div>";
                 tickPixelInterval: 150
             },
             yAxis: {
-            	max : Math.ceil(maxVal),
-            	min : Math.ceil(minVal),
+            	max : chartMax,
+            	min : chartMin,
                 title: false,
+                allowDecimals : true,
                 plotLines: [{
                     value: 0,
                     width: 1,
@@ -210,7 +218,7 @@ function displayListUpdate() {
 			insertThing += "<div class='maxVal'>Maxima >> " + chosenFeeds[key][i][2] + "</div>";
 			insertThing += "<div class='minVal'>Minima >> " + chosenFeeds[key][i][3] + "</div>";
 			insertThing += "</div>";
-			insertThing += "<input type='button' value='Maybe Not...' style='display:inline-block;' class='removeFromArray' onclick='(function(){sonifyRemoveArray(\"" + key + ":" + chosenFeeds[key][i][0] + "\");})();'>";
+			insertThing += "<input type='button' value='Remove' style='display:inline-block;' class='removeFromArray' onclick='(function(){sonifyRemoveArray(\"" + key + ":" + chosenFeeds[key][i][0] + "\");})();'>";
 			insertThing += "</div>";
 		}
 	}
