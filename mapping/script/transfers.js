@@ -23,10 +23,10 @@
 			}
 		});
 
-		$('#prev-button').on('click', function() {
+		$('#prev-button').click(function() {
 			backOne();
 		});
-		$('#next-button').on('click', function() {
+		$('#next-button').click(function() {
 			nextOne();
 		});
 
