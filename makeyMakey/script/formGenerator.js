@@ -268,8 +268,8 @@ function resultParser() {
 		formSubmitted[4] = document.getElementById("feedTitle").value;
 
 		//all testing stuff goes here. Let's add stuff to the dev console for now.
-
-		var fNum = document.getElementById("feedNum").value;
+		var fNum = document.getElementById("feedId").value;
+		console.log(fNum);
 		var containArray = new Array();
 		$.ajax({
 			url : "http://api.cosm.com/v2/" + "feeds/" + fNum,

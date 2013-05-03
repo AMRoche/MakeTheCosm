@@ -64,7 +64,7 @@ function newFeed() {
 }
 
 function testThing() {
-	var apiKEY = "LEXFCUfXTzzUiPhvL0tSAAkJFkWSAKxLQkVLSExCMHlZTT0g";
+	var apiKEY = "";
 	var thingOne = Math.floor(Math.random() * 14);
 	var thingTwo = Math.floor(Math.random() * 25);
 	var testJSON = '{"title":"ITEST","version":"1.0.0","website":"http://www.amroche.co.uk/netChimes","tags":["Makey Makey","NetChimes","Net Chimes"],"location":{"lat":"0","lon":"-59","domain":"physical","name":"A Makey Makey being used.","exposure":"indoor"},' + '"datastreams":[' + '{"id":"Thing_1","current_value":"1","max_value":"1.0","min_value":"0.0"},' + '{"id":"Thing_2","current_value":"0","max_value":"1.0","min_value":"0.0"}' + ']} ';
@@ -73,7 +73,7 @@ function testThing() {
 	console.log("pushing" + thingOne + ":" + thingTwo);
 	$.ajax({
 		type : "PUT",
-		url : "http://api.cosm.com/v2/" + "feeds/" + "105431" + "?_method=PUT",
+		url : "http://api.cosm.com/v2/" + "feeds/" + document.getElementById("feedId").value + "?_method=PUT",
 		beforeSend : function(request) {
 			request.setRequestHeader("X-ApiKey", apiKEY);
 		},
