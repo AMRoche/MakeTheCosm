@@ -21,16 +21,19 @@ function startStuff() {
 
 function validateAPIkey() {
 	
-	//console.log(document.getElementById('apiQueryAccess').value.length);
-	if(document.getElementById('apiQueryAccess').value.length == 0){
+	if(document.getElementById('apiAccess').value.length == 0){
+		//console.log("APILENGTH");
+		document.getElementById('APIempty').style.display = 'inline-block';
+		document.getElementById('QUESTIONfail').style.display = 'none';
+					document.getElementById('APIfail').style.display = 'none';
+
+	}
+	else if(document.getElementById('apiQueryAccess').value.length == 0){
 		//console.log("QUESTION");
 		document.getElementById('QUESTIONfail').style.display = 'inline-block';
 		document.getElementById('APIfail').style.display = 'none';
-	}
-	else if(document.getElementById('apiAccess').value.length == 0){
-		//console.log("APILENGTH");
-		document.getElementById('APIfail').style.display = 'inline-block';
-		document.getElementById('QUESTIONfail').style.display = 'none';
+					document.getElementById('APIempty').style.display = 'none';
+
 	}
 	else{
 		//console.log("stuff");
@@ -39,11 +42,14 @@ function validateAPIkey() {
 			question = document.getElementById('apiQueryAccess').value;
 			document.getElementById('APIfail').style.display = 'none';
 			document.getElementById('overlay').style.display = 'none';
+			document.getElementById('APIempty').style.display = 'none';
 			startStuff();
 		}
 		else{
 			document.getElementById('APIfail').style.display = 'inline-block';
 			document.getElementById('QUESTIONfail').style.display = 'none';
+			document.getElementById('APIempty').style.display = 'none';
+
 		}
 	}
 }

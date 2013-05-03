@@ -189,12 +189,12 @@ function checkForSongData() {
 		for (var i = 0; i < chosenFeeds[key].length; i++) {
 			//"Greater>> Less<< Changes from Original=|="
 			var tester = chosenFeeds[key][i][5];
-			if (tester[0] != undefined && tester[1] != undefined && tester[2] != undefined && tester[3] == true) {
+			console.log(tester);
+			if (tester[0] != undefined && tester[1] != undefined && tester[2] != undefined && tester[3] == "true") {
 				//0 is mode, 1 is threshold, 2 is sound //checks values set in audioSettings.js
 				//console.log("allDef'd");
 				//console.log(tester);
 				//console.log(tester[1]+"")
-				console.log(tester);
 				if (tester[0] == "=|=") {
 					console.log("=|="+tester[1]+"||"+chosenFeeds[key][i][1]);
 					if (tester[1] != chosenFeeds[key][i][1]) {
@@ -213,7 +213,10 @@ function checkForSongData() {
 						playNoise(tester[2]);
 					}
 				} else if (tester[0] == "==" || tester[0] == "|==|") {
-					console.log("|--|"+tester[1]+"||"+chosenFeeds[key][i][1]);
+					//console.log("|--|"+tester[1]+"||"+chosenFeeds[key][i][1]);
+					if(tester[0] == "=="){
+						playNoise(tester[2]);
+					}
 					if (tester[1] == chosenFeeds[key][i][1]) {
 						playNoise(tester[2]);
 					}
@@ -299,15 +302,20 @@ function setPlayArray(index, feed, idOfFeed, value, currentVal) {
 					//console.log("FAIL OF STRING VALUE BEOTCH");
 				}
 			} else {
-				if (value == "Greater Than") {
+				value = value.toString().replace(/\s/g, "");
+				if(chosenFeeds[feed][i][5][index] == "=="){
+					chosenFeeds[feed][i][5][1]=undefined;
+				}
+				if (value == "GreaterThan") {
+					console.log("GREATER THAN EDITING");
 					value = "<<";
-				} else if (value == "Less Than") {
+				} else if (value == "LessThan") {
 					value = ">>";
-				} else if (value == "Value Changes") {
+				} else if (value == "ValueChanges") {
 					value = "=|=";
-				} else if (value == "Is Equal To Current") {
+				} else if (value == "IsEqualToCurrent") {
 					value = "==";
-				} else if (value == "Is Equal To (set Threshold)") {
+				} else if (value == "IsEqualTo(setThreshold)") {
 					value = "|==|";
 				} 
 				if (value == "=|=") {
@@ -318,7 +326,7 @@ function setPlayArray(index, feed, idOfFeed, value, currentVal) {
 				chosenFeeds[feed][i][5][index] = value;
 			}
 		}
-		//console.log(chosenFeeds[feed][i][5]);
+		console.log(chosenFeeds[feed][i][5]);
 	}
 }
 

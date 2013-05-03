@@ -5,8 +5,6 @@ The makey makey interface is feature complete and mostly styled.
  - alphanumeric datastream ID not firing properly. [low priority]
  
  Map and Sound interface now has map and information pulling on click.
- - UX stuff
- - make it look prettier [styling]
 
 Project has now been split in to two subdirectories; mapping and makeyMakey.
 
@@ -23,5 +21,4 @@ Technologies:
 - COSM API
 - BootStrap
 - JQuery
-- ZeptoJS
 - HTML5 audio API

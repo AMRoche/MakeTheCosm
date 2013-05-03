@@ -100,7 +100,8 @@ function initialSet() {
 		console.log(document.getElementById("apiAccess").value);
 		apiKEY = document.getElementById("apiAccess").value;
 		console.log("api key changed to : " + apiKEY);
-	
+	document.getElementById("streamingBanner").style.display="inline-block";
+	document.getElementById("indicator").style.display="inline-block";
 	var optionLength = document.getElementById("numOfFeeds").value;
 	choices = optionLength;
 	var stringyThing = "";

@@ -1,5 +1,5 @@
-var colour = "#0055ff";
-var userColour = "#550055";
+var colour = "#32CDB4"; //flags
+var userColour = "#550055";//home
 var layer = mapbox.layer().id('examples.map-vyofok3q');
 var userLayer;
 

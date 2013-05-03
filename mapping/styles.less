@@ -51,13 +51,43 @@ body{
     width:100%;
     height:100%;
     background-color:white;
-    z-index:9000;
+    z-index:9999;
     background: rgb(100,110,150);
         #formVerifyContainer{
-            width:200px;
+           
+            width:400px;
             margin: 0 auto;
+            overflow-y :auto;
+            height:100%;
+           p{
+                text-align:justify;
+               }
+           a{
+                color:white;
+                }
+            #formVerify{
+                width:300px;
+                margin : 5px auto;
+                border-radius:10px;
+                padding:10px 0;
+                background-color:rgba(255,255,255,0.2);
+                .formRow{
+                    input[type="text"]{
+                        float:right;
+                        }
+                        label{
+                            float:left;
+                            margin-top:5px;
+                            }
+                    clear:both;
+                    width:100%;
+                
+            }
+            }
             .normal{
-                position:relative;
+                display:block;
+                 margin:0 auto;
+            position:relative;
                 width:100px;
                 height:20px;
                 font-size:12px;
@@ -180,9 +210,11 @@ button#prev-button { bottom: 20px; left: 20px;
 	width: 50px;
 	height: 50px;
 	border-radius:50px;
+    -o-border-radius:50px;
 	font-size: 20px;
 	font-weight: bold;
 	text-align: center;
+    z-index:9000;
 }
 button#next-button { right: 20px; bottom: 20px; 
     position: fixed;
@@ -190,7 +222,8 @@ button#next-button { right: 20px; bottom: 20px;
 	width: 50px;
 	height: 50px;
     border-radius:50px;
-		
+    -o-border-radius:50px;
+		z-index:9000;
 	font-size: 20px;
 	font-weight: bold;
 	text-align: center;
@@ -284,14 +317,19 @@ header {
         background:rgba(0,0,0,0.1);
         width:100%;
         border-radius:30px;
-        
+        min-width:810px;
+        overflow-x:auto;
+        .backEmphasis{
+                background:rgba(255,255,255,0.1);
+                border-radius:10px;
+            }
     #audioSelection{
+        float:left;
         padding:1%;
         border-radius:15px;
         background:rgba(0,0,0,0.1);
-        margin : 0 auto 20px auto;
+        margin : 0 auto 20px 5%;
         width:90%;
-        height:90px;
          input[type="button"]{
                 border-radius:15px;
                 width:65px;
@@ -378,7 +416,7 @@ header {
            
             float:left;
             height:100%;
-            overflow-y:scroll;
+            overflow-y:auto;
             width:300px;
             margin-right:10px;
             }
@@ -391,12 +429,13 @@ header {
         width:90%;
         height:76%;
         border-radius:15px;
-        overflow-y:scroll;
+        overflow-y:auto;
         #audioZoneList{
                 width:100%;
                 list-style:none;
                 padding-left:1%;
                     li{
+                    min-width:310px;
                         border-radius:15px;
                         float:left;
                         width:31%;
@@ -456,7 +495,7 @@ header {
                                 }
                         .uniqueSoundDescription{
                             height:3em;
-                            overflow-y:scroll;
+                            overflow-y:auto;
                             width:90%;
                             float:left;
                             clear:both;
@@ -470,7 +509,7 @@ header {
         width:70%;
                   height:100%;
                 border-radius:20px;
-        overflow-y:scroll;
+        overflow-y:auto;
             #selectedFeedsList{
                 width:100%;
    
@@ -543,7 +582,7 @@ header {
         h5{margin-left:15%}
         padding:1%;
         float:left;
-        margin-left:5%;
+        margin-right:5%;
           background:rgba(0,0,0,0.1);
           width:25%;
           height:100%;
@@ -553,7 +592,7 @@ header {
                 background :rgba(0,0,0,0.1);
             width:100%;
             height:89%;
-            overflow-y:scroll;
+            overflow-y:auto;
                 ul{
                     list-style:none;
                     li{
@@ -593,7 +632,7 @@ header {
       #questionSetter{
        float:left;
        }
-      #maxRenderSetter{
+      #renderSetter{
        float:right;
        
        }
@@ -628,7 +667,7 @@ header {
                         }
                     }
                 #feedDescription{
-                    overflow-y:scroll;
+                    overflow-y:auto;
                     
                     font-style:italic;
                     height:20%;
@@ -636,7 +675,7 @@ header {
                     #dataStreamDataList{
                         margin-top:10px;
                         height:67%;
-                        overflow-y:scroll;
+                        overflow-y:auto;
                         ul{list-style:none;
                             li{
                                 .chosen{

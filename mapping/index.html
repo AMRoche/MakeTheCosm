@@ -15,17 +15,17 @@
 					<!--cosm API -->
 					<div class="wrapper">
 						<div id="mapWrapper">
-						<div id="questionSetter">
-							<label>Change the value in the box to change the search parameter: </label>
+						<div id="questionSetter" class="backEmphasis">
+							<label>Search for : </label>
 							<input type="text" id = "queryBox" onchange="question = this.value"/>
 						</div>
-						<div id="renderSetter">
-							<label>Datastreams rendered: </label>
+						<div id="renderSetter" class="backEmphasis">
+							<label>Results shown : </label>
 							<input type="number" id="maxRenderSetter"onchange = "maxRender = this.value">
 						</div>
 						<div id="map"></div>
 						</div>
-						<div id="feedList"><h2> Click on a marker for more information!</h2></div>
+						<div id="feedList"><h2 class="backEmphasis"> Click on a marker for more information!</h2></div>
 					</div>
 				</div>
 			</li>
@@ -34,17 +34,17 @@
 				<div class="content">
 					<h1>Sound Mapping</h1>
 					<div class="wrapper">
+						<div id="listOfFeeds">
+							<h3>Overview of feeds</h3>
+							<h5>Displaying all selected.</h5>
+							<div id="quickInfoSummation">
+								
+							</div>
+						</div>
 						<div id="selectedFeeds">
 							<ul id="selectedFeedsList">
 								
 							</ul>
-						</div>
-						<div id="listOfFeeds">
-							<h3>Overview of feeds</h3>
-							<h5>Displaying all the feeds selected.</h5>
-							<div id="quickInfoSummation">
-								
-							</div>
 						</div>
 					</div>
 				</div>
@@ -94,27 +94,52 @@
 							</div>
 						</div>
 					</div>
-					<!--<p>
-						The goddesses? Alex, the goddesses .... Let me just say this about the goddesses: 
-						I don't believe the term is good enough ... is good enough ... but when you're bound 
-						by these terrestrial descriptions, you must use the best choice available, right?
-					</p>-->
 				</div>
 				</li>
 
 		</ul>
 	<div id="overlay">
 		<div id="formVerifyContainer">
+			
+				<h3>Welcome to part of Make the Cosm!</h3>
+				<p> 
+					You are about to be asked for your location information. All we need this for is to plot your location.	
+				</p>
+				<p>
+					Both a Cosm API key and Cosm account are required to use this web application, as it retrieves information 
+					from the Cosm web servers. To sign up for an account visit <a href="http://www.cosm.com" target="_blank"> the Cosm homepage</a>.
+				</p>
+				<p><em>Warning : </em>Using one API key for two separate MakeTheCosm instances will cause malfunctions.</p>
 			<form id="formVerify" onsubmit="return false;">
+				<div class="formRow">
 					<label>API KEY : </label>
-					<input type="text" id="apiAccess" value="LEXFCUfXTzzUiPhvL0tSAAkJFkWSAKxLQkVLSExCMHlZTT0g">
+					<input type="text" id="apiAccess" value="">
+					<!--LEXFCUfXTzzUiPhvL0tSAAkJFkWSAKxLQkVLSExCMHlZTT0g-->
+				</div>
+				<div class="formRow">
 					<label>Search Query : </label>
-					<input type="text" id="apiQueryAccess" value="arduino">
+					<input type="text" id="apiQueryAccess" value="">
+				</div>
+				<div class="formRow">
 					<button class="normal" type="submit" onclick = "validateAPIkey()">Submit</button>
-				</form>
+				</div>	
+				
 					<span id="checkingAPIkey"></span>
+					<span id="APIempty" class="label label-important"style="display:none;">Your API Key has been left as empty.</span>
 					<span id="APIfail" class="label label-important"style="display:none;">Your API Key has failed to validate. Please try another one.</span>
 					<span id="QUESTIONfail" class="label label-important"style="display:none;">Your Query string is empty. Please try another one.</span>
+				</form>
+				<h3>
+					Detailed user instructions
+				</h3>
+				<p> A short video introduction can be found <a href="http://www.youtube.com/watch?v=qG-mHjIwtVs" target="_blank">here</a>.</p>
+				<p> This application is based on three panels; a feed selection, sound mapping and a sound selection panel.
+					These can be navigated using the arrow keys or the buttons marked with chevrons (&laquo;) and (&raquo;).</p>
+				<p> The <em>feed selection</em> panel renders information to a map which the user can then select from.
+					Once selected, data is rendered in the <em>sound mapping</em> panel.</p>
+				<p> The <em>sound mapping</em> feed consists of selected data being graphed and assigned to criteria.</p>
+				<p> The <em>sound selection</em> is a user interface designed to allow the user to easily select sounds.
+					Once a new sound is selected, it is added to the list accessible in the <em>sound mapping</em> panel.</p>
 		</div>	
 	</div>
 		<header>
