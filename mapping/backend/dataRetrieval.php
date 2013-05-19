@@ -1,13 +1,13 @@
 <?php
 header('Content-type: application/json');
 $apiKEY = $_GET['APIkey'];
+//$apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
 $q = $_GET['question'];
 $maxCount = $_GET['maxCount'];
 //$maxCount = 50;
 //$apiKEY = "JOxnIA8lNaXSQ1aTWFrG4lF6s9aSAKxEbERVNEE5NHZNQT0g";
 //$q = "arduino";
-
-$theurl = 'http://api.cosm.com/v2/feeds';
+$theurl = "http://api.xively.com/v2/feeds";
 $returnJSON = array();
 $ch = curl_init($theurl);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -18,16 +18,18 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-ApiKey:" . $apiKEY));
 // -H
 curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
 // -0
+//curl_setopt($ch, CURLOPT_POSTFIELDS, "key=".$apiKEY);
 curl_setopt($ch, CURLOPT_POSTFIELDS, "per_page=100&q=" . $q . "&order=created_at&status=live");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
 curl_setopt($ch, CURLOPT_HEADER, 1);
 
 $response = curl_exec($ch);
-//echo $response;
+
+
 $response_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 $response = substr($response, $response_size);
-
+//echo($response);
 $response = JSON_decode($response, true);
 //print_r($response);
 //print_r(sizeof($response["results"]));
@@ -68,6 +70,8 @@ else{
 }
 }
 //print_r($returnJSON);
+//echo($response);
+//var_dump($response);
 if (isset($_GET['jsoncallback'])) {
 	print $_GET['jsoncallback'] . '(' . JSON_encode($returnJSON) . ')';
 } else {

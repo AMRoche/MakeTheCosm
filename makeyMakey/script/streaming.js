@@ -73,7 +73,7 @@ function testThing() {
 	console.log("pushing" + thingOne + ":" + thingTwo);
 	$.ajax({
 		type : "PUT",
-		url : "http://api.cosm.com/v2/" + "feeds/" + document.getElementById("feedId").value + "?_method=PUT",
+		url : "http://api.xively.com/v2/" + "feeds/" + document.getElementById("feedId").value + "?_method=PUT",
 		beforeSend : function(request) {
 			request.setRequestHeader("X-ApiKey", apiKEY);
 		},
@@ -96,7 +96,7 @@ function deleteElements(fNum, Name) {
 
 	$.ajax({
 		type : "delete",
-		url : "http://api.cosm.com/v2/" + "feeds/" + fNum + "/datastreams/" + Name,
+		url : "http://api.xively.com/v2/" + "feeds/" + fNum + "/datastreams/" + Name,
 		beforeSend : function(request) {
 			request.setRequestHeader("X-ApiKey", apiKEY);
 		},
@@ -123,7 +123,7 @@ function FeedGet() {
 	var fNum = document.getElementById("feedNum").value;
 	var containArray = new Array();
 	$.ajax({
-		url : "http://api.cosm.com/v2/" + "feeds/" + fNum,
+		url : "http://api.xively.com/v2/" + "feeds/" + fNum,
 		beforeSend : function(request) {
 			request.setRequestHeader("X-ApiKey", apiKEY);
 		},

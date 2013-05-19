@@ -2,7 +2,7 @@
 header('Content-type: application/json');
 $apiKEY = $_GET['APIkey'];
 $thing = '"X-ApiKey : '.$apiKEY.'"';
-$theurl = 'http://api.cosm.com/v2/feeds';
+$theurl = 'http://api.xively.com/v2/feeds';
 $ch = curl_init($theurl);
 
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); // -X

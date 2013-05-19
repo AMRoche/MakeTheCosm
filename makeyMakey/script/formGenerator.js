@@ -121,8 +121,11 @@ function initialSet() {
 	}//inputId, inputKey invert,
 	stringyThing += '<button type ="submit" class="btn"id="subInit">Start Streaming!</button><input type="button" class="btn" id="streamStop" onclick = "(function(){stopStreaming();})();" value="Stop Streaming"\>';
 	stringyThing += '</form>';
+		stringyThing += '<div id = "inputsError" class="label label-warning hidden">Error : Two or more streams with the same name.</div>'
+
 	//document.getElementById("form").style.display = "none";
 	document.getElementById("form").innerHTML = stringyThing;
+	document.getElementById("inputsError").style.display = "none";
 	return false;
 	}
 }
@@ -142,6 +145,7 @@ function optString(input) {
 
 function removeOption(currentCount) {
 	//console.log(currentCount);
+	if(toStream){return false;}
 	choices--;
 	if (choices < 2) {
 		//console.log(document.getElementById("extraButtons"));
@@ -167,6 +171,7 @@ function removeOption(currentCount) {
 }
 
 function addOption(currentCount) {
+	if(toStream){return false;}
 	if (choices >= 9) {
 		var element = document.getElementById("addOpt");
 		element.parentNode.removeChild(element);
@@ -227,7 +232,25 @@ function boolOrNot(thingy) {
 }
 
 function resultParser() {
+	if(document.getElementById("feedTitle").value == ""){
+		document.getElementById("feedTitle").value = "A feed created by MakeTheCosm";
+	}
+	var inputs = document.getElementsByClassName("inputId");
+	for(var i = 0; i < inputs.length; i++){
+		var thing = inputs[i].value;
+		for(var j = 0; j < inputs.length; j++){
+			if(thing != "" && inputs[j].value!=""){
+				if(thing == inputs[j].value && i != j){
+					document.getElementById("inputsError").style.display = "block";
+					return false;
+				}
+			}
+		}
+	}
+	
+	document.getElementById("inputsError").style.display = "none";	
 	toStream = true;
+	console.log(toStream);
 	var inputid, inputkey, Invert;
 	formSubmitted[0].length = 0;
 	formSubmitted[1].length = 0;
@@ -381,7 +404,7 @@ function pushToServer() {
 	document.getElementById("indicator").style.backgroundColor = "green";
 	//inputId, inputKey, invert,feedId, feedTitle
 	//formSubmitted
-	SendUrl = "http://api.cosm.com/v2/" + "feeds/" + formSubmitted[3] + "?_method=PUT";
+	SendUrl = "http://api.xively.com/v2/" + "feeds/" + formSubmitted[3] + "?_method=PUT";
 	console.log(SendUrl+"-----------------");
 	var info = new Array();
 	for (var i = 0; i < formSubmitted[0].length; i++) {

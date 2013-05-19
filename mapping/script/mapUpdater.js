@@ -58,9 +58,11 @@ function apiValidation(supposedKey) {
 	//console.log("testing");
 	$.ajax({
 		type : "GET",
-		url : "http://api.cosm.com/v2/" + "feeds",
+		url : "https://api.xively.com/v2/feeds",
 		beforeSend : function(request) {
 			request.setRequestHeader("X-ApiKey", supposedKey);
+			request.setRequestHeader("content-length", 0);
+			request.setRequestHeader("Host","api.xively.com");
 		},
 		async : false,
 		data : "{}",
