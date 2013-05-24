@@ -259,7 +259,7 @@ function getPertinentInfo() {
 			////console.log(json[i]);
 			var string = "<div id='dataWrapper'>";
 			string += "<h3>" + json[i].title + "</h3><h5 id='uniqueDataFeedDisplayIdentifier'>" + json[i].id + "</h5>";
-			string += "<p id='creator'>Creator : <a href='" + json[i].creator + "'target='_blank'>" + json[i].creator.substring(23, json[i].creator.length) + "</a></p>";
+			string += "<p id='creator'>Creator : <a href='" + json[i].creator + "'target='_blank'>" + json[i].creator.substring(25, json[i].creator.length) + "</a></p>";
 			////console.log();
 			if (json[i].description != undefined) {
 				string += "<p id='feedDescription'>" + json[i].description + "</p>";
